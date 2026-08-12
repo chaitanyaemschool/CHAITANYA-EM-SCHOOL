@@ -578,3 +578,8 @@
 @utility gold-sweep {
   animation: goldSweep 1.2s var(--ease-out-quart) infinite;
 }
+
+/* Cache buster to force Vercel to generate a new CSS file hash */
+.cache-buster-trigger {
+  opacity: 0.99;
+}
