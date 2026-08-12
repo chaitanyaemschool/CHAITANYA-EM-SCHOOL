@@ -120,13 +120,21 @@ export function SectionPreview({
             })}
 
             {images.length > 0 && (
-              <div className={`mt-6 grid gap-4 ${device === "mobile" ? "grid-cols-1" : "grid-cols-2"}`}>
+              <div
+                className={`mt-6 ${
+                  device === "mobile"
+                    ? "flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scrollbar-hide -mx-10 px-10"
+                    : "grid grid-cols-2 gap-4"
+                }`}
+              >
                 {images.map((f) => {
                   const v = str(data[f.key]);
                   return (
                     <div
                       key={f.key}
-                      className="aspect-[4/3] overflow-hidden rounded-[18px] bg-secondary/60 ring-1 ring-black/5"
+                      className={`aspect-[4/3] overflow-hidden rounded-[18px] bg-secondary/60 ring-1 ring-black/5 ${
+                        device === "mobile" ? "w-[260px] shrink-0 snap-center" : ""
+                      }`}
                     >
                       {v ? (
                         <img src={v} alt={f.label} className="h-full w-full object-contain md:object-cover" />
@@ -151,7 +159,13 @@ export function SectionPreview({
                   <div className="text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
                     {list.label}
                   </div>
-                  <div className={`mt-4 grid gap-4 ${device === "mobile" ? "grid-cols-1" : device === "tablet" ? "grid-cols-2" : "grid-cols-3"}`}>
+                  <div
+                    className={`mt-4 ${
+                      device === "mobile"
+                        ? "flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scrollbar-hide -mx-10 px-10"
+                        : `grid gap-4 ${device === "tablet" ? "grid-cols-2" : "grid-cols-3"}`
+                    }`}
+                  >
                     {items.map((item, i) => {
                       const imageField = list.fields.find(isImage);
                       const textFields = list.fields.filter((f) => !isImage(f));
@@ -159,7 +173,9 @@ export function SectionPreview({
                       return (
                         <div
                           key={i}
-                          className="overflow-hidden rounded-[18px] bg-white ring-1 ring-black/5 shadow-[0_18px_40px_-30px_rgba(15,23,42,0.4)]"
+                          className={`overflow-hidden rounded-[18px] bg-white ring-1 ring-black/5 shadow-[0_18px_40px_-30px_rgba(15,23,42,0.4)] ${
+                            device === "mobile" ? "w-[280px] shrink-0 snap-center" : ""
+                          }`}
                         >
                           {imageField && (
                             <div className="aspect-[4/3] bg-secondary/60">
