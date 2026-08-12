@@ -120,7 +120,7 @@ export function SectionPreview({
             })}
 
             {images.length > 0 && (
-              <div className="mt-6 grid grid-cols-2 gap-4">
+              <div className={`mt-6 grid gap-4 ${device === "mobile" ? "grid-cols-1" : "grid-cols-2"}`}>
                 {images.map((f) => {
                   const v = str(data[f.key]);
                   return (
@@ -151,7 +151,7 @@ export function SectionPreview({
                   <div className="text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
                     {list.label}
                   </div>
-                  <div className="mt-4 grid grid-cols-3 gap-4">
+                  <div className={`mt-4 grid gap-4 ${device === "mobile" ? "grid-cols-1" : device === "tablet" ? "grid-cols-2" : "grid-cols-3"}`}>
                     {items.map((item, i) => {
                       const imageField = list.fields.find(isImage);
                       const textFields = list.fields.filter((f) => !isImage(f));
