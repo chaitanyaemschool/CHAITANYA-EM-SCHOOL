@@ -45,10 +45,23 @@ export function SiteHeader() {
         }}
         className="fixed inset-x-3 top-3 z-50 mx-auto max-w-6xl rounded-[28px] ring-1 ring-black/5 md:inset-x-6 md:top-4 lg:inset-x-8"
       >
-        <div className="flex h-full items-center justify-between gap-2 px-3 md:gap-3 md:px-6">
+        <div className="relative flex h-full items-center justify-between gap-2 px-3 md:gap-3 md:px-6">
+          {isInner && (
+            <button
+              onClick={() => router.history.back()}
+              aria-label="Go back"
+              className={`focus-luxe grid shrink-0 place-items-center rounded-full bg-white text-foreground ring-1 ring-black/5 shadow-[0_4px_14px_-6px_rgba(15,23,42,0.12)] transition-all duration-300 ease-out hover:scale-105 active:scale-95 md:hidden ${
+                scrolled ? "h-10 w-10" : "h-11 w-11"
+              }`}
+            >
+              <ArrowLeft className="h-4 w-4" strokeWidth={2.5} />
+            </button>
+          )}
           <Link
             to="/"
-            className="flex min-w-0 items-center gap-2.5 md:gap-3"
+            className={`flex min-w-0 items-center gap-2.5 md:gap-3 ${
+              isInner ? "absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0" : ""
+            }`}
             aria-label="Chaitanya EM School — Home"
           >
             <img
