@@ -129,7 +129,7 @@ export function SectionPreview({
                       className="aspect-[4/3] overflow-hidden rounded-[18px] bg-secondary/60 ring-1 ring-black/5"
                     >
                       {v ? (
-                        <img src={v} alt={f.label} className="h-full w-full object-cover" />
+                        <img src={v} alt={f.label} className="h-full w-full object-contain md:object-cover" />
                       ) : (
                         <div className="grid h-full place-items-center text-[12px] text-muted-foreground">
                           {f.label}
@@ -164,7 +164,7 @@ export function SectionPreview({
                           {imageField && (
                             <div className="aspect-[4/3] bg-secondary/60">
                               {img && (
-                                <img src={img} alt="" className="h-full w-full object-cover" />
+                                <img src={img} alt="" className="h-full w-full object-contain md:object-cover" />
                               )}
                             </div>
                           )}

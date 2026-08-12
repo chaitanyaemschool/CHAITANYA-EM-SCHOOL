@@ -181,7 +181,7 @@ function HeroInner() {
               loading={i === 0 ? "eager" : "lazy"}
               onLoad={i === 0 ? () => setHeroLoaded(true) : undefined}
 
-              className="absolute inset-0 h-full w-full object-cover will-change-[transform,opacity] [backface-visibility:hidden]"
+              className="absolute inset-0 h-full w-full object-contain md:object-cover will-change-[transform,opacity] [backface-visibility:hidden]"
               initial={false}
               animate={
                 reduce
@@ -607,7 +607,7 @@ function AcademicsStageModal({
                 decoding="async"
                 src={stage.image}
                 alt={stage.grades}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain md:object-cover"
               />
               <button
                 type="button"
@@ -818,7 +818,7 @@ function PreviewCardInner({ item, index }: { item: SectionPreview; index: number
               whileInView={{ scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 1.6, ease }}
-              className="h-[42vh] w-full object-cover sm:h-[54vh] md:h-[62vh] lg:h-[70vh]"
+              className="h-[42vh] w-full object-contain md:object-cover sm:h-[54vh] md:h-[62vh] lg:h-[70vh]"
               loading="lazy"
               decoding="async"
             />

@@ -221,7 +221,7 @@ function StageCard({
                       src={stage.preview.image}
                       alt={`${stage.tag} learning at Chaitanya EM School`}
                       loading="lazy"
-                      className="aspect-[4/3] w-full object-cover"
+                      className="aspect-[4/3] w-full object-contain md:object-cover"
                     />
                   </motion.div>
 

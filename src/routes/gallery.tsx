@@ -424,7 +424,7 @@ function Rail3DCard({
             loading={index < 2 ? "eager" : "lazy"}
             decoding="async"
             style={{ x: imgX }}
-            className="h-full w-full scale-[1.04] object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.09] [image-rendering:auto] [transform:translateZ(0)]"
+            className="h-full w-full scale-[1.04] object-contain md:object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.09] [image-rendering:auto] [transform:translateZ(0)]"
           />
         </div>
         <div className="relative z-10 px-1.5 pb-2 pt-3">
@@ -569,7 +569,7 @@ function MomentCard({
             if (el?.complete) setLoaded(true);
           }}
           onLoad={() => setLoaded(true)}
-          className={`h-full w-full object-cover transition-[opacity,transform] duration-[800ms] ease-out group-hover:scale-[1.06] ${
+          className={`h-full w-full object-contain md:object-cover transition-[opacity,transform] duration-[800ms] ease-out group-hover:scale-[1.06] ${
             loaded ? "opacity-100" : "opacity-0"
           }`}
         />
@@ -897,7 +897,7 @@ function VideoCard({
             loading={index < 2 ? "eager" : "lazy"}
             decoding="async"
             style={{ x: imgX }}
-            className="h-full w-full scale-[1.04] object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.09] [transform:translateZ(0)]"
+            className="h-full w-full scale-[1.04] object-contain md:object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.09] [transform:translateZ(0)]"
           />
           <div
             aria-hidden

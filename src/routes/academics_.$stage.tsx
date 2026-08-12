@@ -93,7 +93,7 @@ function StagePage() {
             decoding="async"
             src={stage.detail.heroImage}
             alt={`${stage.tag} students at Chaitanya EM School`}
-            className="aspect-[16/10] w-full object-cover md:aspect-[21/9]"
+            className="aspect-[16/10] w-full object-contain md:object-cover md:aspect-[21/9]"
           />
         </motion.div>
 
@@ -182,7 +182,7 @@ function StagePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.6, delay: i * 0.1, ease }}
-                className={`w-full rounded-[20px] object-cover ring-1 ring-black/5 ${
+                className={`w-full rounded-[20px] object-contain md:object-cover ring-1 ring-black/5 ${
                   i % 2 === 0 ? "aspect-[3/4]" : "aspect-[3/4] mt-8"
                 }`}
               />

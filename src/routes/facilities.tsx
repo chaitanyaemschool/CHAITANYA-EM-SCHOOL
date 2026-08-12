@@ -115,7 +115,7 @@ function FacilitiesPage() {
                       alt={f.title ?? ""}
                       loading="lazy"
                       decoding="async"
-                      className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
+                      className="h-full w-full object-contain md:object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent" />
                     <div className="absolute left-3 top-3 grid h-10 w-10 place-items-center rounded-full border border-white/50 bg-[rgba(15,23,42,0.42)] shadow-[0_8px_20px_-10px_rgba(15,23,42,0.6)] backdrop-blur-md">

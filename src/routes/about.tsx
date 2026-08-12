@@ -215,7 +215,7 @@ function Hero() {
             <img
               src={c.imageMain || heroAssembly.url}
               alt="Chaitanya EM School students in assembly"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain md:object-cover"
               loading="eager"
               style={{ boxShadow: "0 40px 80px -30px rgba(15,23,48,0.35)" }}
             />
@@ -231,7 +231,7 @@ function Hero() {
               <img
                 src={c.imageSmall || studentReading}
                 alt="Student reading"
-                className="aspect-[4/5] h-full w-full object-cover"
+                className="aspect-[4/5] h-full w-full object-contain md:object-cover"
                 loading="lazy"
                 style={{ boxShadow: "0 30px 60px -25px rgba(15,23,48,0.4)" }}
               />
@@ -317,7 +317,7 @@ function Beginning() {
                 src={c.image}
                 alt="An early classroom at Chaitanya"
                 loading="lazy"
-                className="aspect-[4/5] w-full object-cover"
+                className="aspect-[4/5] w-full object-contain md:object-cover"
               />
             </div>
 
@@ -711,7 +711,7 @@ function PeopleCard({ person, index }: { person: Leader; index: number }) {
                 src={person.photo}
                 alt={`${person.name} — ${person.role}`}
                 loading="lazy"
-                className="aspect-[4/5] w-full object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+                className="aspect-[4/5] w-full object-contain md:object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
               />
             ) : (
               <div
@@ -1202,7 +1202,7 @@ function FinalCTA() {
                 alt="Students learning together in a Chaitanya classroom"
                 loading="lazy"
                 decoding="async"
-                className="aspect-[4/5] w-full object-cover transition-transform duration-[1200ms] ease-out will-change-transform group-hover:scale-[1.04]"
+                className="aspect-[4/5] w-full object-contain md:object-cover transition-transform duration-[1200ms] ease-out will-change-transform group-hover:scale-[1.04]"
               />
             </div>
           </div>
