@@ -7,7 +7,7 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 export default defineConfig({
   plugins: [
     tailwindcss(),
-    tanstackStart({
+    tanstackStart({ prerender: { routes: ["/"], crawlLinks: true },
       server: { entry: "server" },
     }),
     react(),

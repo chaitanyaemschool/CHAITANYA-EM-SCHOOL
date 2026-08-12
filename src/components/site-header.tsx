@@ -54,17 +54,15 @@ export function SiteHeader() {
             <img
               src="/logo-crest.jpeg"
               alt=""
-              width={44}
-              height={44}
               className={`shrink-0 rounded-full object-cover ring-1 ring-black/5 transition-all duration-500 ease-out ${
-                scrolled ? "h-9 w-9 md:h-10 md:w-10" : "h-11 w-11 md:h-12 md:w-12"
+                scrolled ? "h-10 w-10 md:h-12 md:w-12" : "h-12 w-12 md:h-14 md:w-14"
               }`}
             />
             <img
               src="/logo-wordmark.png"
               alt="Chaitanya (E.M.) High School"
-              className={`max-w-[150px] sm:max-w-[200px] md:max-w-[280px] object-contain object-left transition-all duration-500 ease-out ${
-                scrolled ? "h-9 md:h-10" : "h-11 md:h-12"
+              className={`object-contain object-left transition-all duration-500 ease-out ${
+                scrolled ? "h-10 md:h-12" : "h-12 md:h-14"
               }`}
             />
           </Link>
@@ -152,12 +150,12 @@ function MenuOverlay({
                 <img
                   src="/logo-crest.jpeg"
                   alt=""
-                  className="h-10 w-10 shrink-0 rounded-full bg-white p-1 ring-1 ring-black/5"
+                  className="h-12 w-12 shrink-0 rounded-full bg-white p-1 ring-1 ring-black/5"
                 />
                 <img
                   src="/logo-wordmark.png"
                   alt="Chaitanya (E.M.) High School"
-                  className="h-10 max-w-[180px] object-contain object-left"
+                  className="h-12 object-contain object-left"
                 />
               </div>
               <button
