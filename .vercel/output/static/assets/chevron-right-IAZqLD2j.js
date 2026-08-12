@@ -1,0 +1,1 @@
+import{Z as e}from"./content-merge-DFym-puB.js";var t=e(`chevron-right`,[[`path`,{d:`m9 18 6-6-6-6`,key:`mthhwq`}]]);export{t};
