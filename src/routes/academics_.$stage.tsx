@@ -15,7 +15,9 @@ export const Route = createFileRoute("/academics_/$stage")({
   },
   head: ({ params }) => {
     const stage = getStage(params.stage);
-    const title = stage ? `${stage.tag} Programme — Chaitanya EM School` : "Academics — Chaitanya EM School";
+    const title = stage
+      ? `${stage.tag} Programme — Chaitanya EM School`
+      : "Academics — Chaitanya EM School";
     const description = stage?.detail.intro ?? "Academic programmes at Chaitanya EM School.";
     return {
       meta: [
@@ -86,7 +88,9 @@ function StagePage() {
           transition={{ duration: 0.8, delay: 0.2, ease }}
           className="mt-10 overflow-hidden rounded-[26px] ring-1 ring-black/5 md:rounded-[32px]"
         >
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src={stage.detail.heroImage}
             alt={`${stage.tag} students at Chaitanya EM School`}
             className="aspect-[16/10] w-full object-cover md:aspect-[21/9]"
@@ -160,7 +164,9 @@ function StagePage() {
                   className="mt-1.5 h-2 w-2 shrink-0 rounded-full"
                   style={{ background: "oklch(0.62 0.18 45)" }}
                 />
-                <span className="text-[14px] leading-relaxed text-foreground/85 md:text-[15px]">{d}</span>
+                <span className="text-[14px] leading-relaxed text-foreground/85 md:text-[15px]">
+                  {d}
+                </span>
               </motion.li>
             ))}
           </ul>
@@ -195,7 +201,9 @@ function StagePage() {
           <Link
             to="/academics"
             className="group inline-flex w-full max-w-[420px] items-center gap-4 rounded-full px-6 py-4 text-white shadow-[0_28px_60px_-28px_rgba(15,23,60,0.7)] ring-1 ring-white/15 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_36px_72px_-28px_rgba(15,23,60,0.75)] sm:w-auto sm:gap-5 sm:px-9 sm:py-5"
-            style={{ background: "linear-gradient(135deg,oklch(0.42 0.14 258),oklch(0.24 0.09 258))" }}
+            style={{
+              background: "linear-gradient(135deg,oklch(0.42 0.14 258),oklch(0.24 0.09 258))",
+            }}
           >
             <span className="min-w-0 flex-1">
               <span className="block text-[10px] font-medium uppercase tracking-[0.28em] text-white/65">

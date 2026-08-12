@@ -1,12 +1,26 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { motion, AnimatePresence } from "motion/react";
-import { Check, Loader2, Upload, X, Plus, GripVertical, Image as ImageIcon, ChevronDown } from "lucide-react";
+import {
+  Check,
+  Loader2,
+  Upload,
+  X,
+  Plus,
+  GripVertical,
+  Image as ImageIcon,
+  ChevronDown,
+} from "lucide-react";
 import { db } from "@/lib/firebase";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import { saveSection } from "@/lib/content-write";
 import { mergeSection } from "@/lib/content-merge";
-import { CONTENT_SECTIONS, CONTENT_DEFAULTS, type SectionDef, type FieldDef } from "@/lib/content-schema";
+import {
+  CONTENT_SECTIONS,
+  CONTENT_DEFAULTS,
+  type SectionDef,
+  type FieldDef,
+} from "@/lib/content-schema";
 import { toast } from "sonner";
 import { SectionPreview } from "@/components/admin/SectionPreview";
 
@@ -40,11 +54,17 @@ function Confirm({
       aria-modal="true"
       onClick={onCancel}
     >
-      <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm rounded-[22px] bg-white p-6 shadow-2xl">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="w-full max-w-sm rounded-[22px] bg-white p-6 shadow-2xl"
+      >
         <div className="text-[16px] font-semibold">{title}</div>
         {body && <p className="mt-2 text-[13px] text-muted-foreground">{body}</p>}
         <div className="mt-5 flex justify-end gap-2">
-          <button onClick={onCancel} className="h-11 rounded-full bg-secondary px-5 text-[13px] font-semibold">
+          <button
+            onClick={onCancel}
+            className="h-11 rounded-full bg-secondary px-5 text-[13px] font-semibold"
+          >
             {cancelLabel}
           </button>
           <button
@@ -58,7 +78,6 @@ function Confirm({
     </div>
   );
 }
-
 
 export function ContentEditor({ page }: { page?: string } = {}) {
   const pages = useMemo(() => {
@@ -78,44 +97,47 @@ export function ContentEditor({ page }: { page?: string } = {}) {
   const [focusKey, setFocusKey] = useState<string | null>(null);
   const [live, setLive] = useState<Record<string, Record<string, unknown>>>({});
 
-  const previewKey = focusKey && activeSections.some((s) => s.key === focusKey)
-    ? focusKey
-    : (activeSections[0]?.key ?? null);
+  const previewKey =
+    focusKey && activeSections.some((s) => s.key === focusKey)
+      ? focusKey
+      : (activeSections[0]?.key ?? null);
   const previewSection = activeSections.find((s) => s.key === previewKey) ?? null;
 
-
   return (
-    <div className={`grid gap-4 ${page ? "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]" : "lg:grid-cols-[200px_minmax(0,1fr)_minmax(0,1.05fr)]"}`}>
+    <div
+      className={`grid gap-4 ${page ? "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]" : "lg:grid-cols-[200px_minmax(0,1fr)_minmax(0,1.05fr)]"}`}
+    >
       {/* Page rail */}
       {!page && (
-      <aside className="lg:sticky lg:top-32 lg:self-start">
-        <div className="rounded-[22px] bg-white p-2 ring-1 ring-black/5 shadow-[0_10px_28px_-18px_rgba(15,23,42,0.15)]">
-          <div className="px-3 pt-2 pb-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">Pages</div>
-          <div className="flex gap-1 overflow-x-auto lg:flex-col [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {pages.map(([p]) => {
-              const active = p === activePage;
-              return (
-                <button
-                  key={p}
-                  onClick={() => {
-                    setActivePage(p);
-                    setFocusKey(null);
-                  }}
-                  className={`flex-shrink-0 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-[13px] font-semibold transition-all ${
-                    active
-                      ? "bg-foreground text-background"
-                      : "text-foreground/70 hover:bg-secondary/60"
-                  }`}
-                >
-                  {p}
-                </button>
-              );
-            })}
+        <aside className="lg:sticky lg:top-32 lg:self-start">
+          <div className="rounded-[22px] bg-white p-2 ring-1 ring-black/5 shadow-[0_10px_28px_-18px_rgba(15,23,42,0.15)]">
+            <div className="px-3 pt-2 pb-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+              Pages
+            </div>
+            <div className="flex gap-1 overflow-x-auto lg:flex-col [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {pages.map(([p]) => {
+                const active = p === activePage;
+                return (
+                  <button
+                    key={p}
+                    onClick={() => {
+                      setActivePage(p);
+                      setFocusKey(null);
+                    }}
+                    className={`flex-shrink-0 lg:w-full text-left px-3.5 py-2.5 rounded-xl text-[13px] font-semibold transition-all ${
+                      active
+                        ? "bg-foreground text-background"
+                        : "text-foreground/70 hover:bg-secondary/60"
+                    }`}
+                  >
+                    {p}
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </aside>
+        </aside>
       )}
-
 
       <div className="flex min-w-0 flex-col gap-4">
         {activeSections.map((s) => (
@@ -130,12 +152,12 @@ export function ContentEditor({ page }: { page?: string } = {}) {
           <div className="rounded-[24px] border border-dashed border-black/10 bg-white/60 p-10 text-center">
             <div className="text-[15px] font-semibold">No editable sections on this page yet</div>
             <p className="mx-auto mt-2 max-w-[42ch] text-[12.5px] text-muted-foreground">
-              This page is still using fixed content. Ask for it to be connected and every heading, paragraph and image here becomes editable.
+              This page is still using fixed content. Ask for it to be connected and every heading,
+              paragraph and image here becomes editable.
             </p>
           </div>
         )}
       </div>
-
 
       <div className="min-w-0 lg:sticky lg:top-32 lg:self-start">
         <SectionPreview
@@ -157,7 +179,9 @@ function SectionCard({
   onFocus?: () => void;
   onData?: (d: Record<string, unknown>) => void;
 }) {
-  const [data, setData] = useState<Record<string, unknown>>(() => CONTENT_DEFAULTS[section.key] ?? {});
+  const [data, setData] = useState<Record<string, unknown>>(
+    () => CONTENT_DEFAULTS[section.key] ?? {},
+  );
   const [open, setOpen] = useState(true);
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [dirty, setDirty] = useState(false);
@@ -181,7 +205,6 @@ function SectionCard({
       setData(mergeSection(section.key, remote));
     });
     return unsub;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [section.key]);
 
   const update = (patch: Record<string, unknown>) => {
@@ -205,7 +228,6 @@ function SectionCard({
       toast.error("Unable to save changes. Please try again.");
     }
   };
-
 
   // Warn before leaving with unsaved edits
   useEffect(() => {
@@ -244,14 +266,21 @@ function SectionCard({
           <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             {section.page}
           </div>
-          <div className="mt-1 text-[17px] font-semibold tracking-[-0.02em] truncate">{section.title}</div>
+          <div className="mt-1 text-[17px] font-semibold tracking-[-0.02em] truncate">
+            {section.title}
+          </div>
           {section.description && (
-            <div className="mt-0.5 text-[12px] text-muted-foreground truncate">{section.description}</div>
+            <div className="mt-0.5 text-[12px] text-muted-foreground truncate">
+              {section.description}
+            </div>
           )}
         </div>
         <div className="flex items-center gap-2">
           <SaveBadge state={saveState} dirty={dirty} />
-          <motion.span animate={{ rotate: open ? 180 : 0 }} className="grid h-8 w-8 place-items-center rounded-full bg-secondary/60">
+          <motion.span
+            animate={{ rotate: open ? 180 : 0 }}
+            className="grid h-8 w-8 place-items-center rounded-full bg-secondary/60"
+          >
             <ChevronDown className="h-4 w-4" />
           </motion.span>
         </div>
@@ -285,7 +314,11 @@ function SectionCard({
 
               <div className="sticky bottom-0 -mx-5 -mb-5 flex flex-wrap items-center justify-between gap-3 border-t border-black/5 bg-white/90 px-5 py-3.5 backdrop-blur">
                 <span className="text-[12px] font-medium text-muted-foreground">
-                  {dirty ? "You have unsaved changes." : saveState === "saved" ? "All changes saved" : "Up to date"}
+                  {dirty
+                    ? "You have unsaved changes."
+                    : saveState === "saved"
+                      ? "All changes saved"
+                      : "Up to date"}
                 </span>
                 <div className="flex items-center gap-2">
                   {dirty && (
@@ -303,7 +336,11 @@ function SectionCard({
                     disabled={!dirty || saveState === "saving"}
                     className="inline-flex h-11 items-center gap-2 rounded-full bg-foreground px-5 text-[13px] font-semibold text-background transition-transform active:scale-95 disabled:opacity-40"
                   >
-                    {saveState === "saving" ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Check className="h-3.5 w-3.5" />}
+                    {saveState === "saving" ? (
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                    ) : (
+                      <Check className="h-3.5 w-3.5" />
+                    )}
                     Save changes
                   </button>
                 </div>
@@ -314,7 +351,7 @@ function SectionCard({
                 title="You have unsaved changes."
                 body="Discarding will restore the last saved version of this section."
                 confirmLabel="Discard changes"
-        cancelLabel="Continue editing"
+                cancelLabel="Continue editing"
                 onCancel={() => setAskDiscard(false)}
                 onConfirm={() => {
                   setAskDiscard(false);
@@ -323,7 +360,6 @@ function SectionCard({
                   toast.success("Changes discarded");
                 }}
               />
-
             </div>
           </motion.div>
         )}
@@ -401,7 +437,13 @@ function FieldControl({
       />
     );
   const inputType =
-    field.type === "email" ? "email" : field.type === "tel" ? "tel" : field.type === "url" ? "url" : "text";
+    field.type === "email"
+      ? "email"
+      : field.type === "tel"
+        ? "tel"
+        : field.type === "url"
+          ? "url"
+          : "text";
   return (
     <input
       type={inputType}
@@ -486,7 +528,6 @@ function ListEditor({
 }) {
   const items = Array.isArray(value) ? value : [];
   const [pending, setPending] = useState<number | null>(null);
-
 
   const updateItem = (i: number, patch: Record<string, unknown>) => {
     const next = items.map((it, idx) => (idx === i ? { ...it, ...patch } : it));
@@ -600,6 +641,5 @@ function ListEditor({
         }}
       />
     </div>
-
   );
 }

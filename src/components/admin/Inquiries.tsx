@@ -1,6 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "motion/react";
-import { collection, deleteDoc, doc, onSnapshot, orderBy, query, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+  updateDoc,
+} from "firebase/firestore";
 import {
   Archive,
   Download,
@@ -92,7 +100,7 @@ export function Inquiries() {
       () => {
         setLoadError(true);
         setLoading(false);
-      }
+      },
     );
     return unsub;
   }, []);
@@ -126,11 +134,22 @@ export function Inquiries() {
     const head = ["Name", "Mobile", "Email", "Class", "Message", "Source", "Status", "Received"];
     const esc = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
     const body = filtered.map((r) =>
-      [r.studentName, r.mobile, r.email, r.classApplying, r.message, r.source, label(statusOf(r)), fmt(r.createdAt)]
+      [
+        r.studentName,
+        r.mobile,
+        r.email,
+        r.classApplying,
+        r.message,
+        r.source,
+        label(statusOf(r)),
+        fmt(r.createdAt),
+      ]
         .map(esc)
-        .join(",")
+        .join(","),
     );
-    const blob = new Blob([[head.join(","), ...body].join("\n")], { type: "text/csv;charset=utf-8" });
+    const blob = new Blob([[head.join(","), ...body].join("\n")], {
+      type: "text/csv;charset=utf-8",
+    });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -213,7 +232,9 @@ export function Inquiries() {
         </div>
       ) : loadError ? (
         <div className="rounded-[22px] bg-white p-10 text-center ring-1 ring-black/5">
-          <div className="text-[14.5px] font-semibold">Unable to load content. Please try again.</div>
+          <div className="text-[14.5px] font-semibold">
+            Unable to load content. Please try again.
+          </div>
           <button
             onClick={() => window.location.reload()}
             className="mt-4 rounded-full bg-[#1c2a4d] px-5 py-2.5 text-[12.5px] font-semibold text-white active:scale-95"
@@ -249,12 +270,18 @@ export function Inquiries() {
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="flex min-w-0 items-center gap-3">
                     <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[oklch(0.32_0.11_258)]/10 text-[12px] font-bold text-[oklch(0.32_0.11_258)]">
-                      {String(r.studentName ?? "?").slice(0, 1).toUpperCase()}
+                      {String(r.studentName ?? "?")
+                        .slice(0, 1)
+                        .toUpperCase()}
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="truncate text-[15px] font-semibold">{r.studentName || "Unnamed"}</span>
-                        <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.1em] ${meta.cls}`}>
+                        <span className="truncate text-[15px] font-semibold">
+                          {r.studentName || "Unnamed"}
+                        </span>
+                        <span
+                          className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.1em] ${meta.cls}`}
+                        >
                           {meta.label}
                         </span>
                       </div>
@@ -266,7 +293,11 @@ export function Inquiries() {
 
                   <div className="flex flex-wrap items-center gap-1.5">
                     {tel && (
-                      <a href={`tel:${tel}`} aria-label="Call" className="grid h-9 w-9 place-items-center rounded-full bg-[#eef2ff] text-[#4338ca] active:scale-90">
+                      <a
+                        href={`tel:${tel}`}
+                        aria-label="Call"
+                        className="grid h-9 w-9 place-items-center rounded-full bg-[#eef2ff] text-[#4338ca] active:scale-90"
+                      >
                         <Phone className="h-4 w-4" />
                       </a>
                     )}
@@ -282,13 +313,19 @@ export function Inquiries() {
                       </a>
                     )}
                     {r.email && (
-                      <a href={`mailto:${r.email}`} aria-label="Email" className="grid h-9 w-9 place-items-center rounded-full bg-[#fff7ed] text-[#c2410c] active:scale-90">
+                      <a
+                        href={`mailto:${r.email}`}
+                        aria-label="Email"
+                        className="grid h-9 w-9 place-items-center rounded-full bg-[#fff7ed] text-[#c2410c] active:scale-90"
+                      >
                         <Mail className="h-4 w-4" />
                       </a>
                     )}
                     <select
                       value={st}
-                      onChange={(e) => patch(r.id, { status: e.target.value, read: true }, "Status updated")}
+                      onChange={(e) =>
+                        patch(r.id, { status: e.target.value, read: true }, "Status updated")
+                      }
                       aria-label="Change status"
                       className="h-9 rounded-full bg-[#1c2a4d]/[0.05] px-3 text-[11.5px] font-semibold text-[#1c2a4d]/75 outline-none"
                     >
@@ -299,7 +336,9 @@ export function Inquiries() {
                       ))}
                     </select>
                     <button
-                      onClick={() => patch(r.id, { archived: !r.archived }, r.archived ? "Restored" : "Archived")}
+                      onClick={() =>
+                        patch(r.id, { archived: !r.archived }, r.archived ? "Restored" : "Archived")
+                      }
                       aria-label="Archive"
                       className="grid h-9 w-9 place-items-center rounded-full bg-[#1c2a4d]/[0.05] text-[#1c2a4d]/60 active:scale-90"
                     >
@@ -340,7 +379,8 @@ export function Inquiries() {
           >
             <div className="text-[16px] font-semibold">Delete this enquiry?</div>
             <p className="mt-2 text-[13px] text-[#1c2a4d]/60">
-              {pendingDelete.studentName || "This enquiry"} will be permanently removed. This cannot be undone.
+              {pendingDelete.studentName || "This enquiry"} will be permanently removed. This cannot
+              be undone.
             </p>
             <div className="mt-5 flex justify-end gap-2">
               <button

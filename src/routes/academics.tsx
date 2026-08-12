@@ -155,118 +155,117 @@ function StageCard({
           willChange: "transform",
         }}
       >
-
-      <button
-        type="button"
-        onClick={() => {
-          if (draggedRef.current) return;
-          onToggle();
-        }}
-        aria-expanded={open}
-        className="block w-full cursor-[inherit] p-6 text-left md:p-12 lg:p-14"
-      >
-
-        <div className="flex items-start justify-between gap-4">
-          <span className="text-[10px] font-medium uppercase tracking-[0.28em] opacity-70">
-            0{index + 1} · {stage.tag}
-          </span>
-          <span
-            className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ring-1 transition-all duration-300 ${
-              dark ? "bg-white/15 ring-white/25" : "bg-white/70 ring-black/10"
-            }`}
-          >
-            <Plus
-              className={`h-4 w-4 transition-transform duration-300 ${open ? "rotate-45" : ""}`}
-              strokeWidth={2.4}
-            />
-          </span>
-        </div>
-
-        <div className="mt-8 text-[28px] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-[34px] md:text-[52px] lg:text-[64px]">
-          {stage.grades}
-        </div>
-        <div
-          className="mt-2.5 text-[17px] leading-snug opacity-80 md:text-[23px] lg:text-[26px]"
-          style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
+        <button
+          type="button"
+          onClick={() => {
+            if (draggedRef.current) return;
+            onToggle();
+          }}
+          aria-expanded={open}
+          className="block w-full cursor-[inherit] p-6 text-left md:p-12 lg:p-14"
         >
-          {stage.line}
-        </div>
-
-        <span className="mt-8 inline-block md:mt-10">
-          <LearnMore label={open ? "Close preview" : "Learn more"} dark={dark} />
-        </span>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            key="preview"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.45, ease }}
-            className="overflow-hidden"
-          >
-            <div
-              className={`mx-6 mb-6 rounded-[22px] p-5 md:mx-12 md:mb-12 md:p-8 lg:mx-14 ${
-                dark ? "bg-white/10 ring-1 ring-white/15" : "bg-white/70 ring-1 ring-black/5"
+          <div className="flex items-start justify-between gap-4">
+            <span className="text-[10px] font-medium uppercase tracking-[0.28em] opacity-70">
+              0{index + 1} · {stage.tag}
+            </span>
+            <span
+              className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ring-1 transition-all duration-300 ${
+                dark ? "bg-white/15 ring-white/25" : "bg-white/70 ring-black/10"
               }`}
             >
-              <div className="grid gap-6 md:grid-cols-[1.05fr_1fr] md:items-center md:gap-9">
-                <motion.div
-                  initial={{ opacity: 0, scale: 1.04 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.7, ease }}
-                  className="overflow-hidden rounded-[18px]"
-                >
-                  <img
-                    src={stage.preview.image}
-                    alt={`${stage.tag} learning at Chaitanya EM School`}
-                    loading="lazy"
-                    className="aspect-[4/3] w-full object-cover"
-                  />
-                </motion.div>
+              <Plus
+                className={`h-4 w-4 transition-transform duration-300 ${open ? "rotate-45" : ""}`}
+                strokeWidth={2.4}
+              />
+            </span>
+          </div>
 
-                <div>
-                  <h2
-                    className="text-[22px] leading-[1.2] tracking-[-0.02em] md:text-[28px]"
-                    style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
+          <div className="mt-8 text-[28px] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-[34px] md:text-[52px] lg:text-[64px]">
+            {stage.grades}
+          </div>
+          <div
+            className="mt-2.5 text-[17px] leading-snug opacity-80 md:text-[23px] lg:text-[26px]"
+            style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
+          >
+            {stage.line}
+          </div>
+
+          <span className="mt-8 inline-block md:mt-10">
+            <LearnMore label={open ? "Close preview" : "Learn more"} dark={dark} />
+          </span>
+        </button>
+
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              key="preview"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.45, ease }}
+              className="overflow-hidden"
+            >
+              <div
+                className={`mx-6 mb-6 rounded-[22px] p-5 md:mx-12 md:mb-12 md:p-8 lg:mx-14 ${
+                  dark ? "bg-white/10 ring-1 ring-white/15" : "bg-white/70 ring-1 ring-black/5"
+                }`}
+              >
+                <div className="grid gap-6 md:grid-cols-[1.05fr_1fr] md:items-center md:gap-9">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.7, ease }}
+                    className="overflow-hidden rounded-[18px]"
                   >
-                    {stage.preview.title}
-                  </h2>
-                  <p className="mt-3 text-[14px] leading-relaxed opacity-80 md:text-[15px]">
-                    {stage.preview.description}
-                  </p>
+                    <img
+                      src={stage.preview.image}
+                      alt={`${stage.tag} learning at Chaitanya EM School`}
+                      loading="lazy"
+                      className="aspect-[4/3] w-full object-cover"
+                    />
+                  </motion.div>
 
-                  <ul className="mt-5 flex flex-wrap gap-2">
-                    {stage.preview.focus.map((f) => (
-                      <li
-                        key={f}
-                        className={`rounded-full px-3 py-1.5 text-[11px] font-medium tracking-tight ${
-                          dark ? "bg-white/15 text-white" : "bg-white text-foreground ring-1 ring-black/5"
-                        }`}
-                      >
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
+                  <div>
+                    <h2
+                      className="text-[22px] leading-[1.2] tracking-[-0.02em] md:text-[28px]"
+                      style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
+                    >
+                      {stage.preview.title}
+                    </h2>
+                    <p className="mt-3 text-[14px] leading-relaxed opacity-80 md:text-[15px]">
+                      {stage.preview.description}
+                    </p>
 
-                  <Link
-                    to="/academics/$stage"
-                    params={{ stage: stage.slug }}
-                    className="mt-7 inline-block"
-                  >
-                    <LearnMore label={stage.preview.cta} dark={dark} solid />
-                  </Link>
+                    <ul className="mt-5 flex flex-wrap gap-2">
+                      {stage.preview.focus.map((f) => (
+                        <li
+                          key={f}
+                          className={`rounded-full px-3 py-1.5 text-[11px] font-medium tracking-tight ${
+                            dark
+                              ? "bg-white/15 text-white"
+                              : "bg-white text-foreground ring-1 ring-black/5"
+                          }`}
+                        >
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <Link
+                      to="/academics/$stage"
+                      params={{ stage: stage.slug }}
+                      className="mt-7 inline-block"
+                    >
+                      <LearnMore label={stage.preview.cta} dark={dark} solid />
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.article>
     </motion.div>
-
   );
 }
 

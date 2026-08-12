@@ -16,7 +16,6 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-
 import heroAssembly from "@/assets/hero-assembly-best.png.asset.json";
 import studentReading from "@/assets/student-reading.jpg";
 // teacher.jpg intentionally not imported — replaced with editorial collage
@@ -85,21 +84,21 @@ function Reveal({
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 text-[10.5px] font-bold uppercase tracking-[0.32em] text-[color:var(--ember)] md:text-[11px]"
-      style={{ ["--ember" as any]: EMBER }}>
-      <span aria-hidden className="h-[1.5px] w-8 bg-[color:var(--ember)]" style={{ ["--ember" as any]: EMBER }} />
+    <span
+      className="inline-flex items-center gap-2 text-[10.5px] font-bold uppercase tracking-[0.32em] text-[color:var(--ember)] md:text-[11px]"
+      style={{ ["--ember" as unknown]: EMBER }}
+    >
+      <span
+        aria-hidden
+        className="h-[1.5px] w-8 bg-[color:var(--ember)]"
+        style={{ ["--ember" as unknown]: EMBER }}
+      />
       {children}
     </span>
   );
 }
 
-function Editorial({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+function Editorial({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <h2
       className={`font-editorial leading-[0.95] tracking-[-0.02em] ${className ?? ""}`}
@@ -222,21 +221,21 @@ function Hero() {
             />
           </motion.div>
           {(c.imageSmall || studentReading) && (
-          <motion.div
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 30, scale: 0.94 }}
-            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.1, ease, delay: 0.7 }}
-            style={{ y: y2 }}
-            className="absolute -left-2 bottom-0 w-[52%] overflow-hidden rounded-[22px] ring-1 ring-slate-200 md:-left-6"
-          >
-            <img
-              src={c.imageSmall || studentReading}
-              alt="Student reading"
-              className="aspect-[4/5] h-full w-full object-cover"
-              loading="lazy"
-              style={{ boxShadow: "0 30px 60px -25px rgba(15,23,48,0.4)" }}
-            />
-          </motion.div>
+            <motion.div
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 30, scale: 0.94 }}
+              animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 1.1, ease, delay: 0.7 }}
+              style={{ y: y2 }}
+              className="absolute -left-2 bottom-0 w-[52%] overflow-hidden rounded-[22px] ring-1 ring-slate-200 md:-left-6"
+            >
+              <img
+                src={c.imageSmall || studentReading}
+                alt="Student reading"
+                className="aspect-[4/5] h-full w-full object-cover"
+                loading="lazy"
+                style={{ boxShadow: "0 30px 60px -25px rgba(15,23,48,0.4)" }}
+              />
+            </motion.div>
           )}
 
           {/* floating chip */}
@@ -250,19 +249,19 @@ function Hero() {
               border: "1px solid rgba(203,210,223,0.9)",
             }}
           >
-            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500">{c.badgeLabel}</span>
+            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500">
+              {c.badgeLabel}
+            </span>
             <span aria-hidden className="h-3 w-px" style={{ background: "rgba(198,93,44,0.5)" }} />
             <span className="font-editorial text-[17px] leading-none" style={{ color: NAVY_DEEP }}>
               {c.badgeValue}
             </span>
           </motion.div>
-
         </div>
       </div>
     </section>
   );
 }
-
 
 /* -------- 2 · THE BEGINNING -------- */
 function Beginning() {
@@ -272,21 +271,20 @@ function Beginning() {
       className="relative overflow-hidden px-6 py-20 md:px-10 md:py-28 lg:px-16"
       style={{ background: `linear-gradient(180deg, #f5efe4 0%, ${CREAM} 100%)` }}
     >
-
       <div className="relative mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:items-center md:gap-16">
         <div className="relative">
-        {/* oversized decorative year */}
-        <motion.div
-          aria-hidden
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 0.07, y: 0 }}
-          viewport={{ once: true, margin: "-10% 0px" }}
-          transition={{ duration: 1.4, ease }}
-          className="font-editorial pointer-events-none absolute -top-20 left-0 whitespace-nowrap text-[clamp(6rem,26vw,14rem)] leading-[1] tracking-[-0.05em] md:-top-24 md:text-[clamp(7rem,12vw,10.5rem)]"
-          style={{ color: NAVY_DEEP }}
-        >
-          {c.year}
-        </motion.div>
+          {/* oversized decorative year */}
+          <motion.div
+            aria-hidden
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 0.07, y: 0 }}
+            viewport={{ once: true, margin: "-10% 0px" }}
+            transition={{ duration: 1.4, ease }}
+            className="font-editorial pointer-events-none absolute -top-20 left-0 whitespace-nowrap text-[clamp(6rem,26vw,14rem)] leading-[1] tracking-[-0.05em] md:-top-24 md:text-[clamp(7rem,12vw,10.5rem)]"
+            style={{ color: NAVY_DEEP }}
+          >
+            {c.year}
+          </motion.div>
 
           <Reveal>
             <Eyebrow>{c.eyebrow}</Eyebrow>
@@ -331,15 +329,23 @@ function Beginning() {
               <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-500">
                 {c.badgeLabel}
               </div>
-              <div className="font-editorial mt-1 text-[28px] leading-none" style={{ color: NAVY_DEEP }}>
+              <div
+                className="font-editorial mt-1 text-[28px] leading-none"
+                style={{ color: NAVY_DEEP }}
+              >
                 {c.badgeTitle} <em style={{ color: EMBER }}>{c.badgeEm}</em>
               </div>
             </div>
 
             {/* mobile first-year caption */}
             <div className="mt-4 flex items-baseline gap-3 sm:hidden">
-              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-500">{c.badgeLabel}</span>
-              <span className="font-editorial text-[20px] leading-none" style={{ color: NAVY_DEEP }}>
+              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-500">
+                {c.badgeLabel}
+              </span>
+              <span
+                className="font-editorial text-[20px] leading-none"
+                style={{ color: NAVY_DEEP }}
+              >
                 {c.badgeTitle} <em style={{ color: EMBER }}>{c.badgeEm}</em>
               </span>
             </div>
@@ -349,7 +355,6 @@ function Beginning() {
     </section>
   );
 }
-
 
 /* -------- 3 · TIMELINE -------- */
 type Milestone = { year: string; title: string; body: string };
@@ -412,8 +417,7 @@ function MeshGrid() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(198,93,44,0.30) 1.1px, transparent 1.2px)",
+          backgroundImage: "radial-gradient(circle, rgba(198,93,44,0.30) 1.1px, transparent 1.2px)",
           backgroundSize: "144px 144px",
           backgroundPosition: "0 0",
           maskImage: "radial-gradient(95% 65% at 50% 38%, #000 0%, transparent 85%)",
@@ -423,7 +427,9 @@ function MeshGrid() {
       {/* slow tonal light drift — warms the grid without glare */}
       <motion.div
         className="absolute -inset-x-24 -inset-y-28"
-        animate={reduce ? undefined : { x: [0, 30, 0], y: [0, -20, 0], opacity: [0.62, 0.85, 0.62] }}
+        animate={
+          reduce ? undefined : { x: [0, 30, 0], y: [0, -20, 0], opacity: [0.62, 0.85, 0.62] }
+        }
         transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
         style={{
           background:
@@ -441,7 +447,6 @@ function MeshGrid() {
     </div>
   );
 }
-
 
 function TimelineItem({ m, i }: { m: Milestone; i: number }) {
   const right = i % 2 === 1;
@@ -497,7 +502,7 @@ function TimelineItem({ m, i }: { m: Milestone; i: number }) {
           style={{
             scale: scrollLinked ? dotScale : 1,
             background: active ? EMBER : "#cbd2df",
-            ["--cream" as any]: CREAM,
+            ["--cream" as unknown]: CREAM,
             transition: "background 500ms ease",
           }}
           className="relative h-3.5 w-3.5 rounded-full ring-4 ring-[color:var(--cream)]"
@@ -513,8 +518,7 @@ function TimelineItem({ m, i }: { m: Milestone; i: number }) {
             ? "0 40px 80px -40px rgba(15,23,48,0.42), 0 6px 18px -12px rgba(15,23,48,0.18)"
             : "0 22px 48px -34px rgba(15,23,48,0.24)",
           border: `1px solid ${active ? "rgba(198,93,44,0.32)" : "rgba(203,210,223,0.7)"}`,
-          transition:
-            "background 600ms ease, box-shadow 600ms ease, border-color 600ms ease",
+          transition: "background 600ms ease, box-shadow 600ms ease, border-color 600ms ease",
         }}
         className={`ml-14 rounded-[22px] p-6 md:ml-0 md:p-8 md:backdrop-blur ${
           right ? "md:col-start-2" : "md:col-start-1 md:text-right"
@@ -526,26 +530,25 @@ function TimelineItem({ m, i }: { m: Milestone; i: number }) {
         >
           {m.year}
         </div>
-        <div className="mt-3 text-[11px] font-bold uppercase tracking-[0.28em]" style={{ color: EMBER }}>
+        <div
+          className="mt-3 text-[11px] font-bold uppercase tracking-[0.28em]"
+          style={{ color: EMBER }}
+        >
           {m.title}
         </div>
-        <p className="mt-3 text-[14.5px] leading-[1.7] text-slate-700 md:text-[15.5px]">
-          {m.body}
-        </p>
+        <p className="mt-3 text-[14.5px] leading-[1.7] text-slate-700 md:text-[15.5px]">{m.body}</p>
       </motion.div>
     </li>
   );
 }
 
-
 function Timeline() {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const isMobile = useIsMobile();
-  const c = useContent<Record<string, any>>("about_timeline");
-  const milestones: Milestone[] = Array.isArray(c.milestones) && c.milestones.length
-    ? (c.milestones as Milestone[])
-    : MILESTONES;
+  const c = useContent<Record<string, unknown>>("about_timeline");
+  const milestones: Milestone[] =
+    Array.isArray(c.milestones) && c.milestones.length ? (c.milestones as Milestone[]) : MILESTONES;
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -575,7 +578,6 @@ function Timeline() {
         </Reveal>
       </div>
 
-
       <div ref={ref} className="relative z-[1] mx-auto mt-16 max-w-4xl md:mt-20">
         {/* rail */}
         <div className="absolute left-6 top-0 h-full w-px bg-slate-300/70 md:left-1/2 md:-translate-x-1/2" />
@@ -584,7 +586,10 @@ function Timeline() {
           style={{ height, willChange: "height" }}
           className="absolute left-6 top-0 w-px overflow-hidden md:left-1/2 md:-translate-x-1/2"
         >
-          <div className="h-full w-full" style={{ background: `linear-gradient(180deg, ${EMBER} 0%, ${NAVY} 100%)` }} />
+          <div
+            className="h-full w-full"
+            style={{ background: `linear-gradient(180deg, ${EMBER} 0%, ${NAVY} 100%)` }}
+          />
         </motion.div>
 
         {/* travelling indicator — follows scroll progress along the rail */}
@@ -596,7 +601,10 @@ function Timeline() {
           >
             <span
               className="block h-2.5 w-2.5 rounded-full"
-              style={{ background: EMBER, boxShadow: `0 0 0 5px rgba(198,93,44,0.14), 0 0 18px 3px rgba(198,93,44,0.35)` }}
+              style={{
+                background: EMBER,
+                boxShadow: `0 0 0 5px rgba(198,93,44,0.14), 0 0 18px 3px rgba(198,93,44,0.35)`,
+              }}
             />
           </motion.div>
         )}
@@ -610,7 +618,6 @@ function Timeline() {
     </section>
   );
 }
-
 
 /* -------- 5 · THE PEOPLE BEHIND US -------- */
 type Leader = { name: string; role: string; tagline: string; photo?: string };
@@ -637,13 +644,7 @@ const LEADERS: Leader[] = [
 ];
 
 /* Extremely subtle desktop-only perspective tilt. */
-function PeopleCard({
-  person,
-  index,
-}: {
-  person: Leader;
-  index: number;
-}) {
+function PeopleCard({ person, index }: { person: Leader; index: number }) {
   const reduce = useReducedMotion();
   const cardRef = useRef<HTMLElement>(null);
   const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
@@ -675,111 +676,109 @@ function PeopleCard({
       }
       style={{ willChange: "transform" }}
     >
-    <motion.article
-      ref={cardRef as any}
-      initial={{ opacity: 0, y: 34 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-12% 0px" }}
-      transition={{ duration: 0.75, ease, delay: index * 0.12 }}
-      onMouseMove={onMove}
-      onMouseLeave={() => setTilt({ rx: 0, ry: 0 })}
-      className="group relative overflow-hidden rounded-[30px] bg-white/85 p-3 ring-1 ring-slate-200/80 backdrop-blur"
-      style={{
-        boxShadow: hovering
-          ? "0 52px 96px -44px rgba(15,23,48,0.5), 0 12px 28px -18px rgba(15,23,48,0.28)"
-          : "0 26px 60px -34px rgba(15,23,48,0.32)",
-        transform: `perspective(1100px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) rotate(${
-          hovering ? (index % 2 === 0 ? -0.8 : 0.8) : 0
-        }deg) translateY(${hovering ? -8 : 0}px)`,
-        transformStyle: "preserve-3d",
-        transition: "transform 600ms cubic-bezier(0.22,1,0.36,1), box-shadow 600ms ease",
-        willChange: "transform",
-      }}
-    >
-
-      {/* portrait */}
-      <div className="relative overflow-hidden rounded-[22px] bg-[#f2ece1]">
-        <motion.div
-          initial={{ scale: 1.06, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true, margin: "-12% 0px" }}
-          transition={{ duration: 1, ease, delay: index * 0.12 + 0.08 }}
-          className="h-full w-full"
-        >
-          {person.photo ? (
-            <img
-              src={person.photo}
-              alt={`${person.name} — ${person.role}`}
-              loading="lazy"
-              className="aspect-[4/5] w-full object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
-            />
-          ) : (
-            <div
-              className="grid aspect-[4/5] w-full place-items-center text-center"
-              style={{ background: "linear-gradient(160deg,#f6efe3 0%,#ece3d4 100%)" }}
-            >
-              <div className="px-6">
-                <div
-                  className="font-editorial text-[44px] leading-none"
-                  style={{ color: NAVY_DEEP, opacity: 0.35 }}
-                >
-                  {person.name.charAt(0)}
-                </div>
-                <div className="mt-3 text-[10px] font-bold uppercase tracking-[0.28em] text-slate-500">
-                  Photo coming soon
-                </div>
-              </div>
-            </div>
-          )}
-        </motion.div>
-
-        {/* number detail */}
-        <div
-          className="absolute left-4 top-4 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-[11px] font-bold tracking-[0.08em] ring-1 ring-white/70 backdrop-blur"
-          style={{ color: EMBER }}
-        >
-          {String(index + 1).padStart(2, "0")}
-        </div>
-
-        {/* soft bottom veil for depth */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-24 opacity-70"
-          style={{ background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.85) 100%)" }}
-        />
-      </div>
-
-      {/* text */}
-      <motion.div
-        initial={{ opacity: 0, y: 14 }}
+      <motion.article
+        ref={cardRef as unknown}
+        initial={{ opacity: 0, y: 34 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-12% 0px" }}
-        transition={{ duration: 0.7, ease, delay: index * 0.12 + 0.22 }}
-        className="px-4 pb-5 pt-6 sm:px-5"
+        transition={{ duration: 0.75, ease, delay: index * 0.12 }}
+        onMouseMove={onMove}
+        onMouseLeave={() => setTilt({ rx: 0, ry: 0 })}
+        className="group relative overflow-hidden rounded-[30px] bg-white/85 p-3 ring-1 ring-slate-200/80 backdrop-blur"
+        style={{
+          boxShadow: hovering
+            ? "0 52px 96px -44px rgba(15,23,48,0.5), 0 12px 28px -18px rgba(15,23,48,0.28)"
+            : "0 26px 60px -34px rgba(15,23,48,0.32)",
+          transform: `perspective(1100px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) rotate(${
+            hovering ? (index % 2 === 0 ? -0.8 : 0.8) : 0
+          }deg) translateY(${hovering ? -8 : 0}px)`,
+          transformStyle: "preserve-3d",
+          transition: "transform 600ms cubic-bezier(0.22,1,0.36,1), box-shadow 600ms ease",
+          willChange: "transform",
+        }}
       >
-        <h3
-          className="font-editorial text-[30px] leading-none md:text-[32px]"
-          style={{ color: NAVY_DEEP }}
-        >
-          {person.name}
-        </h3>
-        <div
-          className="mt-2.5 text-[10.5px] font-bold uppercase tracking-[0.28em]"
-          style={{ color: EMBER }}
-        >
-          {person.role}
-        </div>
-        <p className="mt-4 text-[14.5px] leading-[1.7] text-slate-700">
-          {person.tagline}
-        </p>
-        <div
-          aria-hidden
-          className="mt-5 h-px w-full origin-left scale-x-[0.25] bg-slate-300 transition-transform duration-700 group-hover:scale-x-100"
-        />
-      </motion.div>
-    </motion.article>
-    </motion.div>
+        {/* portrait */}
+        <div className="relative overflow-hidden rounded-[22px] bg-[#f2ece1]">
+          <motion.div
+            initial={{ scale: 1.06, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true, margin: "-12% 0px" }}
+            transition={{ duration: 1, ease, delay: index * 0.12 + 0.08 }}
+            className="h-full w-full"
+          >
+            {person.photo ? (
+              <img
+                src={person.photo}
+                alt={`${person.name} — ${person.role}`}
+                loading="lazy"
+                className="aspect-[4/5] w-full object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+              />
+            ) : (
+              <div
+                className="grid aspect-[4/5] w-full place-items-center text-center"
+                style={{ background: "linear-gradient(160deg,#f6efe3 0%,#ece3d4 100%)" }}
+              >
+                <div className="px-6">
+                  <div
+                    className="font-editorial text-[44px] leading-none"
+                    style={{ color: NAVY_DEEP, opacity: 0.35 }}
+                  >
+                    {person.name.charAt(0)}
+                  </div>
+                  <div className="mt-3 text-[10px] font-bold uppercase tracking-[0.28em] text-slate-500">
+                    Photo coming soon
+                  </div>
+                </div>
+              </div>
+            )}
+          </motion.div>
 
+          {/* number detail */}
+          <div
+            className="absolute left-4 top-4 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-[11px] font-bold tracking-[0.08em] ring-1 ring-white/70 backdrop-blur"
+            style={{ color: EMBER }}
+          >
+            {String(index + 1).padStart(2, "0")}
+          </div>
+
+          {/* soft bottom veil for depth */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-24 opacity-70"
+            style={{
+              background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.85) 100%)",
+            }}
+          />
+        </div>
+
+        {/* text */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-12% 0px" }}
+          transition={{ duration: 0.7, ease, delay: index * 0.12 + 0.22 }}
+          className="px-4 pb-5 pt-6 sm:px-5"
+        >
+          <h3
+            className="font-editorial text-[30px] leading-none md:text-[32px]"
+            style={{ color: NAVY_DEEP }}
+          >
+            {person.name}
+          </h3>
+          <div
+            className="mt-2.5 text-[10.5px] font-bold uppercase tracking-[0.28em]"
+            style={{ color: EMBER }}
+          >
+            {person.role}
+          </div>
+          <p className="mt-4 text-[14.5px] leading-[1.7] text-slate-700">{person.tagline}</p>
+          <div
+            aria-hidden
+            className="mt-5 h-px w-full origin-left scale-x-[0.25] bg-slate-300 transition-transform duration-700 group-hover:scale-x-100"
+          />
+        </motion.div>
+      </motion.article>
+    </motion.div>
   );
 }
 
@@ -830,7 +829,6 @@ function PeopleBehind() {
             <p className="max-w-[46ch] text-[15px] leading-[1.75] text-slate-700 md:text-[16.5px]">
               {intro.paragraph}
             </p>
-
           </Reveal>
         </div>
 
@@ -896,9 +894,9 @@ const MOTO_STAGES = [
 ];
 
 function OurMoto() {
-  const c = useContent<Record<string, any>>("about_moto");
+  const c = useContent<Record<string, unknown>>("about_moto");
   const stages = (Array.isArray(c.stages) && c.stages.length ? c.stages : MOTO_STAGES).map(
-    (s: any, i: number) => ({ ...MOTO_STAGES[i % MOTO_STAGES.length], ...s }),
+    (s: unknown, i: number) => ({ ...MOTO_STAGES[i % MOTO_STAGES.length], ...s }),
   );
   const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
@@ -930,8 +928,7 @@ function OurMoto() {
     if (!el) return 0;
     const r = el.getBoundingClientRect();
     return (
-      (Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2)) *
-        180) /
+      (Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2)) * 180) /
       Math.PI
     );
   };
@@ -1004,7 +1001,6 @@ function OurMoto() {
     });
   };
 
-
   return (
     <section
       id="our-moto"
@@ -1026,13 +1022,13 @@ function OurMoto() {
           </Reveal>
           <Reveal delay={0.05}>
             <Editorial className="mt-6 text-[clamp(2rem,5.5vw,3.75rem)]">
-              {c.title} <em style={{ color: EMBER }}>{c.titleEm}</em>{c.titleTail}
+              {c.title} <em style={{ color: EMBER }}>{c.titleEm}</em>
+              {c.titleTail}
             </Editorial>
           </Reveal>
           <Reveal delay={0.12}>
             <p className="mt-6 max-w-[52ch] text-[15px] leading-[1.75] text-slate-700 md:text-[16.5px]">
               {c.paragraph}
-
             </p>
           </Reveal>
         </div>
@@ -1114,7 +1110,10 @@ function OurMoto() {
                     className="absolute left-0 top-0 h-full w-[3px] transition-opacity duration-500"
                     style={{ background: st.color, opacity: on ? 1 : 0 }}
                   />
-                  <div className="font-editorial text-[34px] leading-none" style={{ color: st.color }}>
+                  <div
+                    className="font-editorial text-[34px] leading-none"
+                    style={{ color: st.color }}
+                  >
                     {st.n}
                   </div>
                   <h3
@@ -1160,14 +1159,14 @@ function FinalCTA() {
             </p>
           </Reveal>
 
-
           <Reveal delay={0.25}>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
                 to="/contact"
                 className="group inline-flex h-14 items-center justify-between gap-3 rounded-full px-6 text-[15px] font-semibold text-white transition-all duration-500 hover:shadow-[0_18px_40px_-12px_rgba(15,23,42,0.5)] active:scale-[0.97]"
                 style={{
-                  background: "linear-gradient(135deg, oklch(0.55 0.16 258) 0%, oklch(0.35 0.13 258) 100%)",
+                  background:
+                    "linear-gradient(135deg, oklch(0.55 0.16 258) 0%, oklch(0.35 0.13 258) 100%)",
                   boxShadow: "0 14px 36px -12px rgba(34,64,180,0.55)",
                 }}
               >

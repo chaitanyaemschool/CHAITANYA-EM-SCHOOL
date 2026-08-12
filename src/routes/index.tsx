@@ -26,9 +26,7 @@ import { ACADEMIC_STAGES } from "@/lib/academics-data";
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
-    links: [
-      { rel: "preload", as: "image", href: hero1Assembly.url } as any,
-    ],
+    links: [{ rel: "preload", as: "image", href: hero1Assembly.url } as unknown],
   }),
 });
 
@@ -62,7 +60,12 @@ function PillButton({
       </span>
     </>
   );
-  if (to) return <Link to={to} className={cls}>{inner}</Link>;
+  if (to)
+    return (
+      <Link to={to} className={cls}>
+        {inner}
+      </Link>
+    );
   return <button className={cls}>{inner}</button>;
 }
 
@@ -70,7 +73,7 @@ function Hero() {
   return <HeroInner />;
 }
 
-function ScrollIndicator({ style }: { style?: any }) {
+function ScrollIndicator({ style }: { style?: unknown }) {
   const reduce = useReducedMotion();
   return (
     <motion.a
@@ -91,7 +94,9 @@ function ScrollIndicator({ style }: { style?: any }) {
         whileTap={{ scale: 0.94 }}
         transition={{ type: "spring", stiffness: 260, damping: 20 }}
         className="relative flex h-10 w-6 items-start justify-center rounded-full border-[1.5px] border-white/85 backdrop-blur-sm"
-        style={{ boxShadow: "0 8px 24px -6px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06)" }}
+        style={{
+          boxShadow: "0 8px 24px -6px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06)",
+        }}
       >
         <motion.span
           aria-hidden
@@ -151,17 +156,18 @@ function HeroInner() {
     return () => clearInterval(t);
   }, [reduce, slideCount]);
 
-
   return (
     <section id="top" ref={ref} className="relative h-[100svh] w-full overflow-hidden">
-      <motion.div style={{ y: imgY, scale: imgScale, perspective: 1400 }} className="absolute inset-0">
-        {/* Dark warm placeholder that blends with the school photography — prevents any white flash before decode */}
+      <motion.div
+        style={{ y: imgY, scale: imgScale, perspective: 1400 }}
+        className="absolute inset-0"
+      >
+        {/* Dark warm placeholder that blends with the school photography — prevents unknown white flash before decode */}
         <div
           aria-hidden
           className="absolute inset-0"
           style={{
-            background:
-              "linear-gradient(135deg, #1a2540 0%, #223055 45%, #3a2a1e 100%)",
+            background: "linear-gradient(135deg, #1a2540 0%, #223055 45%, #3a2a1e 100%)",
           }}
         />
         {heroImages.map((img, i) => {
@@ -195,10 +201,7 @@ function HeroInner() {
           );
         })}
       </motion.div>
-      <motion.div
-        style={{ opacity: overlayOpacity }}
-        className="absolute inset-0"
-      >
+      <motion.div style={{ opacity: overlayOpacity }} className="absolute inset-0">
         <div
           className="absolute inset-0"
           style={{
@@ -226,7 +229,6 @@ function HeroInner() {
           <span className="h-px w-6 bg-white/50" />
           {cms.eyebrow}
         </motion.div>
-
 
         <div className="mt-4 pb-2 md:mt-5">
           <motion.h1
@@ -272,7 +274,6 @@ function HeroInner() {
           {cms.subline}
         </motion.p>
 
-
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -280,7 +281,9 @@ function HeroInner() {
           className="mt-6 flex flex-row flex-wrap items-center gap-2.5 sm:gap-3"
         >
           <PillButton to="/contact">{cms.ctaPrimary || "Book a visit"}</PillButton>
-          <PillButton variant="ghost" to="/academics">{cms.ctaSecondary || "Our academics"}</PillButton>
+          <PillButton variant="ghost" to="/academics">
+            {cms.ctaSecondary || "Our academics"}
+          </PillButton>
         </motion.div>
       </div>
 
@@ -324,13 +327,19 @@ function HeroFloatingBadges() {
         transition={{ delay: 1.1, duration: 0.9, ease }}
         className="absolute right-6 top-28 lg:right-12 lg:top-32"
       >
-        <div className={`glass-strong flex items-center gap-3 rounded-2xl px-4 py-3 ${reduce ? "" : "float-slow"}`}>
+        <div
+          className={`glass-strong flex items-center gap-3 rounded-2xl px-4 py-3 ${reduce ? "" : "float-slow"}`}
+        >
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-[oklch(0.32_0.11_258)] text-white">
             <Award className="h-4 w-4" strokeWidth={2.2} />
           </span>
           <div className="leading-tight">
-            <div className="text-[9px] font-semibold uppercase tracking-[0.24em] text-foreground/60">Established</div>
-            <div className="text-[15px] font-semibold tracking-tight text-foreground">Since 2012</div>
+            <div className="text-[9px] font-semibold uppercase tracking-[0.24em] text-foreground/60">
+              Established
+            </div>
+            <div className="text-[15px] font-semibold tracking-tight text-foreground">
+              Since 2012
+            </div>
           </div>
         </div>
       </motion.div>
@@ -342,13 +351,21 @@ function HeroFloatingBadges() {
         transition={{ delay: 1.3, duration: 0.9, ease }}
         className="absolute right-10 top-1/2 -translate-y-1/2 lg:right-16"
       >
-        <div className={`glass-strong flex items-center gap-3 rounded-2xl px-4 py-3 ${reduce ? "" : "float-slower"}`}>
+        <div
+          className={`glass-strong flex items-center gap-3 rounded-2xl px-4 py-3 ${reduce ? "" : "float-slower"}`}
+        >
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-[oklch(0.55_0.16_148)] text-white">
             <Sparkles className="h-4 w-4" strokeWidth={2.2} />
           </span>
           <div className="leading-tight">
-            <CountUp to={100} suffix="%" className="text-[15px] font-semibold tracking-tight text-foreground" />
-            <div className="text-[10px] font-medium uppercase tracking-[0.24em] text-foreground/60">Academic environment</div>
+            <CountUp
+              to={100}
+              suffix="%"
+              className="text-[15px] font-semibold tracking-tight text-foreground"
+            />
+            <div className="text-[10px] font-medium uppercase tracking-[0.24em] text-foreground/60">
+              Academic environment
+            </div>
           </div>
         </div>
       </motion.div>
@@ -377,11 +394,22 @@ function HeroFloatingBadges() {
 }
 
 /* Number that counts up when first mounted */
-function CountUp({ to, suffix = "", className }: { to: number; suffix?: string; className?: string }) {
+function CountUp({
+  to,
+  suffix = "",
+  className,
+}: {
+  to: number;
+  suffix?: string;
+  className?: string;
+}) {
   const [n, setN] = useState(0);
   const reduce = useReducedMotion();
   useEffect(() => {
-    if (reduce) { setN(to); return; }
+    if (reduce) {
+      setN(to);
+      return;
+    }
     const start = performance.now();
     const dur = 1200;
     let raf = 0;
@@ -394,9 +422,13 @@ function CountUp({ to, suffix = "", className }: { to: number; suffix?: string; 
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [to, reduce]);
-  return <div className={className}>{n}{suffix}</div>;
+  return (
+    <div className={className}>
+      {n}
+      {suffix}
+    </div>
+  );
 }
-
 
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
@@ -425,7 +457,13 @@ type SectionPreview = {
   cta: string;
 };
 
-const PREVIEW_ROUTES: SectionPreview["to"][] = ["/about", "/academics", "/facilities", "/gallery", "/contact"];
+const PREVIEW_ROUTES: SectionPreview["to"][] = [
+  "/about",
+  "/academics",
+  "/facilities",
+  "/gallery",
+  "/contact",
+];
 
 function PreviewCard({ item, index }: { item: SectionPreview; index: number }) {
   return <PreviewCardInner item={item} index={index} />;
@@ -441,11 +479,9 @@ function ContactExtras() {
         email={contact.email}
         className="grid-cols-1"
       />
-
     </div>
   );
 }
-
 
 /* Distinct palette + accents per section */
 type Theme = {
@@ -524,8 +560,13 @@ const academicsStages = ACADEMIC_STAGES.map((s, i) => ({
   fg: s.fg,
 }));
 
-
-function AcademicsStageModal({ stage, onClose }: { stage: (typeof academicsStages)[number] | null; onClose: () => void }) {
+function AcademicsStageModal({
+  stage,
+  onClose,
+}: {
+  stage: (typeof academicsStages)[number] | null;
+  onClose: () => void;
+}) {
   useEffect(() => {
     if (!stage) return;
     const prevOverflow = document.body.style.overflow;
@@ -562,7 +603,13 @@ function AcademicsStageModal({ stage, onClose }: { stage: (typeof academicsStage
             className="w-full max-w-sm overflow-hidden rounded-[32px] bg-white shadow-[0_40px_100px_-24px_rgba(0,0,0,0.65)] ring-1 ring-white/20"
           >
             <div className="relative aspect-[4/3] w-full overflow-hidden">
-              <img loading="lazy" decoding="async" src={stage.image} alt={stage.grades} className="h-full w-full object-cover" />
+              <img
+                loading="lazy"
+                decoding="async"
+                src={stage.image}
+                alt={stage.grades}
+                className="h-full w-full object-cover"
+              />
               <button
                 type="button"
                 aria-label="Close stage"
@@ -573,10 +620,18 @@ function AcademicsStageModal({ stage, onClose }: { stage: (typeof academicsStage
               </button>
             </div>
             <div className="px-6 py-6">
-              <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-muted-foreground">{stage.tag}</div>
-              <h4 className="font-editorial mt-2 text-[34px] leading-none text-foreground">{stage.grades}</h4>
-              <p className="mt-3 text-[15px] font-semibold leading-snug text-foreground">{stage.title}</p>
-              <p className="mt-3 text-[13px] font-medium leading-relaxed text-foreground/70">{stage.detail}</p>
+              <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-muted-foreground">
+                {stage.tag}
+              </div>
+              <h4 className="font-editorial mt-2 text-[34px] leading-none text-foreground">
+                {stage.grades}
+              </h4>
+              <p className="mt-3 text-[15px] font-semibold leading-snug text-foreground">
+                {stage.title}
+              </p>
+              <p className="mt-3 text-[13px] font-medium leading-relaxed text-foreground/70">
+                {stage.detail}
+              </p>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {stage.focus.map((f) => (
                   <li
@@ -597,7 +652,6 @@ function AcademicsStageModal({ stage, onClose }: { stage: (typeof academicsStage
                 <ChevronRight className="h-4 w-4" strokeWidth={2.4} />
               </Link>
             </div>
-
           </motion.div>
         </motion.div>
       )}
@@ -692,7 +746,7 @@ function AcademicsStageCards() {
 
 function PreviewCardInner({ item, index }: { item: SectionPreview; index: number }) {
   const t = themes[index] ?? themes[0];
-      const isAcademics = item.to === "/academics";
+  const isAcademics = item.to === "/academics";
   const isDarkSection = false;
   return (
     <motion.section
@@ -724,61 +778,69 @@ function PreviewCardInner({ item, index }: { item: SectionPreview; index: number
       )}
 
       <div className="relative mx-auto max-w-6xl">
-      <div className={`relative text-[10px] font-semibold uppercase tracking-[0.32em] ${t.eyebrow}`}>
-        {item.eyebrow}
-      </div>
-
-      <h3 className={`font-editorial relative mt-4 text-[clamp(2.6rem,11vw,4.25rem)] leading-[0.94] md:text-[clamp(3.5rem,6.5vw,6rem)] ${t.heading}`}>
-        {item.title}
-      </h3>
-
-      <p className={`relative mt-4 max-w-[44ch] text-[15px] font-medium leading-[1.65] md:text-[17px] lg:text-[18px] ${t.body}`}>
-        {item.body}
-      </p>
-
-      {isAcademics ? (
-        <AcademicsStageCards />
-      ) : (
-        <motion.div
-          initial={{ opacity: 0, y: 30, rotateX: 6 }}
-          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 1, ease, delay: 0.1 }}
-          whileHover={{ y: -4, scale: 1.01 }}
-          className={`card-spotlight hover-lift relative mt-7 overflow-hidden rounded-[28px] ring-1 md:mt-10 ${isDarkSection ? "ring-white/10" : "ring-black/5"}`}
-          style={{
-            boxShadow: "0 30px 70px -30px rgba(15,23,42,0.4)",
-            transformStyle: "preserve-3d",
-            perspective: 1000,
-          }}
+        <div
+          className={`relative text-[10px] font-semibold uppercase tracking-[0.32em] ${t.eyebrow}`}
         >
-          <motion.img
-            src={item.image}
-            alt=""
-            initial={{ scale: 1.15 }}
-            whileInView={{ scale: 1 }}
+          {item.eyebrow}
+        </div>
+
+        <h3
+          className={`font-editorial relative mt-4 text-[clamp(2.6rem,11vw,4.25rem)] leading-[0.94] md:text-[clamp(3.5rem,6.5vw,6rem)] ${t.heading}`}
+        >
+          {item.title}
+        </h3>
+
+        <p
+          className={`relative mt-4 max-w-[44ch] text-[15px] font-medium leading-[1.65] md:text-[17px] lg:text-[18px] ${t.body}`}
+        >
+          {item.body}
+        </p>
+
+        {isAcademics ? (
+          <AcademicsStageCards />
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 30, rotateX: 6 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1.6, ease }}
-            className="h-[42vh] w-full object-cover sm:h-[54vh] md:h-[62vh] lg:h-[70vh]"
-            loading="lazy"
-            decoding="async"
-          />
-        </motion.div>
-      )}
+            transition={{ duration: 1, ease, delay: 0.1 }}
+            whileHover={{ y: -4, scale: 1.01 }}
+            className={`card-spotlight hover-lift relative mt-7 overflow-hidden rounded-[28px] ring-1 md:mt-10 ${isDarkSection ? "ring-white/10" : "ring-black/5"}`}
+            style={{
+              boxShadow: "0 30px 70px -30px rgba(15,23,42,0.4)",
+              transformStyle: "preserve-3d",
+              perspective: 1000,
+            }}
+          >
+            <motion.img
+              src={item.image}
+              alt=""
+              initial={{ scale: 1.15 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 1.6, ease }}
+              className="h-[42vh] w-full object-cover sm:h-[54vh] md:h-[62vh] lg:h-[70vh]"
+              loading="lazy"
+              decoding="async"
+            />
+          </motion.div>
+        )}
 
-      {item.to === "/contact" && <ContactExtras />}
+        {item.to === "/contact" && <ContactExtras />}
 
-      {!isAcademics && (
-        <Link
-          to={item.to}
-          className={`group btn-glow relative mt-7 inline-flex h-12 items-center gap-3 rounded-full pl-5 pr-2 text-[13px] font-semibold tracking-tight transition-all duration-500 active:scale-[0.97] hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-12px_rgba(15,23,42,0.35)] ${t.cta}`}
-        >
-          <span className="uppercase tracking-[0.14em]">{item.cta}</span>
-          <span className={`grid h-8 w-8 place-items-center rounded-full transition-transform duration-500 group-hover:translate-x-1 ${t.ctaIcon}`}>
-            <ArrowUpRight className="h-4 w-4" strokeWidth={2.5} />
-          </span>
-        </Link>
-      )}
+        {!isAcademics && (
+          <Link
+            to={item.to}
+            className={`group btn-glow relative mt-7 inline-flex h-12 items-center gap-3 rounded-full pl-5 pr-2 text-[13px] font-semibold tracking-tight transition-all duration-500 active:scale-[0.97] hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-12px_rgba(15,23,42,0.35)] ${t.cta}`}
+          >
+            <span className="uppercase tracking-[0.14em]">{item.cta}</span>
+            <span
+              className={`grid h-8 w-8 place-items-center rounded-full transition-transform duration-500 group-hover:translate-x-1 ${t.ctaIcon}`}
+            >
+              <ArrowUpRight className="h-4 w-4" strokeWidth={2.5} />
+            </span>
+          </Link>
+        )}
       </div>
     </motion.section>
   );

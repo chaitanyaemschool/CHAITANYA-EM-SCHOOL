@@ -1,11 +1,16 @@
-import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+} from "motion/react";
 import { ArrowUp, Phone } from "lucide-react";
 
 import { useState } from "react";
 
 import { telHref, waHref } from "@/lib/social-links";
 import { useContent } from "@/lib/use-content";
-
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -54,8 +59,6 @@ function WhatsAppGlyph({ className }: { className?: string }) {
   );
 }
 
-
-
 /**
  * Vertical floating dock — Scroll to top, Call, WhatsApp only.
  * Uniform diameter, spacing and depth; CSS-only gloss + hover animation.
@@ -88,10 +91,17 @@ export function FloatingDock() {
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.22, ease }}
             className={BTN}
-            style={sphere("oklch(0.62 0.11 258)", "oklch(0.30 0.11 258)", "oklch(0.35 0.13 258 / 0.75)")}
+            style={sphere(
+              "oklch(0.62 0.11 258)",
+              "oklch(0.30 0.11 258)",
+              "oklch(0.35 0.13 258 / 0.75)",
+            )}
           >
             <Gloss />
-            <ArrowUp className="relative h-[19px] w-[19px] text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)]" strokeWidth={2.6} />
+            <ArrowUp
+              className="relative h-[19px] w-[19px] text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)]"
+              strokeWidth={2.6}
+            />
           </motion.button>
         )}
       </AnimatePresence>
@@ -103,7 +113,10 @@ export function FloatingDock() {
         style={sphere("oklch(0.78 0.11 258)", "oklch(0.38 0.15 258)", "oklch(0.5 0.16 258 / 0.75)")}
       >
         <Gloss />
-        <Phone className="relative h-[19px] w-[19px] drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)]" strokeWidth={2.4} />
+        <Phone
+          className="relative h-[19px] w-[19px] drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)]"
+          strokeWidth={2.4}
+        />
       </a>
 
       <a
@@ -117,8 +130,6 @@ export function FloatingDock() {
         <Gloss />
         <WhatsAppGlyph className="relative h-[26px] w-[26px] text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]" />
       </a>
-
-
     </div>
   );
 }

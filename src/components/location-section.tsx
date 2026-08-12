@@ -36,8 +36,8 @@ export function LocationSection() {
           Come and find us.
         </h2>
         <p className="mt-3 max-w-[52ch] text-[14px] leading-relaxed text-muted-foreground md:text-[15px]">
-          We're on the main road in Chekkapalli. Drop in on a working morning — someone
-          will always walk you around the campus.
+          We're on the main road in Chekkapalli. Drop in on a working morning — someone will always
+          walk you around the campus.
         </p>
       </motion.div>
 
@@ -85,7 +85,9 @@ export function LocationSection() {
           </div>
           <div className="mt-3 flex items-start gap-2.5 text-[13.5px] leading-relaxed text-muted-foreground">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-foreground/50" strokeWidth={2.2} />
-            <span className="whitespace-pre-line">{contact.address || "Chekkapalli, Andhra Pradesh"}</span>
+            <span className="whitespace-pre-line">
+              {contact.address || "Chekkapalli, Andhra Pradesh"}
+            </span>
           </div>
           <div className="mt-3 flex items-start gap-2.5 text-[13.5px] text-muted-foreground">
             <Clock className="mt-0.5 h-4 w-4 shrink-0 text-foreground/50" strokeWidth={2.2} />
@@ -97,7 +99,10 @@ export function LocationSection() {
             rel="noreferrer"
             className="group mt-5 inline-flex min-h-11 items-center gap-2.5 self-start rounded-full bg-[linear-gradient(135deg,oklch(0.55_0.16_258),oklch(0.35_0.13_258))] px-5 text-[13.5px] font-semibold text-white shadow-[0_14px_30px_-14px_rgba(34,64,180,0.6)] transition-all duration-400 hover:-translate-y-0.5 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.35_0.13_258)] focus-visible:ring-offset-2 focus-visible:ring-offset-background md:mt-auto"
           >
-            <Navigation className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-0.5" strokeWidth={2.3} />
+            <Navigation
+              className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-0.5"
+              strokeWidth={2.3}
+            />
             Get directions
           </a>
         </div>

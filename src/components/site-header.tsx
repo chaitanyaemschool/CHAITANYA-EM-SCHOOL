@@ -8,7 +8,6 @@ import wordmarkAsset from "@/assets/chaitanya-telugu-wordmark.asset.json";
 import { navItems } from "@/components/site-footer";
 import { AdmissionDialog } from "@/components/admission-form";
 
-
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export function SiteHeader() {
@@ -49,7 +48,11 @@ export function SiteHeader() {
         className="fixed inset-x-3 top-3 z-50 mx-auto max-w-6xl rounded-[28px] ring-1 ring-black/5 md:inset-x-6 md:top-4 lg:inset-x-8"
       >
         <div className="flex h-full items-center justify-between gap-2 px-3 md:gap-3 md:px-6">
-          <Link to="/" className="flex min-w-0 items-center gap-2.5 md:gap-3" aria-label="Chaitanya EM School — Home">
+          <Link
+            to="/"
+            className="flex min-w-0 items-center gap-2.5 md:gap-3"
+            aria-label="Chaitanya EM School — Home"
+          >
             <img
               src={logoAsset.url}
               alt=""
@@ -93,7 +96,9 @@ export function SiteHeader() {
             className={`focus-luxe grid shrink-0 place-items-center rounded-full text-white shadow-[0_10px_28px_-10px_rgba(34,64,180,0.55)] transition-all duration-500 ease-out hover:scale-105 active:scale-95 md:hidden ${
               scrolled ? "h-10 w-10" : "h-11 w-11"
             }`}
-            style={{ background: "linear-gradient(135deg,oklch(0.52 0.16 258),oklch(0.36 0.13 258))" }}
+            style={{
+              background: "linear-gradient(135deg,oklch(0.52 0.16 258),oklch(0.36 0.13 258))",
+            }}
           >
             <Menu className="h-4 w-4" strokeWidth={2.5} />
           </button>
@@ -101,12 +106,19 @@ export function SiteHeader() {
       </motion.header>
       <MenuOverlay open={menu} onClose={() => setMenu(false)} onEnroll={() => setEnroll(true)} />
       <AdmissionDialog open={enroll} onClose={() => setEnroll(false)} />
-
     </>
   );
 }
 
-function MenuOverlay({ open, onClose, onEnroll }: { open: boolean; onClose: () => void; onEnroll: () => void }) {
+function MenuOverlay({
+  open,
+  onClose,
+  onEnroll,
+}: {
+  open: boolean;
+  onClose: () => void;
+  onEnroll: () => void;
+}) {
   return (
     <AnimatePresence>
       {open && (
@@ -139,7 +151,11 @@ function MenuOverlay({ open, onClose, onEnroll }: { open: boolean; onClose: () =
               }}
             >
               <div className="flex min-w-0 items-center gap-3">
-                <img src={logoAsset.url} alt="" className="h-10 w-10 shrink-0 rounded-full bg-white p-1 ring-1 ring-black/5" />
+                <img
+                  src={logoAsset.url}
+                  alt=""
+                  className="h-10 w-10 shrink-0 rounded-full bg-white p-1 ring-1 ring-black/5"
+                />
                 <img
                   src={wordmarkAsset.url}
                   alt="Chaitanya (E.M.) High School"
@@ -150,7 +166,9 @@ function MenuOverlay({ open, onClose, onEnroll }: { open: boolean; onClose: () =
                 onClick={onClose}
                 aria-label="Close menu"
                 className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-white shadow-[0_8px_20px_-8px_rgba(200,70,70,0.55)] active:scale-95 transition-transform"
-                style={{ background: "linear-gradient(135deg,oklch(0.72 0.17 28),oklch(0.56 0.19 28))" }}
+                style={{
+                  background: "linear-gradient(135deg,oklch(0.72 0.17 28),oklch(0.56 0.19 28))",
+                }}
               >
                 <X className="h-4 w-4" strokeWidth={2.5} />
               </button>
@@ -226,13 +244,15 @@ function MenuOverlay({ open, onClose, onEnroll }: { open: boolean; onClose: () =
                   onEnroll();
                 }}
                 className="font-nav flex h-14 w-full items-center justify-center gap-2 rounded-full text-[15px] font-bold text-white shadow-[0_16px_40px_-14px_rgba(34,64,180,0.55)] active:scale-[0.98] transition-transform"
-                style={{ background: "linear-gradient(135deg,oklch(0.55 0.16 258) 0%,oklch(0.35 0.13 258) 100%)" }}
+                style={{
+                  background:
+                    "linear-gradient(135deg,oklch(0.55 0.16 258) 0%,oklch(0.35 0.13 258) 100%)",
+                }}
               >
                 Enroll now
                 <ArrowUpRight className="h-4 w-4" strokeWidth={2.5} />
               </button>
             </div>
-
           </motion.aside>
         </motion.div>
       )}

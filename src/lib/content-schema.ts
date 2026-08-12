@@ -48,8 +48,8 @@ export type ListDef = {
 };
 
 export type SectionDef = {
-  key: string;             // Firestore doc id under `content`
-  page: string;            // grouping in admin sidebar
+  key: string; // Firestore doc id under `content`
+  page: string; // grouping in admin sidebar
   title: string;
   description?: string;
   fields?: FieldDef[];
@@ -65,10 +65,30 @@ export const CONTENT_SECTIONS: SectionDef[] = [
     fields: [
       { key: "eyebrow", label: "Eyebrow", type: "text", placeholder: "Chaitanya · Since 2012" },
       { key: "headline", label: "Headline (line 1)", type: "text", placeholder: "Learning today." },
-      { key: "headlineTwo", label: "Headline (line 2)", type: "text", placeholder: "Leading tomorrow." },
-      { key: "subline", label: "Subline", type: "textarea", placeholder: "A school for complete knowledge…" },
-      { key: "ctaPrimary", label: "Primary button label", type: "text", placeholder: "Book a visit" },
-      { key: "ctaSecondary", label: "Secondary button label", type: "text", placeholder: "Our academics" },
+      {
+        key: "headlineTwo",
+        label: "Headline (line 2)",
+        type: "text",
+        placeholder: "Leading tomorrow.",
+      },
+      {
+        key: "subline",
+        label: "Subline",
+        type: "textarea",
+        placeholder: "A school for complete knowledge…",
+      },
+      {
+        key: "ctaPrimary",
+        label: "Primary button label",
+        type: "text",
+        placeholder: "Book a visit",
+      },
+      {
+        key: "ctaSecondary",
+        label: "Secondary button label",
+        type: "text",
+        placeholder: "Our academics",
+      },
     ],
     lists: [
       {
@@ -135,7 +155,8 @@ export const CONTENT_SECTIONS: SectionDef[] = [
     key: "about_hero",
     page: "About School",
     title: "Editorial hero",
-    description: "The opening frame of the About page — headline, paragraph, both photos and the year badge.",
+    description:
+      "The opening frame of the About page — headline, paragraph, both photos and the year badge.",
     fields: [
       { key: "eyebrow", label: "Eyebrow", type: "text" },
       { key: "line1", label: "Headline line 1", type: "text" },
@@ -199,7 +220,12 @@ export const CONTENT_SECTIONS: SectionDef[] = [
       { key: "eyebrow", label: "Eyebrow", type: "text" },
       { key: "title", label: "Heading", type: "text", placeholder: "Learning is a" },
       { key: "titleEm", label: "Heading accent", type: "text", placeholder: "journey" },
-      { key: "titleTail", label: "Heading ending", type: "text", placeholder: ". We make every step count." },
+      {
+        key: "titleTail",
+        label: "Heading ending",
+        type: "text",
+        placeholder: ". We make every step count.",
+      },
       { key: "paragraph", label: "Paragraph", type: "textarea" },
       { key: "image", label: "LEAD circle image", type: "image" },
     ],
@@ -259,7 +285,12 @@ export const CONTENT_SECTIONS: SectionDef[] = [
           { key: "name", label: "Name", type: "text" },
           { key: "role", label: "Role", type: "text" },
           { key: "tagline", label: "Tagline", type: "text" },
-          { key: "photo", label: "Portrait", type: "image", help: "Portrait photo — 4:5 works best." },
+          {
+            key: "photo",
+            label: "Portrait",
+            type: "image",
+            help: "Portrait photo — 4:5 works best.",
+          },
         ],
       },
     ],
@@ -276,10 +307,25 @@ export const CONTENT_SECTIONS: SectionDef[] = [
         label: "Videos",
         itemLabel: "Video",
         fields: [
-          { key: "url", label: "YouTube link", type: "url", placeholder: "https://www.youtube.com/watch?v=..." },
-          { key: "title", label: "Event title", type: "text", placeholder: "Annual Day Highlights" },
+          {
+            key: "url",
+            label: "YouTube link",
+            type: "url",
+            placeholder: "https://www.youtube.com/watch?v=...",
+          },
+          {
+            key: "title",
+            label: "Event title",
+            type: "text",
+            placeholder: "Annual Day Highlights",
+          },
           { key: "label", label: "Category / year", type: "text", placeholder: "Event · 2024" },
-          { key: "thumb", label: "Custom thumbnail (optional)", type: "image", help: "Leave empty to use the YouTube thumbnail." },
+          {
+            key: "thumb",
+            label: "Custom thumbnail (optional)",
+            type: "image",
+            help: "Leave empty to use the YouTube thumbnail.",
+          },
         ],
       },
     ],
@@ -288,7 +334,8 @@ export const CONTENT_SECTIONS: SectionDef[] = [
     key: "home_previews",
     page: "Home",
     title: "Home page sections",
-    description: "The big scrolling cards on the home page — About, Academics, Facilities, Gallery, Contact.",
+    description:
+      "The big scrolling cards on the home page — About, Academics, Facilities, Gallery, Contact.",
     lists: [
       {
         key: "cards",
@@ -318,7 +365,12 @@ export const CONTENT_SECTIONS: SectionDef[] = [
           { key: "image", label: "Photo", type: "image" },
           { key: "title", label: "Title", type: "text" },
           { key: "line", label: "Caption", type: "text" },
-          { key: "category", label: "Category", type: "text", help: "Campus, Classrooms, Events, Annual Day, Sports or Labs." },
+          {
+            key: "category",
+            label: "Category",
+            type: "text",
+            help: "Campus, Classrooms, Events, Annual Day, Sports or Labs.",
+          },
         ],
       },
     ],
@@ -330,7 +382,12 @@ export const CONTENT_SECTIONS: SectionDef[] = [
     description: "Shared across home contact strip, /contact page, and the footer.",
     fields: [
       { key: "phone", label: "Phone number", type: "tel", placeholder: "+91 90000 00000" },
-      { key: "whatsapp", label: "WhatsApp number (digits only)", type: "text", placeholder: "910000000000" },
+      {
+        key: "whatsapp",
+        label: "WhatsApp number (digits only)",
+        type: "text",
+        placeholder: "910000000000",
+      },
       { key: "email", label: "Email address", type: "email" },
       { key: "address", label: "Address", type: "textarea" },
       { key: "mapUrl", label: "Google Maps embed URL", type: "url" },
@@ -424,26 +481,106 @@ export const CONTENT_DEFAULTS: Record<string, Record<string, unknown>> = {
   },
   gallery_photos: {
     photos: [
-      { image: lifeAnnualDay, title: "Annual Day", line: "One evening, a thousand tiny stars on stage.", category: "Annual Day" },
-      { image: lifeSports, title: "Sports Day", line: "Small feet, big finish lines.", category: "Sports" },
-      { image: lifeScience, title: "Science Activities", line: "The world begins to answer curious questions.", category: "Labs" },
-      { image: lifeDrawing, title: "Drawing Competition", line: "Imagination arrives on paper first.", category: "Events" },
-      { image: classroomImg, title: "Classroom Learning", line: "Where a quiet spark becomes an idea.", category: "Classrooms" },
-      { image: lifeIndependence, title: "Independence Day", line: "Small hands, tallest salute.", category: "Events" },
-      { image: lifeYoga, title: "Yoga Day", line: "Stillness is also a lesson.", category: "Campus" },
-      { image: lifeDance, title: "Dance Performance", line: "Rhythm learnt long before the words.", category: "Annual Day" },
-      { image: lifeFestival, title: "Festival Celebration", line: "Lights, laughter, and one big family.", category: "Events" },
-      { image: lifeParents, title: "Parents Meeting", line: "The most important classroom is a shared one.", category: "Campus" },
-      { image: lifeAssembly, title: "Morning Assembly", line: "Every day begins together.", category: "Campus" },
+      {
+        image: lifeAnnualDay,
+        title: "Annual Day",
+        line: "One evening, a thousand tiny stars on stage.",
+        category: "Annual Day",
+      },
+      {
+        image: lifeSports,
+        title: "Sports Day",
+        line: "Small feet, big finish lines.",
+        category: "Sports",
+      },
+      {
+        image: lifeScience,
+        title: "Science Activities",
+        line: "The world begins to answer curious questions.",
+        category: "Labs",
+      },
+      {
+        image: lifeDrawing,
+        title: "Drawing Competition",
+        line: "Imagination arrives on paper first.",
+        category: "Events",
+      },
+      {
+        image: classroomImg,
+        title: "Classroom Learning",
+        line: "Where a quiet spark becomes an idea.",
+        category: "Classrooms",
+      },
+      {
+        image: lifeIndependence,
+        title: "Independence Day",
+        line: "Small hands, tallest salute.",
+        category: "Events",
+      },
+      {
+        image: lifeYoga,
+        title: "Yoga Day",
+        line: "Stillness is also a lesson.",
+        category: "Campus",
+      },
+      {
+        image: lifeDance,
+        title: "Dance Performance",
+        line: "Rhythm learnt long before the words.",
+        category: "Annual Day",
+      },
+      {
+        image: lifeFestival,
+        title: "Festival Celebration",
+        line: "Lights, laughter, and one big family.",
+        category: "Events",
+      },
+      {
+        image: lifeParents,
+        title: "Parents Meeting",
+        line: "The most important classroom is a shared one.",
+        category: "Campus",
+      },
+      {
+        image: lifeAssembly,
+        title: "Morning Assembly",
+        line: "Every day begins together.",
+        category: "Campus",
+      },
     ],
   },
   facilities: {
     items: [
-      { title: "Smart Classrooms", tag: "Digital learning", image: classroomImg, body: "Interactive smart boards paired with teachers who still know every child's name." },
-      { title: "Science Lab", tag: "Hands-on discovery", image: scienceImg, body: "A full science lab where curiosity turns into experiments — chemistry, physics, biology." },
-      { title: "Playground", tag: "Room to run", image: sportsImg, body: "Open ground for athletics, cricket, football and daily physical education." },
-      { title: "Arts & Culture", tag: "Music · Dance · Drawing", image: danceImg, body: "Weekly art, dance, music and craft — because a childhood should also feel like joy." },
-      { title: "School Transport", tag: "Door to gate", image: busImg, body: "Safe, GPS-tracked buses with trained attendants across every village route we serve." },
+      {
+        title: "Smart Classrooms",
+        tag: "Digital learning",
+        image: classroomImg,
+        body: "Interactive smart boards paired with teachers who still know every child's name.",
+      },
+      {
+        title: "Science Lab",
+        tag: "Hands-on discovery",
+        image: scienceImg,
+        body: "A full science lab where curiosity turns into experiments — chemistry, physics, biology.",
+      },
+      {
+        title: "Playground",
+        tag: "Room to run",
+        image: sportsImg,
+        body: "Open ground for athletics, cricket, football and daily physical education.",
+      },
+      {
+        title: "Arts & Culture",
+        tag: "Music · Dance · Drawing",
+        image: danceImg,
+        body: "Weekly art, dance, music and craft — because a childhood should also feel like joy.",
+      },
+      {
+        title: "School Transport",
+        tag: "Door to gate",
+        image: busImg,
+        body: "Safe, GPS-tracked buses with trained attendants across every village route we serve.",
+      },
     ],
   },
   about_hero: {
@@ -478,10 +615,26 @@ export const CONTENT_DEFAULTS: Record<string, Record<string, unknown>> = {
     titleEm: "chapter",
     titleTail: "at a time.",
     milestones: [
-      { year: "2015", title: "A small beginning.", body: "The school opens its doors in Chekkapalli with a handful of families and a single classroom." },
-      { year: "The Early Years", title: "Building a foundation.", body: "Creating a safe and nurturing environment for young learners — routines, kindness and curiosity first." },
-      { year: "The Journey Forward", title: "Growing with purpose.", body: "Expanding classrooms and strengthening academic foundations, one grade at a time." },
-      { year: "Today", title: "Nursery to Grade 10.", body: "A growing community of curious, confident learners — and the families who make it home." },
+      {
+        year: "2015",
+        title: "A small beginning.",
+        body: "The school opens its doors in Chekkapalli with a handful of families and a single classroom.",
+      },
+      {
+        year: "The Early Years",
+        title: "Building a foundation.",
+        body: "Creating a safe and nurturing environment for young learners — routines, kindness and curiosity first.",
+      },
+      {
+        year: "The Journey Forward",
+        title: "Growing with purpose.",
+        body: "Expanding classrooms and strengthening academic foundations, one grade at a time.",
+      },
+      {
+        year: "Today",
+        title: "Nursery to Grade 10.",
+        body: "A growing community of curious, confident learners — and the families who make it home.",
+      },
     ],
   },
   about_people_intro: {
@@ -500,10 +653,26 @@ export const CONTENT_DEFAULTS: Record<string, Record<string, unknown>> = {
       "The LEAD cycle shapes how we teach — plan with intent, teach with care, review honestly and evaluate so every child moves forward.",
     image: leadMotto.url,
     stages: [
-      { n: "01", title: "Planning", body: "Every meaningful learning journey begins with a clear direction." },
-      { n: "02", title: "Implementation", body: "Ideas become meaningful through thoughtful action and learning experiences." },
-      { n: "03", title: "Review", body: "Progress is observed, understood and improved continuously." },
-      { n: "04", title: "Evaluation", body: "Learning is measured to help every child move forward with confidence." },
+      {
+        n: "01",
+        title: "Planning",
+        body: "Every meaningful learning journey begins with a clear direction.",
+      },
+      {
+        n: "02",
+        title: "Implementation",
+        body: "Ideas become meaningful through thoughtful action and learning experiences.",
+      },
+      {
+        n: "03",
+        title: "Review",
+        body: "Progress is observed, understood and improved continuously.",
+      },
+      {
+        n: "04",
+        title: "Evaluation",
+        body: "Learning is measured to help every child move forward with confidence.",
+      },
     ],
   },
   about_cta: {
@@ -542,12 +711,42 @@ export const CONTENT_DEFAULTS: Record<string, Record<string, unknown>> = {
   },
   gallery_videos: {
     items: [
-      { url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", title: "Annual Day Highlights", label: "Event · 2024", thumb: "" },
-      { url: "https://www.youtube.com/watch?v=hY7m5jjJ9mM", title: "Sports Day Moments", label: "Event · 2024", thumb: "" },
-      { url: "https://www.youtube.com/watch?v=9bZkp7q19f0", title: "Cultural Performance", label: "Stage · 2023", thumb: "" },
-      { url: "https://www.youtube.com/watch?v=kJQP7kiw5Fk", title: "Science Exhibition", label: "Learning · 2023", thumb: "" },
-      { url: "https://www.youtube.com/watch?v=3JZ_D3ELwOQ", title: "Independence Day", label: "Assembly · 2024", thumb: "" },
-      { url: "https://www.youtube.com/watch?v=OPf0YbXqDm0", title: "Campus Tour", label: "Our School", thumb: "" },
+      {
+        url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        title: "Annual Day Highlights",
+        label: "Event · 2024",
+        thumb: "",
+      },
+      {
+        url: "https://www.youtube.com/watch?v=hY7m5jjJ9mM",
+        title: "Sports Day Moments",
+        label: "Event · 2024",
+        thumb: "",
+      },
+      {
+        url: "https://www.youtube.com/watch?v=9bZkp7q19f0",
+        title: "Cultural Performance",
+        label: "Stage · 2023",
+        thumb: "",
+      },
+      {
+        url: "https://www.youtube.com/watch?v=kJQP7kiw5Fk",
+        title: "Science Exhibition",
+        label: "Learning · 2023",
+        thumb: "",
+      },
+      {
+        url: "https://www.youtube.com/watch?v=3JZ_D3ELwOQ",
+        title: "Independence Day",
+        label: "Assembly · 2024",
+        thumb: "",
+      },
+      {
+        url: "https://www.youtube.com/watch?v=OPf0YbXqDm0",
+        title: "Campus Tour",
+        label: "Our School",
+        thumb: "",
+      },
     ],
   },
   contact_info: {
@@ -564,5 +763,4 @@ export const CONTENT_DEFAULTS: Record<string, Record<string, unknown>> = {
     facebook: "https://www.facebook.com/search/top?q=Nagaraju%20Maridhu",
     youtube: "https://www.youtube.com/@chaitanyaschoolchekkapalli",
   },
-
 };

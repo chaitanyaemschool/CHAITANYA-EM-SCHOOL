@@ -50,7 +50,10 @@ export function PhotoGallery() {
     const unsub = onSnapshot(
       doc(db, "content", SECTION),
       (snap) => {
-        const merged = mergeSection<{ photos?: Photo[] }>(SECTION, snap.data() as Record<string, unknown>);
+        const merged = mergeSection<{ photos?: Photo[] }>(
+          SECTION,
+          snap.data() as Record<string, unknown>,
+        );
         if (skipRemote.current) {
           skipRemote.current = false;
         } else if (!dirtyRef.current) {
@@ -105,7 +108,12 @@ export function PhotoGallery() {
     try {
       for (const file of list) {
         const res = await uploadToCloudinary(file);
-        added.push({ image: res.secure_url, title: file.name.replace(/\.[^.]+$/, ""), line: "", category: "Campus" });
+        added.push({
+          image: res.secure_url,
+          title: file.name.replace(/\.[^.]+$/, ""),
+          line: "",
+          category: "Campus",
+        });
         setUploading((p) => (p ? { ...p, done: p.done + 1 } : p));
       }
       apply([...photos, ...added]);
@@ -147,7 +155,9 @@ export function PhotoGallery() {
         .map((p, i) => ({ p, i }))
         .filter(({ p }) =>
           q
-            ? [p.title, p.line, p.category].filter(Boolean).some((v) => String(v).toLowerCase().includes(q))
+            ? [p.title, p.line, p.category]
+                .filter(Boolean)
+                .some((v) => String(v).toLowerCase().includes(q))
             : true,
         ),
     [photos, q],
@@ -157,10 +167,15 @@ export function PhotoGallery() {
     <div>
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3 sm:flex sm:flex-wrap sm:items-end sm:justify-between">
         <div className="min-w-0">
-          <div className="text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">Media</div>
-          <h1 className="mt-2 text-[26px] font-semibold tracking-[-0.03em] sm:text-[28px]">Photo gallery</h1>
+          <div className="text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+            Media
+          </div>
+          <h1 className="mt-2 text-[26px] font-semibold tracking-[-0.03em] sm:text-[28px]">
+            Photo gallery
+          </h1>
           <p className="mt-2 max-w-[52ch] text-[13px] text-muted-foreground">
-            These are the exact photos shown on the public gallery page. Replace, edit, reorder, delete or add new ones.
+            These are the exact photos shown on the public gallery page. Replace, edit, reorder,
+            delete or add new ones.
           </p>
         </div>
         <button
@@ -168,10 +183,21 @@ export function PhotoGallery() {
           disabled={!!uploading}
           className="flex h-11 shrink-0 items-center gap-2 rounded-full bg-foreground px-4 text-[12.5px] font-semibold text-background transition-transform active:scale-95 disabled:opacity-60"
         >
-          {uploading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Upload className="h-3.5 w-3.5" />}
+          {uploading ? (
+            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+          ) : (
+            <Upload className="h-3.5 w-3.5" />
+          )}
           {uploading ? `Uploading ${uploading.done}/${uploading.total}` : "Upload images"}
         </button>
-        <input ref={uploadRef} type="file" accept="image/*" multiple hidden onChange={(e) => handleUpload(e.target.files)} />
+        <input
+          ref={uploadRef}
+          type="file"
+          accept="image/*"
+          multiple
+          hidden
+          onChange={(e) => handleUpload(e.target.files)}
+        />
       </div>
 
       <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -193,7 +219,11 @@ export function PhotoGallery() {
             disabled={!dirty || saving}
             className="inline-flex h-11 items-center gap-2 rounded-full bg-foreground px-5 text-[13px] font-semibold text-background transition-transform active:scale-95 disabled:opacity-40"
           >
-            {saving ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Check className="h-3.5 w-3.5" />}
+            {saving ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            ) : (
+              <Check className="h-3.5 w-3.5" />
+            )}
             Save changes
           </button>
         </div>
@@ -216,12 +246,23 @@ export function PhotoGallery() {
       ) : (
         <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {visible.map(({ p, i }) => (
-            <div key={`${p.image}-${i}`} className="overflow-hidden rounded-[20px] bg-white ring-1 ring-black/5">
+            <div
+              key={`${p.image}-${i}`}
+              className="overflow-hidden rounded-[20px] bg-white ring-1 ring-black/5"
+            >
               <div className="relative aspect-[4/3] bg-secondary/50">
                 {p.image ? (
-                  <img src={p.image} alt={p.title ?? "Gallery photo"} className="h-full w-full object-cover" loading="lazy" decoding="async" />
+                  <img
+                    src={p.image}
+                    alt={p.title ?? "Gallery photo"}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 ) : (
-                  <div className="grid h-full place-items-center"><ImageIcon className="h-6 w-6 text-muted-foreground" /></div>
+                  <div className="grid h-full place-items-center">
+                    <ImageIcon className="h-6 w-6 text-muted-foreground" />
+                  </div>
                 )}
                 <span className="absolute left-2 top-2 rounded-full bg-black/60 px-2 py-0.5 text-[10px] font-semibold text-white">
                   #{i + 1}
@@ -279,7 +320,9 @@ export function PhotoGallery() {
         </div>
       )}
       {q && photos.length > 0 && (
-        <p className="mt-3 text-[11.5px] text-muted-foreground">Clear the search to reorder photos.</p>
+        <p className="mt-3 text-[11.5px] text-muted-foreground">
+          Clear the search to reorder photos.
+        </p>
       )}
 
       {/* Edit metadata */}
@@ -293,7 +336,9 @@ export function PhotoGallery() {
               <input
                 value={photos[editIndex]![k] ?? ""}
                 onChange={(e) =>
-                  apply(photos.map((p, idx) => (idx === editIndex ? { ...p, [k]: e.target.value } : p)))
+                  apply(
+                    photos.map((p, idx) => (idx === editIndex ? { ...p, [k]: e.target.value } : p)),
+                  )
                 }
                 className="mt-1.5 h-11 w-full rounded-xl border border-black/10 bg-secondary/30 px-3.5 text-[14px] outline-none focus:bg-white"
               />
@@ -318,14 +363,22 @@ export function PhotoGallery() {
               <figcaption className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Current image
               </figcaption>
-              <img src={photos[replaceIndex]!.image} alt="" className="aspect-[4/3] w-full rounded-xl object-cover ring-1 ring-black/5" />
+              <img
+                src={photos[replaceIndex]!.image}
+                alt=""
+                className="aspect-[4/3] w-full rounded-xl object-cover ring-1 ring-black/5"
+              />
             </figure>
             <figure>
               <figcaption className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 New image
               </figcaption>
               {replaceUrl ? (
-                <img src={replaceUrl} alt="" className="aspect-[4/3] w-full rounded-xl object-cover ring-1 ring-black/5" />
+                <img
+                  src={replaceUrl}
+                  alt=""
+                  className="aspect-[4/3] w-full rounded-xl object-cover ring-1 ring-black/5"
+                />
               ) : (
                 <button
                   onClick={() => replaceRef.current?.click()}
@@ -336,15 +389,26 @@ export function PhotoGallery() {
               )}
             </figure>
           </div>
-          <input ref={replaceRef} type="file" accept="image/*" hidden onChange={(e) => handleReplaceFile(e.target.files?.[0])} />
+          <input
+            ref={replaceRef}
+            type="file"
+            accept="image/*"
+            hidden
+            onChange={(e) => handleReplaceFile(e.target.files?.[0])}
+          />
           <div className="mt-5 flex justify-end gap-2">
-            <button onClick={() => setReplaceIndex(null)} className="h-11 rounded-full bg-secondary px-5 text-[13px] font-semibold">
+            <button
+              onClick={() => setReplaceIndex(null)}
+              className="h-11 rounded-full bg-secondary px-5 text-[13px] font-semibold"
+            >
               Cancel
             </button>
             <button
               disabled={!replaceUrl}
               onClick={() => {
-                apply(photos.map((p, idx) => (idx === replaceIndex ? { ...p, image: replaceUrl! } : p)));
+                apply(
+                  photos.map((p, idx) => (idx === replaceIndex ? { ...p, image: replaceUrl! } : p)),
+                );
                 setReplaceIndex(null);
                 setReplaceUrl(null);
                 toast.success("Image replaced. Remember to save.");
@@ -364,7 +428,10 @@ export function PhotoGallery() {
             This image will be removed from the gallery on the website.
           </p>
           <div className="mt-5 flex justify-end gap-2">
-            <button onClick={() => setDeleteIndex(null)} className="h-11 rounded-full bg-secondary px-5 text-[13px] font-semibold">
+            <button
+              onClick={() => setDeleteIndex(null)}
+              className="h-11 rounded-full bg-secondary px-5 text-[13px] font-semibold"
+            >
               Cancel
             </button>
             <button
@@ -385,7 +452,15 @@ export function PhotoGallery() {
   );
 }
 
-function Modal({ title, children, onClose }: { title: string; children: React.ReactNode; onClose: () => void }) {
+function Modal({
+  title,
+  children,
+  onClose,
+}: {
+  title: string;
+  children: React.ReactNode;
+  onClose: () => void;
+}) {
   return (
     <div
       className="fixed inset-0 z-[90] grid place-items-center overflow-y-auto bg-black/45 p-4 backdrop-blur-sm"
@@ -393,7 +468,10 @@ function Modal({ title, children, onClose }: { title: string; children: React.Re
       aria-modal="true"
       onClick={onClose}
     >
-      <div onClick={(e) => e.stopPropagation()} className="w-full max-w-md rounded-[22px] bg-white p-5 shadow-2xl sm:p-6">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="w-full max-w-md rounded-[22px] bg-white p-5 shadow-2xl sm:p-6"
+      >
         <div className="text-[16px] font-semibold">{title}</div>
         {children}
       </div>

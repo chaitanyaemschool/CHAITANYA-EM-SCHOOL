@@ -27,8 +27,7 @@ I would like to know more about admissions.
 
 Regards,`;
 
-export const telHref = (phone?: string) =>
-  `tel:${(phone || SOCIAL.phone).replace(/[^+\d]/g, "")}`;
+export const telHref = (phone?: string) => `tel:${(phone || SOCIAL.phone).replace(/[^+\d]/g, "")}`;
 
 export const mailHref = (email?: string) =>
   `mailto:${email || SOCIAL.email}?subject=${encodeURIComponent(MAIL_SUBJECT)}&body=${encodeURIComponent(MAIL_BODY)}`;

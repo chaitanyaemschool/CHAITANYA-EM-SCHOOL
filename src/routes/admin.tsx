@@ -2,12 +2,7 @@ import { createFileRoute, Link, useNavigate, useRouterState } from "@tanstack/re
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { auth, db } from "@/lib/firebase";
-import {
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut,
-  type User,
-} from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut, type User } from "firebase/auth";
 import {
   addDoc,
   collection,
@@ -47,12 +42,14 @@ import {
   Inbox,
 } from "lucide-react";
 
-
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
       { title: "Admin Dashboard — Chaitanya EM School" },
-      { name: "description", content: "Manage content, images, gallery and pages of Chaitanya EM School." },
+      {
+        name: "description",
+        content: "Manage content, images, gallery and pages of Chaitanya EM School.",
+      },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
@@ -91,9 +88,7 @@ const NAV_GROUPS: NavGroup[] = [
   },
   {
     label: "Content",
-    items: [
-      { id: "media", label: "Media library", icon: Cloud },
-    ],
+    items: [{ id: "media", label: "Media library", icon: Cloud }],
   },
   {
     label: "Inquiries & leads",
@@ -113,8 +108,14 @@ const TAB_META: Record<string, { title: string; subtitle: string }> = {
   "page:Home": { title: "Home page", subtitle: "Edit the hero, about strip and academics cards." },
   "page:About School": { title: "About us", subtitle: "Editorial hero and the leadership team." },
   "page:Facilities": { title: "Facilities", subtitle: "Manage facility cards, text and photos." },
-  "page:Life / Gallery": { title: "Gallery & videos", subtitle: "Video stories shown on the gallery page." },
-  "page:Contact & Global": { title: "Contact & footer", subtitle: "Phone, WhatsApp, email, address and social links." },
+  "page:Life / Gallery": {
+    title: "Gallery & videos",
+    subtitle: "Video stories shown on the gallery page.",
+  },
+  "page:Contact & Global": {
+    title: "Contact & footer",
+    subtitle: "Phone, WhatsApp, email, address and social links.",
+  },
   gallery: { title: "Photo gallery", subtitle: "Upload, reorder and remove gallery photos." },
   media: { title: "Media library", subtitle: "Every uploaded image in one place." },
   inquiries: { title: "Inquiries", subtitle: "Every enquiry submitted on the website." },
@@ -122,7 +123,6 @@ const TAB_META: Record<string, { title: string; subtitle: string }> = {
 };
 
 type Tab = string;
-
 
 export function AdminPage() {
   const [user, setUser] = useState<User | null>(null);
@@ -132,7 +132,10 @@ export function AdminPage() {
   const [signingIn, setSigningIn] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
   const [showPw, setShowPw] = useState(false);
-  const [touched, setTouched] = useState<{ email: boolean; pw: boolean }>({ email: false, pw: false });
+  const [touched, setTouched] = useState<{ email: boolean; pw: boolean }>({
+    email: false,
+    pw: false,
+  });
   const [signingOut, setSigningOut] = useState(false);
   const [tab, setTab] = useState<Tab>("overview");
   const navigate = useNavigate();
@@ -164,19 +167,27 @@ export function AdminPage() {
   if (!user) {
     const emailInvalid = !EMAIL_RE.test(email.trim());
     const pwInvalid = pw.length < 6;
-    const emailErr = touched.email && emailInvalid
-      ? email.trim().length === 0
-        ? "Email is required."
-        : "Enter a valid email address."
-      : null;
-    const pwErr = touched.pw && pwInvalid
-      ? pw.length === 0
-        ? "Password is required."
-        : "Password must be at least 6 characters."
-      : null;
+    const emailErr =
+      touched.email && emailInvalid
+        ? email.trim().length === 0
+          ? "Email is required."
+          : "Enter a valid email address."
+        : null;
+    const pwErr =
+      touched.pw && pwInvalid
+        ? pw.length === 0
+          ? "Password is required."
+          : "Password must be at least 6 characters."
+        : null;
     const canSubmit = !emailInvalid && !pwInvalid && !signingIn;
     return (
-      <div className="grid min-h-screen place-items-center px-6 py-16 text-[#1c2a4d]" style={{ background: "radial-gradient(80% 60% at 20% 0%, #fdf1dd 0%, transparent 60%), linear-gradient(180deg, #faf6ef 0%, #f4ece0 100%)" }}>
+      <div
+        className="grid min-h-screen place-items-center px-6 py-16 text-[#1c2a4d]"
+        style={{
+          background:
+            "radial-gradient(80% 60% at 20% 0%, #fdf1dd 0%, transparent 60%), linear-gradient(180deg, #faf6ef 0%, #f4ece0 100%)",
+        }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -188,8 +199,12 @@ export function AdminPage() {
               <ShieldCheck className="h-5 w-5" />
             </div>
             <div className="leading-none">
-              <div className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#1c2a4d]/50">Chaitanya</div>
-              <div className="mt-1.5 text-[16px] font-semibold tracking-[-0.02em]">Admin Console</div>
+              <div className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#1c2a4d]/50">
+                Chaitanya
+              </div>
+              <div className="mt-1.5 text-[16px] font-semibold tracking-[-0.02em]">
+                Admin Console
+              </div>
             </div>
           </div>
 
@@ -197,7 +212,8 @@ export function AdminPage() {
             Sign in to manage the school website.
           </h1>
           <p className="mt-3 max-w-[36ch] text-[13px] leading-relaxed text-[#1c2a4d]/60">
-            Restricted area — for authorised staff only. Create an admin user in Firebase Auth (Email/Password) and sign in below.
+            Restricted area — for authorised staff only. Create an admin user in Firebase Auth
+            (Email/Password) and sign in below.
           </p>
 
           <form
@@ -211,7 +227,8 @@ export function AdminPage() {
                 await signInWithEmailAndPassword(auth, email.trim(), pw);
               } catch (err: unknown) {
                 const code = (err as { code?: string })?.code ?? "";
-                const fallback = err instanceof Error ? err.message.replace("Firebase: ", "") : "Sign in failed";
+                const fallback =
+                  err instanceof Error ? err.message.replace("Firebase: ", "") : "Sign in failed";
                 setAuthError(friendlyAuthError(code, fallback));
               } finally {
                 setSigningIn(false);
@@ -220,8 +237,12 @@ export function AdminPage() {
             className="mt-8 rounded-[26px] bg-white/85 p-6 ring-1 ring-[#1c2a4d]/10 backdrop-blur-xl shadow-[0_30px_70px_-40px_rgba(28,42,77,0.55)]"
             noValidate
           >
-            <label className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#1c2a4d]/55">Email</label>
-            <div className={`mt-2 flex items-center rounded-2xl border bg-[#faf6ef] px-4 transition-colors ${emailErr ? "border-red-400/60" : "border-[#1c2a4d]/12 focus-within:border-[#c65d2c]"}`}>
+            <label className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#1c2a4d]/55">
+              Email
+            </label>
+            <div
+              className={`mt-2 flex items-center rounded-2xl border bg-[#faf6ef] px-4 transition-colors ${emailErr ? "border-red-400/60" : "border-[#1c2a4d]/12 focus-within:border-[#c65d2c]"}`}
+            >
               <Mail className="h-4 w-4 text-[#c65d2c]" />
               <input
                 type="email"
@@ -237,12 +258,19 @@ export function AdminPage() {
               />
             </div>
             {emailErr && (
-              <div id="email-err" className="mt-1.5 flex items-center gap-1.5 text-[11px] text-red-300">
+              <div
+                id="email-err"
+                className="mt-1.5 flex items-center gap-1.5 text-[11px] text-red-300"
+              >
                 <AlertCircle className="h-3 w-3" /> {emailErr}
               </div>
             )}
-            <label className="mt-4 block text-[11px] font-medium uppercase tracking-[0.22em] text-[#1c2a4d]/55">Password</label>
-            <div className={`mt-2 flex items-center rounded-2xl border bg-[#faf6ef] px-4 transition-colors ${pwErr ? "border-red-400/60" : "border-[#1c2a4d]/12 focus-within:border-[#c65d2c]"}`}>
+            <label className="mt-4 block text-[11px] font-medium uppercase tracking-[0.22em] text-[#1c2a4d]/55">
+              Password
+            </label>
+            <div
+              className={`mt-2 flex items-center rounded-2xl border bg-[#faf6ef] px-4 transition-colors ${pwErr ? "border-red-400/60" : "border-[#1c2a4d]/12 focus-within:border-[#c65d2c]"}`}
+            >
               <Lock className="h-4 w-4 text-[#c65d2c]" />
               <input
                 type={showPw ? "text" : "password"}
@@ -265,7 +293,10 @@ export function AdminPage() {
               </button>
             </div>
             {pwErr && (
-              <div id="pw-err" className="mt-1.5 flex items-center gap-1.5 text-[11px] text-red-300">
+              <div
+                id="pw-err"
+                className="mt-1.5 flex items-center gap-1.5 text-[11px] text-red-300"
+              >
                 <AlertCircle className="h-3 w-3" /> {pwErr}
               </div>
             )}
@@ -287,7 +318,11 @@ export function AdminPage() {
             >
               {signingIn ? "Signing in…" : "Enter dashboard"}
               <span className="grid h-8 w-8 place-items-center rounded-full bg-white/20 text-white">
-                {signingIn ? <Loader2 className="h-4 w-4 animate-spin" /> : <ShieldCheck className="h-4 w-4" strokeWidth={2.5} />}
+                {signingIn ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <ShieldCheck className="h-4 w-4" strokeWidth={2.5} />
+                )}
               </span>
             </button>
             <div className="mt-4 text-[11px] text-[#1c2a4d]/40">
@@ -295,7 +330,10 @@ export function AdminPage() {
             </div>
           </form>
 
-          <Link to="/" className="mt-8 inline-flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.22em] text-[#1c2a4d]/55 transition-colors hover:text-[#1c2a4d]">
+          <Link
+            to="/"
+            className="mt-8 inline-flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.22em] text-[#1c2a4d]/55 transition-colors hover:text-[#1c2a4d]"
+          >
             ← Back to site
           </Link>
         </motion.div>
@@ -335,11 +373,12 @@ export function AdminPage() {
   );
 }
 
-
 function KPI({ label, value, hint }: { label: string; value: string; hint: string }) {
   return (
     <div className="rounded-[22px] bg-white p-5 ring-1 ring-black/5 shadow-[0_10px_28px_-18px_rgba(15,23,42,0.2)]">
-      <div className="text-[10px] font-medium uppercase tracking-[0.24em] text-muted-foreground">{label}</div>
+      <div className="text-[10px] font-medium uppercase tracking-[0.24em] text-muted-foreground">
+        {label}
+      </div>
       <div className="mt-2 text-[32px] font-black tracking-[-0.03em]">{value}</div>
       <div className="mt-1 text-[11px] text-muted-foreground">{hint}</div>
     </div>
@@ -349,10 +388,14 @@ function KPI({ label, value, hint }: { label: string; value: string; hint: strin
 function SettingsPanel() {
   const env = import.meta.env;
   const firebaseReady = Boolean(env.VITE_FIREBASE_API_KEY && env.VITE_FIREBASE_PROJECT_ID);
-  const cloudinaryReady = Boolean(env.VITE_CLOUDINARY_CLOUD_NAME && env.VITE_CLOUDINARY_UPLOAD_PRESET);
+  const cloudinaryReady = Boolean(
+    env.VITE_CLOUDINARY_CLOUD_NAME && env.VITE_CLOUDINARY_UPLOAD_PRESET,
+  );
   return (
     <div>
-      <div className="text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">Configuration</div>
+      <div className="text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+        Configuration
+      </div>
       <h1 className="mt-2 text-[28px] font-semibold tracking-[-0.03em]">Settings</h1>
       <div className="mt-5 flex flex-col gap-3">
         {[
@@ -373,12 +416,17 @@ function SettingsPanel() {
           { label: "WhatsApp number", hint: "Contact routing", ready: true },
           { label: "SEO metadata", hint: "Titles & descriptions", ready: true },
         ].map((r) => (
-          <div key={r.label} className="flex items-center justify-between rounded-2xl bg-white p-4 ring-1 ring-black/5">
+          <div
+            key={r.label}
+            className="flex items-center justify-between rounded-2xl bg-white p-4 ring-1 ring-black/5"
+          >
             <div>
               <div className="text-[14px] font-semibold">{r.label}</div>
               <div className="mt-0.5 text-[12px] text-muted-foreground">{r.hint}</div>
             </div>
-            <span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] ${r.ready ? "bg-[oklch(0.92_0.09_150)] text-[oklch(0.32_0.14_150)]" : "bg-secondary text-muted-foreground"}`}>
+            <span
+              className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] ${r.ready ? "bg-[oklch(0.92_0.09_150)] text-[oklch(0.32_0.14_150)]" : "bg-secondary text-muted-foreground"}`}
+            >
               {r.ready ? "Ready" : "Pending"}
             </span>
           </div>

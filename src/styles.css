@@ -64,21 +64,21 @@
 :root {
   /* Curated palette — White · Trust Blue · Education Green · Warm Golden · Soft Gray */
   --radius: 1.75rem;
-  --background: oklch(0.992 0.003 95);       /* warm white */
-  --foreground: oklch(0.19 0.045 258);       /* deep ink */
+  --background: oklch(0.992 0.003 95); /* warm white */
+  --foreground: oklch(0.19 0.045 258); /* deep ink */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.19 0.045 258);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.19 0.045 258);
-  --primary: oklch(0.32 0.11 258);           /* trust blue */
+  --primary: oklch(0.32 0.11 258); /* trust blue */
   --primary-foreground: oklch(0.99 0.004 95);
-  --secondary: oklch(0.965 0.006 250);       /* soft gray */
+  --secondary: oklch(0.965 0.006 250); /* soft gray */
   --secondary-foreground: oklch(0.22 0.05 258);
   --muted: oklch(0.96 0.005 250);
   --muted-foreground: oklch(0.52 0.018 258);
-  --accent: oklch(0.78 0.13 78);             /* warm golden */
+  --accent: oklch(0.78 0.13 78); /* warm golden */
   --accent-foreground: oklch(0.19 0.045 258);
-  --growth: oklch(0.6 0.13 148);             /* education green */
+  --growth: oklch(0.6 0.13 148); /* education green */
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: oklch(0.92 0.008 250);
@@ -102,8 +102,6 @@
   --font-body: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
   --font-nav: "Manrope", "Inter", "Segoe UI", system-ui, sans-serif;
   --font-serif: "Manrope", "Inter", "Segoe UI", system-ui, sans-serif;
-
-
 
   /* Luxury shadow scale */
   --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
@@ -172,7 +170,9 @@
     text-rendering: optimizeLegibility;
   }
   @media (min-width: 768px) {
-    body { font-size: 18px; }
+    body {
+      font-size: 18px;
+    }
   }
 
   p {
@@ -185,16 +185,36 @@
     overscroll-behavior-y: none;
   }
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
+    html {
+      scroll-behavior: auto;
+    }
   }
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
     letter-spacing: -0.018em;
   }
-  h1 { font-weight: 800; }
-  h2, h3 { font-weight: 700; }
-  h4, h5, h6 { font-weight: 600; }
-  button, input, textarea, select, label {
+  h1 {
+    font-weight: 800;
+  }
+  h2,
+  h3 {
+    font-weight: 700;
+  }
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+  }
+  button,
+  input,
+  textarea,
+  select,
+  label {
     font-family: var(--font-body);
   }
   ::selection {
@@ -205,7 +225,6 @@
     -webkit-user-drag: none;
   }
 }
-
 
 @theme inline {
   --color-growth: var(--growth);
@@ -293,7 +312,6 @@
   line-height: 1.3;
 }
 @utility grain {
-
   position: relative;
   &::before {
     content: "";
@@ -314,8 +332,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
@@ -323,8 +345,12 @@
 }
 
 @keyframes heroShimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* ---------- Premium interaction primitives (site-wide) ---------- */
@@ -349,19 +375,27 @@
 @utility btn-glow {
   position: relative;
   isolation: isolate;
-  transition: box-shadow 480ms var(--ease-out-quart), transform 240ms var(--ease-out-quart);
+  transition:
+    box-shadow 480ms var(--ease-out-quart),
+    transform 240ms var(--ease-out-quart);
   &::after {
     content: "";
     position: absolute;
     inset: -2px;
     border-radius: inherit;
-    background: radial-gradient(60% 100% at 50% 0%, color-mix(in oklab, var(--primary) 35%, transparent), transparent 70%);
+    background: radial-gradient(
+      60% 100% at 50% 0%,
+      color-mix(in oklab, var(--primary) 35%, transparent),
+      transparent 70%
+    );
     opacity: 0;
     transition: opacity 500ms var(--ease-out-quart);
     z-index: -1;
     filter: blur(14px);
   }
-  &:hover::after { opacity: 1; }
+  &:hover::after {
+    opacity: 1;
+  }
 }
 
 /* Cursor-tracked spotlight — kept as a no-op wrapper (the white hover wash was
@@ -370,7 +404,6 @@
   position: relative;
   overflow: hidden;
 }
-
 
 /* Strong glassmorphism panel — for floating navs, feature cards, badges */
 @utility glass-strong {
@@ -384,8 +417,13 @@
 
 /* Floating badges */
 @keyframes floatY {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 @utility float-slow {
   animation: floatY 6s ease-in-out infinite;
@@ -396,9 +434,17 @@
 
 /* Scroll indicator dot */
 @keyframes scrollDot {
-  0% { transform: translateY(0); opacity: 0; }
-  30% { opacity: 1; }
-  100% { transform: translateY(18px); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(18px);
+    opacity: 0;
+  }
 }
 @utility scroll-hint-dot {
   animation: scrollDot 1.8s var(--ease-out-quart) infinite;
@@ -410,14 +456,19 @@
   &::after {
     content: "";
     position: absolute;
-    left: 0; right: 0; bottom: -2px;
+    left: 0;
+    right: 0;
+    bottom: -2px;
     height: 1px;
     background: currentColor;
     transform-origin: right;
     transform: scaleX(0);
     transition: transform 500ms var(--ease-out-quart);
   }
-  &:hover::after { transform-origin: left; transform: scaleX(1); }
+  &:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+  }
 }
 
 /* Site-wide cursor spotlight — a fixed overlay driven by CSS vars from <MouseSpotlight /> */
@@ -426,15 +477,19 @@
   inset: 0;
   pointer-events: none;
   z-index: 40;
-  background: radial-gradient(420px circle at var(--cursor-x, -100px) var(--cursor-y, -100px),
+  background: radial-gradient(
+    420px circle at var(--cursor-x, -100px) var(--cursor-y, -100px),
     color-mix(in oklab, var(--primary) 22%, transparent) 0%,
-    transparent 65%);
+    transparent 65%
+  );
   opacity: 0.06;
   mix-blend-mode: multiply;
   transition: opacity 400ms var(--ease-out-quart);
 }
 @media (pointer: coarse), (prefers-reduced-motion: reduce) {
-  .cursor-spotlight { display: none; }
+  .cursor-spotlight {
+    display: none;
+  }
 }
 
 /* ---------- Utility: hide scrollbars on horizontal rails ---------- */
@@ -506,13 +561,19 @@
   color: var(--muted-foreground);
   pointer-events: none;
   transform-origin: left top;
-  transition: transform 260ms var(--ease-out-quart), color 260ms var(--ease-out-quart);
+  transition:
+    transform 260ms var(--ease-out-quart),
+    color 260ms var(--ease-out-quart);
 }
 
 /* Loader: golden sweep line */
 @keyframes goldSweep {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 @utility gold-sweep {
   animation: goldSweep 1.2s var(--ease-out-quart) infinite;

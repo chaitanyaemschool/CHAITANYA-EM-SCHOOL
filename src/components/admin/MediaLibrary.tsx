@@ -1,5 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, serverTimestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+} from "firebase/firestore";
 import { Check, Copy, Loader2, Search, Trash2, Upload, Image as ImageIcon } from "lucide-react";
 import { CONTENT_SECTIONS } from "@/lib/content-schema";
 import { mergeSection } from "@/lib/content-merge";
@@ -30,17 +39,26 @@ export function MediaLibrary() {
   useEffect(() => {
     const unsubs = CONTENT_SECTIONS.map((section) =>
       onSnapshot(doc(db, "content", section.key), (snap) => {
-        const data = mergeSection<Record<string, unknown>>(section.key, snap.data() as Record<string, unknown>);
+        const data = mergeSection<Record<string, unknown>>(
+          section.key,
+          snap.data() as Record<string, unknown>,
+        );
         const urls: string[] = [];
         const walk = (v: unknown) => {
-          if (typeof v === "string" && /^https?:\/\/|^\//.test(v) && /(cloudinary|\.(jpe?g|png|webp|avif))/i.test(v)) urls.push(v);
+          if (
+            typeof v === "string" &&
+            /^https?:\/\/|^\//.test(v) &&
+            /(cloudinary|\.(jpe?g|png|webp|avif))/i.test(v)
+          )
+            urls.push(v);
           else if (Array.isArray(v)) v.forEach(walk);
           else if (v && typeof v === "object") Object.values(v).forEach(walk);
         };
         walk(data);
         setInUse((prev) => {
           const next = { ...prev };
-          for (const [url, where] of Object.entries(next)) if (where === section.title) delete next[url];
+          for (const [url, where] of Object.entries(next))
+            if (where === section.title) delete next[url];
           for (const u of urls) next[u] = section.title;
           return next;
         });
@@ -65,11 +83,11 @@ export function MediaLibrary() {
               width: typeof data.width === "number" ? data.width : undefined,
               height: typeof data.height === "number" ? data.height : undefined,
             };
-          })
+          }),
         );
         setLoading(false);
       },
-      () => setLoading(false)
+      () => setLoading(false),
     );
     return unsub;
   }, []);
@@ -108,7 +126,9 @@ export function MediaLibrary() {
     <div>
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <div className="text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">Assets</div>
+          <div className="text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+            Assets
+          </div>
           <h1 className="mt-2 text-[28px] font-semibold tracking-[-0.03em]">Media library</h1>
           <p className="mt-2 max-w-[52ch] text-[13px] text-muted-foreground">
             Upload images once, then paste the link into any section of the website.
@@ -119,7 +139,11 @@ export function MediaLibrary() {
           disabled={uploading}
           className="flex items-center gap-2 rounded-full bg-foreground px-4 py-2.5 text-[12px] font-semibold text-background transition-transform active:scale-95 disabled:opacity-60"
         >
-          {uploading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Upload className="h-3.5 w-3.5" />}
+          {uploading ? (
+            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+          ) : (
+            <Upload className="h-3.5 w-3.5" />
+          )}
           {uploading ? "Uploading…" : "Upload"}
         </button>
         <input
@@ -150,20 +174,35 @@ export function MediaLibrary() {
         <div className="mt-6 rounded-[22px] bg-white p-8 text-center ring-1 ring-black/5">
           <ImageIcon className="mx-auto h-8 w-8 text-muted-foreground" />
           <div className="mt-3 text-[14px] font-semibold">No media yet</div>
-          <p className="mt-1 text-[12px] text-muted-foreground">Upload photos and reuse them anywhere on the site.</p>
+          <p className="mt-1 text-[12px] text-muted-foreground">
+            Upload photos and reuse them anywhere on the site.
+          </p>
         </div>
       ) : (
         <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
           {filtered.map((m) => (
-            <div key={m.id} className="group overflow-hidden rounded-[20px] bg-white ring-1 ring-black/5">
+            <div
+              key={m.id}
+              className="group overflow-hidden rounded-[20px] bg-white ring-1 ring-black/5"
+            >
               <div className="aspect-square overflow-hidden bg-secondary/50">
-                <img src={m.url} alt={m.name ?? "Media asset"} className="h-full w-full object-cover" loading="lazy" decoding="async" />
+                <img
+                  src={m.url}
+                  alt={m.name ?? "Media asset"}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="flex items-center justify-between gap-2 px-3 py-2.5">
                 <div className="min-w-0">
-                  <div className="truncate text-[11px] text-muted-foreground">{m.name ?? m.publicId}</div>
+                  <div className="truncate text-[11px] text-muted-foreground">
+                    {m.name ?? m.publicId}
+                  </div>
                   {inUse[m.url] && (
-                    <div className="mt-0.5 truncate text-[10px] font-semibold text-emerald-700">In use · {inUse[m.url]}</div>
+                    <div className="mt-0.5 truncate text-[10px] font-semibold text-emerald-700">
+                      In use · {inUse[m.url]}
+                    </div>
                   )}
                 </div>
                 <div className="flex shrink-0 items-center gap-1">
@@ -176,7 +215,11 @@ export function MediaLibrary() {
                     }}
                     className="grid h-7 w-7 place-items-center rounded-full bg-secondary/70 transition-transform active:scale-95"
                   >
-                    {copied === m.id ? <Check className="h-3.5 w-3.5 text-emerald-600" /> : <Copy className="h-3.5 w-3.5" />}
+                    {copied === m.id ? (
+                      <Check className="h-3.5 w-3.5 text-emerald-600" />
+                    ) : (
+                      <Copy className="h-3.5 w-3.5" />
+                    )}
                   </button>
                   <button
                     aria-label="Delete image"
@@ -199,7 +242,10 @@ export function MediaLibrary() {
           aria-modal="true"
           onClick={() => setPendingDelete(null)}
         >
-          <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm rounded-[22px] bg-white p-6 shadow-2xl">
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-sm rounded-[22px] bg-white p-6 shadow-2xl"
+          >
             <div className="text-[16px] font-semibold">Delete this image?</div>
             <p className="mt-2 text-[13px] text-muted-foreground">
               {inUse[pendingDelete.url]
@@ -207,7 +253,10 @@ export function MediaLibrary() {
                 : "It will be removed from the media library."}
             </p>
             <div className="mt-5 flex justify-end gap-2">
-              <button onClick={() => setPendingDelete(null)} className="h-11 rounded-full bg-secondary px-5 text-[13px] font-semibold">
+              <button
+                onClick={() => setPendingDelete(null)}
+                className="h-11 rounded-full bg-secondary px-5 text-[13px] font-semibold"
+              >
                 Cancel
               </button>
               <button

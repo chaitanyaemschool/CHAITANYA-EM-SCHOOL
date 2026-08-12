@@ -10,12 +10,11 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
-import appCss from "../styles.css?url"; 
+import appCss from "../styles.css?url";
 import { Toaster } from "sonner";
 import { MouseSpotlight } from "@/components/mouse-spotlight";
 import { LogoLoader } from "@/components/logo-loader";
 import { FloatingDock } from "@/components/floating-dock";
-
 
 function NotFoundComponent() {
   return (
@@ -85,8 +84,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Chaitanya EM School — Chekkapalli" },
       {
         name: "description",
-        content:
-          "A school for complete knowledge. English medium education in Chekkapalli.",
+        content: "A school for complete knowledge. English medium education in Chekkapalli.",
       },
       { name: "author", content: "Chaitanya EM School" },
       { property: "og:title", content: "Chaitanya EM School — Chekkapalli" },
@@ -97,7 +95,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Chaitanya EM School — Chekkapalli" },
-      { name: "twitter:description", content: "A school for complete knowledge. English medium education in Chekkapalli." },
+      {
+        name: "twitter:description",
+        content: "A school for complete knowledge. English medium education in Chekkapalli.",
+      },
     ],
     links: [
       {
@@ -115,7 +116,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap",
       },
-
     ],
   }),
   shellComponent: RootShell,
@@ -151,7 +151,6 @@ function RootComponent() {
       <MouseSpotlight />
       <LogoLoader />
       <Toaster position="top-center" richColors closeButton />
-
     </QueryClientProvider>
   );
 }

@@ -25,11 +25,15 @@ function useCollection(name: string, take = 8) {
   const [rows, setRows] = useState<Row[]>([]);
   const [count, setCount] = useState(0);
   useEffect(() => {
-    const unsubAll = onSnapshot(collection(db, name), (s) => setCount(s.size), () => setCount(0));
+    const unsubAll = onSnapshot(
+      collection(db, name),
+      (s) => setCount(s.size),
+      () => setCount(0),
+    );
     const unsubRecent = onSnapshot(
       query(collection(db, name), orderBy("createdAt", "desc"), limit(take)),
       (s) => setRows(s.docs.map((d) => ({ id: d.id, ...d.data() }) as Row)),
-      () => setRows([])
+      () => setRows([]),
     );
     return () => {
       unsubAll();
@@ -56,16 +60,40 @@ export function Dashboard({ onNavigate }: { onNavigate: (id: string) => void }) 
 
   const unread = useMemo(
     () => inquiries.rows.filter((r) => r["read"] !== true).length,
-    [inquiries.rows]
+    [inquiries.rows],
   );
   const pagesCount = useMemo(() => new Set(CONTENT_SECTIONS.map((s) => s.page)).size, []);
   const lastUpdated = inquiries.rows[0] ? timeAgo(inquiries.rows[0]["createdAt"]) : "—";
 
   const stats = [
-    { label: "Total inquiries", value: inquiries.count, hint: `${unread} unread`, icon: Users, tone: "bg-[#eef2ff] text-[#4338ca]" },
-    { label: "Gallery images", value: gallery.count, hint: "Published photos", icon: Images, tone: "bg-[#ecfdf5] text-[#047857]" },
-    { label: "Media files", value: media.count, hint: "In media library", icon: ImageIcon, tone: "bg-[#fff7ed] text-[#c2410c]" },
-    { label: "Website pages", value: pagesCount, hint: "Editable pages", icon: FileText, tone: "bg-[#fdf2f8] text-[#be185d]" },
+    {
+      label: "Total inquiries",
+      value: inquiries.count,
+      hint: `${unread} unread`,
+      icon: Users,
+      tone: "bg-[#eef2ff] text-[#4338ca]",
+    },
+    {
+      label: "Gallery images",
+      value: gallery.count,
+      hint: "Published photos",
+      icon: Images,
+      tone: "bg-[#ecfdf5] text-[#047857]",
+    },
+    {
+      label: "Media files",
+      value: media.count,
+      hint: "In media library",
+      icon: ImageIcon,
+      tone: "bg-[#fff7ed] text-[#c2410c]",
+    },
+    {
+      label: "Website pages",
+      value: pagesCount,
+      hint: "Editable pages",
+      icon: FileText,
+      tone: "bg-[#fdf2f8] text-[#be185d]",
+    },
   ];
 
   const quick = [
@@ -93,7 +121,9 @@ export function Dashboard({ onNavigate }: { onNavigate: (id: string) => void }) 
                 <s.icon className="h-5 w-5" strokeWidth={2.1} />
               </div>
             </div>
-            <div className="mt-4 text-[30px] font-black leading-none tracking-[-0.03em]">{s.value}</div>
+            <div className="mt-4 text-[30px] font-black leading-none tracking-[-0.03em]">
+              {s.value}
+            </div>
             <div className="mt-1.5 text-[12.5px] font-semibold text-[#1c2a4d]/70">{s.label}</div>
             <div className="mt-0.5 text-[11.5px] text-[#1c2a4d]/45">{s.hint}</div>
           </motion.div>
@@ -128,10 +158,14 @@ export function Dashboard({ onNavigate }: { onNavigate: (id: string) => void }) 
                 className="flex items-center gap-3 rounded-2xl bg-[#faf8f4] px-3.5 py-3 ring-1 ring-black/[0.04]"
               >
                 <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[oklch(0.32_0.11_258)]/10 text-[11px] font-bold text-[oklch(0.32_0.11_258)]">
-                  {String(r["studentName"] ?? "?").slice(0, 1).toUpperCase()}
+                  {String(r["studentName"] ?? "?")
+                    .slice(0, 1)
+                    .toUpperCase()}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="truncate text-[13.5px] font-semibold">{String(r["studentName"] ?? "Unnamed")}</div>
+                  <div className="truncate text-[13.5px] font-semibold">
+                    {String(r["studentName"] ?? "Unnamed")}
+                  </div>
                   <div className="truncate text-[11.5px] text-[#1c2a4d]/50">
                     {String(r["mobile"] ?? r["email"] ?? "—")}
                   </div>
@@ -140,7 +174,9 @@ export function Dashboard({ onNavigate }: { onNavigate: (id: string) => void }) 
                   <div className="text-[11px] text-[#1c2a4d]/45">{timeAgo(r["createdAt"])}</div>
                   <span
                     className={`mt-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.1em] ${
-                      r["read"] === true ? "bg-[#1c2a4d]/[0.06] text-[#1c2a4d]/50" : "bg-[#dcfce7] text-[#15803d]"
+                      r["read"] === true
+                        ? "bg-[#1c2a4d]/[0.06] text-[#1c2a4d]/50"
+                        : "bg-[#dcfce7] text-[#15803d]"
                     }`}
                   >
                     {r["read"] === true ? "Read" : "New"}
@@ -179,8 +215,16 @@ export function Dashboard({ onNavigate }: { onNavigate: (id: string) => void }) 
             </div>
             <div className="mt-4 grid grid-cols-3 gap-2">
               {[...media.rows, ...gallery.rows].slice(0, 6).map((m) => (
-                <div key={m.id} className="aspect-square overflow-hidden rounded-xl bg-[#faf8f4] ring-1 ring-black/5">
-                  <img src={String(m["url"] ?? "")} alt="" className="h-full w-full object-cover" loading="lazy" />
+                <div
+                  key={m.id}
+                  className="aspect-square overflow-hidden rounded-xl bg-[#faf8f4] ring-1 ring-black/5"
+                >
+                  <img
+                    src={String(m["url"] ?? "")}
+                    alt=""
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
               ))}
               {media.rows.length + gallery.rows.length === 0 && (

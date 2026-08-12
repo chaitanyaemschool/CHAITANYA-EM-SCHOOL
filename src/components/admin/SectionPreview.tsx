@@ -61,7 +61,9 @@ export function SectionPreview({
             {section?.title ?? "Select a section"}
           </div>
         </div>
-        <div className={`shrink-0 items-center gap-1 rounded-full bg-secondary/60 p-1 ${isMobile ? "hidden" : "flex"}`}>
+        <div
+          className={`shrink-0 items-center gap-1 rounded-full bg-secondary/60 p-1 ${isMobile ? "hidden" : "flex"}`}
+        >
           {DEVICES.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
@@ -70,7 +72,9 @@ export function SectionPreview({
               aria-pressed={device === id}
               onClick={() => setDevice(id)}
               className={`grid h-7 w-7 place-items-center rounded-full transition-colors ${
-                device === id ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
+                device === id
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               <Icon className="h-3.5 w-3.5" />
@@ -159,7 +163,9 @@ export function SectionPreview({
                         >
                           {imageField && (
                             <div className="aspect-[4/3] bg-secondary/60">
-                              {img && <img src={img} alt="" className="h-full w-full object-cover" />}
+                              {img && (
+                                <img src={img} alt="" className="h-full w-full object-cover" />
+                              )}
                             </div>
                           )}
                           <div className="p-4">

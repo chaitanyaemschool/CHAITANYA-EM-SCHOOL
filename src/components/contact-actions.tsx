@@ -133,7 +133,9 @@ export function ContactActions({
             <Icon className="h-[19px] w-[19px]" />
           </span>
           <span className="min-w-0">
-            <span className="block truncate text-[14px] font-semibold tracking-tight text-foreground">{label}</span>
+            <span className="block truncate text-[14px] font-semibold tracking-tight text-foreground">
+              {label}
+            </span>
             <span className="block truncate text-[11.5px] text-muted-foreground">{sub}</span>
           </span>
         </motion.a>

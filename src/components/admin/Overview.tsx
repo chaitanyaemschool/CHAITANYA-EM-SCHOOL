@@ -1,12 +1,26 @@
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { motion } from "motion/react";
-import { ExternalLink, Image as ImageIcon, Images, Pencil, Sparkles, Upload, Users } from "lucide-react";
+import {
+  ExternalLink,
+  Image as ImageIcon,
+  Images,
+  Pencil,
+  Sparkles,
+  Upload,
+  Users,
+} from "lucide-react";
 import { db } from "@/lib/firebase";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-type Row = { id: string; studentName?: string; mobile?: string; read?: boolean; createdAt?: { seconds: number } };
+type Row = {
+  id: string;
+  studentName?: string;
+  mobile?: string;
+  read?: boolean;
+  createdAt?: { seconds: number };
+};
 
 const PREVIEW_SECTIONS = [
   { label: "Hero", page: "Home" },
@@ -16,7 +30,11 @@ const PREVIEW_SECTIONS = [
   { label: "Contact", page: "Contact" },
 ];
 
-export function Overview({ onNavigate }: { onNavigate: (tab: "content" | "gallery" | "media" | "admissions") => void }) {
+export function Overview({
+  onNavigate,
+}: {
+  onNavigate: (tab: "content" | "gallery" | "media" | "admissions") => void;
+}) {
   const [enquiries, setEnquiries] = useState<Row[]>([]);
   const [galleryCount, setGalleryCount] = useState<number | null>(null);
   const [mediaCount, setMediaCount] = useState<number | null>(null);
@@ -24,7 +42,9 @@ export function Overview({ onNavigate }: { onNavigate: (tab: "content" | "galler
   useEffect(() => {
     const unsubs = [
       onSnapshot(query(collection(db, "admissions"), orderBy("createdAt", "desc")), (s) =>
-        setEnquiries(s.docs.map((d) => ({ id: d.id, ...(d.data() as Record<string, unknown>) })) as Row[])
+        setEnquiries(
+          s.docs.map((d) => ({ id: d.id, ...(d.data() as Record<string, unknown>) })) as Row[],
+        ),
       ),
       onSnapshot(collection(db, "gallery"), (s) => setGalleryCount(s.size)),
       onSnapshot(collection(db, "media"), (s) => setMediaCount(s.size)),
@@ -36,8 +56,12 @@ export function Overview({ onNavigate }: { onNavigate: (tab: "content" | "galler
 
   return (
     <div>
-      <div className="text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">Welcome back</div>
-      <h1 className="mt-2 text-[30px] font-semibold leading-tight tracking-[-0.035em]">Dashboard</h1>
+      <div className="text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+        Welcome back
+      </div>
+      <h1 className="mt-2 text-[30px] font-semibold leading-tight tracking-[-0.035em]">
+        Dashboard
+      </h1>
 
       <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
         <KPI label="Total admissions" value={enquiries.length} hint="Enquiry forms" />
@@ -56,7 +80,9 @@ export function Overview({ onNavigate }: { onNavigate: (tab: "content" | "galler
         >
           <div className="flex items-center justify-between gap-3 border-b border-black/5 px-5 py-4">
             <div>
-              <div className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">Live website</div>
+              <div className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                Live website
+              </div>
               <div className="mt-1 text-[15px] font-semibold">Homepage preview</div>
             </div>
             <a
@@ -98,14 +124,28 @@ export function Overview({ onNavigate }: { onNavigate: (tab: "content" | "galler
             </div>
             <div className="mt-4 grid grid-cols-2 gap-2">
               <ActionTile icon={Upload} label="Upload media" onClick={() => onNavigate("media")} />
-              <ActionTile icon={Images} label="Manage gallery" onClick={() => onNavigate("gallery")} />
-              <ActionTile icon={Pencil} label="Edit content" onClick={() => onNavigate("content")} />
-              <ActionTile icon={Users} label="View enquiries" onClick={() => onNavigate("admissions")} />
+              <ActionTile
+                icon={Images}
+                label="Manage gallery"
+                onClick={() => onNavigate("gallery")}
+              />
+              <ActionTile
+                icon={Pencil}
+                label="Edit content"
+                onClick={() => onNavigate("content")}
+              />
+              <ActionTile
+                icon={Users}
+                label="View enquiries"
+                onClick={() => onNavigate("admissions")}
+              />
             </div>
           </div>
 
           <div className="rounded-[24px] bg-white p-5 ring-1 ring-black/5">
-            <div className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">Recent enquiries</div>
+            <div className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+              Recent enquiries
+            </div>
             {enquiries.length === 0 ? (
               <div className="mt-4 flex items-center gap-2 text-[12.5px] text-muted-foreground">
                 <ImageIcon className="h-4 w-4" /> Nothing yet — new enquiries appear here.
@@ -119,7 +159,9 @@ export function Overview({ onNavigate }: { onNavigate: (tab: "content" | "galler
                     className="flex items-center justify-between gap-3 py-2.5 text-left"
                   >
                     <div className="min-w-0">
-                      <div className="truncate text-[13.5px] font-semibold">{r.studentName || "—"}</div>
+                      <div className="truncate text-[13.5px] font-semibold">
+                        {r.studentName || "—"}
+                      </div>
                       <div className="text-[11.5px] text-muted-foreground">{r.mobile || "—"}</div>
                     </div>
                     {r.read !== true && (
@@ -138,17 +180,45 @@ export function Overview({ onNavigate }: { onNavigate: (tab: "content" | "galler
   );
 }
 
-function KPI({ label, value, hint, accent }: { label: string; value: number | null; hint: string; accent?: boolean }) {
+function KPI({
+  label,
+  value,
+  hint,
+  accent,
+}: {
+  label: string;
+  value: number | null;
+  hint: string;
+  accent?: boolean;
+}) {
   return (
-    <div className={`rounded-[22px] p-5 ring-1 ring-black/5 ${accent ? "bg-[oklch(0.32_0.11_258)] text-white" : "bg-white"}`}>
-      <div className={`text-[10px] font-medium uppercase tracking-[0.24em] ${accent ? "text-white/60" : "text-muted-foreground"}`}>{label}</div>
-      <div className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.03em]">{value ?? "—"}</div>
-      <div className={`mt-2 text-[11.5px] ${accent ? "text-white/65" : "text-muted-foreground"}`}>{hint}</div>
+    <div
+      className={`rounded-[22px] p-5 ring-1 ring-black/5 ${accent ? "bg-[oklch(0.32_0.11_258)] text-white" : "bg-white"}`}
+    >
+      <div
+        className={`text-[10px] font-medium uppercase tracking-[0.24em] ${accent ? "text-white/60" : "text-muted-foreground"}`}
+      >
+        {label}
+      </div>
+      <div className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.03em]">
+        {value ?? "—"}
+      </div>
+      <div className={`mt-2 text-[11.5px] ${accent ? "text-white/65" : "text-muted-foreground"}`}>
+        {hint}
+      </div>
     </div>
   );
 }
 
-function ActionTile({ icon: Icon, label, onClick }: { icon: typeof Users; label: string; onClick: () => void }) {
+function ActionTile({
+  icon: Icon,
+  label,
+  onClick,
+}: {
+  icon: typeof Users;
+  label: string;
+  onClick: () => void;
+}) {
   return (
     <button
       onClick={onClick}

@@ -13,7 +13,8 @@ export function MouseSpotlight() {
     const el = ref.current;
     if (!el) return;
     let raf = 0;
-    let x = -100, y = -100;
+    let x = -100,
+      y = -100;
     const onMove = (e: MouseEvent) => {
       x = e.clientX;
       y = e.clientY;

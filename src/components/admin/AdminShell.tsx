@@ -151,7 +151,9 @@ export function AdminShell({
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           className="absolute -right-3 top-20 grid h-6 w-6 place-items-center rounded-full bg-white text-[#1c2a4d]/60 ring-1 ring-[#1c2a4d]/10 transition-transform hover:text-[#1c2a4d] active:scale-90"
         >
-          <ChevronLeft className={`h-3.5 w-3.5 transition-transform ${collapsed ? "rotate-180" : ""}`} />
+          <ChevronLeft
+            className={`h-3.5 w-3.5 transition-transform ${collapsed ? "rotate-180" : ""}`}
+          />
         </button>
       </aside>
 
@@ -186,11 +188,11 @@ export function AdminShell({
         )}
       </AnimatePresence>
 
-      <div
-        className="transition-[padding] duration-300"
-        style={{ paddingLeft: undefined }}
-      >
-        <div className="lg:pl-[var(--admin-rail)]" style={{ ["--admin-rail" as string]: collapsed ? "76px" : "262px" }}>
+      <div className="transition-[padding] duration-300" style={{ paddingLeft: undefined }}>
+        <div
+          className="lg:pl-[var(--admin-rail)]"
+          style={{ ["--admin-rail" as string]: collapsed ? "76px" : "262px" }}
+        >
           {/* Top bar */}
           <header className="sticky top-0 z-30 border-b border-[#1c2a4d]/10 bg-[#f7f4ee]/85 backdrop-blur-xl">
             <div className="flex items-center gap-3 px-4 py-3 md:px-6">
@@ -202,9 +204,13 @@ export function AdminShell({
                 <Menu className="h-4.5 w-4.5" />
               </button>
               <div className="min-w-0 flex-1">
-                <h1 className="truncate text-[17px] font-semibold tracking-[-0.02em] md:text-[20px]">{title}</h1>
+                <h1 className="truncate text-[17px] font-semibold tracking-[-0.02em] md:text-[20px]">
+                  {title}
+                </h1>
                 {subtitle && (
-                  <p className="mt-0.5 hidden truncate text-[12px] text-[#1c2a4d]/55 sm:block">{subtitle}</p>
+                  <p className="mt-0.5 hidden truncate text-[12px] text-[#1c2a4d]/55 sm:block">
+                    {subtitle}
+                  </p>
                 )}
               </div>
               <div className="flex shrink-0 items-center gap-2">
@@ -227,7 +233,9 @@ export function AdminShell({
             </div>
           </header>
 
-          <main className="mx-auto w-full max-w-[1400px] px-4 py-6 md:px-6 md:py-8">{children}</main>
+          <main className="mx-auto w-full max-w-[1400px] px-4 py-6 md:px-6 md:py-8">
+            {children}
+          </main>
         </div>
       </div>
     </div>

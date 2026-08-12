@@ -15,7 +15,6 @@ import { X, ChevronLeft, ChevronRight, Play, Maximize2 } from "lucide-react";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 
-
 import lifeAnnualDay from "@/assets/life-annualday.jpg";
 import lifeSports from "@/assets/life-sports.jpg";
 import lifeScience from "@/assets/life-science.jpg";
@@ -92,22 +91,143 @@ type Story = {
 };
 
 const DEFAULT_STORIES: Story[] = [
-  { id: "annual", title: "Annual Day", line: "One evening, a thousand tiny stars on stage.", img: lifeAnnualDay, srcSet: annualDaySet, srcSetLarge: annualDayLargeSet, reveal: "mask", size: "hero", category: "Annual Day" },
-  { id: "sports", title: "Sports Day", line: "Small feet, big finish lines.", img: lifeSports, srcSet: sportsSet, srcSetLarge: sportsLargeSet, reveal: "zoom", size: "tall", category: "Sports" },
-  { id: "science", title: "Science Activities", line: "The world begins to answer curious questions.", img: lifeScience, srcSet: scienceSet, srcSetLarge: scienceLargeSet, reveal: "blur", size: "wide", category: "Labs" },
-  { id: "drawing", title: "Drawing Competition", line: "Imagination arrives on paper first.", img: lifeDrawing, srcSet: drawingSet, srcSetLarge: drawingLargeSet, reveal: "layer", size: "tall", category: "Events" },
-  { id: "classroom", title: "Classroom Learning", line: "Where a quiet spark becomes an idea.", img: classroomImg, srcSet: classroomSet, srcSetLarge: classroomLargeSet, reveal: "lift", size: "wide", category: "Classrooms" },
-  { id: "independence", title: "Independence Day", line: "Small hands, tallest salute.", img: lifeIndependence, srcSet: independenceSet, srcSetLarge: independenceLargeSet, reveal: "perspective", size: "hero", category: "Events" },
-  { id: "yoga", title: "Yoga Day", line: "Stillness is also a lesson.", img: lifeYoga, srcSet: yogaSet, srcSetLarge: yogaLargeSet, reveal: "mask", size: "wide", category: "Campus" },
-  { id: "dance", title: "Dance Performance", line: "Rhythm learnt long before the words.", img: lifeDance, srcSet: danceSet, srcSetLarge: danceLargeSet, reveal: "zoom", size: "tall", category: "Annual Day" },
-  { id: "festival", title: "Festival Celebration", line: "Lights, laughter, and one big family.", img: lifeFestival, srcSet: festivalSet, srcSetLarge: festivalLargeSet, reveal: "blur", size: "wide", category: "Events" },
-  { id: "parents", title: "Parents Meeting", line: "The most important classroom is a shared one.", img: lifeParents, srcSet: parentsSet, srcSetLarge: parentsLargeSet, reveal: "lift", size: "square", category: "Campus" },
-  { id: "assembly", title: "Morning Assembly", line: "Every day begins together.", img: lifeAssembly, srcSet: assemblySet, srcSetLarge: assemblyLargeSet, reveal: "perspective", size: "wide", category: "Campus" },
+  {
+    id: "annual",
+    title: "Annual Day",
+    line: "One evening, a thousand tiny stars on stage.",
+    img: lifeAnnualDay,
+    srcSet: annualDaySet,
+    srcSetLarge: annualDayLargeSet,
+    reveal: "mask",
+    size: "hero",
+    category: "Annual Day",
+  },
+  {
+    id: "sports",
+    title: "Sports Day",
+    line: "Small feet, big finish lines.",
+    img: lifeSports,
+    srcSet: sportsSet,
+    srcSetLarge: sportsLargeSet,
+    reveal: "zoom",
+    size: "tall",
+    category: "Sports",
+  },
+  {
+    id: "science",
+    title: "Science Activities",
+    line: "The world begins to answer curious questions.",
+    img: lifeScience,
+    srcSet: scienceSet,
+    srcSetLarge: scienceLargeSet,
+    reveal: "blur",
+    size: "wide",
+    category: "Labs",
+  },
+  {
+    id: "drawing",
+    title: "Drawing Competition",
+    line: "Imagination arrives on paper first.",
+    img: lifeDrawing,
+    srcSet: drawingSet,
+    srcSetLarge: drawingLargeSet,
+    reveal: "layer",
+    size: "tall",
+    category: "Events",
+  },
+  {
+    id: "classroom",
+    title: "Classroom Learning",
+    line: "Where a quiet spark becomes an idea.",
+    img: classroomImg,
+    srcSet: classroomSet,
+    srcSetLarge: classroomLargeSet,
+    reveal: "lift",
+    size: "wide",
+    category: "Classrooms",
+  },
+  {
+    id: "independence",
+    title: "Independence Day",
+    line: "Small hands, tallest salute.",
+    img: lifeIndependence,
+    srcSet: independenceSet,
+    srcSetLarge: independenceLargeSet,
+    reveal: "perspective",
+    size: "hero",
+    category: "Events",
+  },
+  {
+    id: "yoga",
+    title: "Yoga Day",
+    line: "Stillness is also a lesson.",
+    img: lifeYoga,
+    srcSet: yogaSet,
+    srcSetLarge: yogaLargeSet,
+    reveal: "mask",
+    size: "wide",
+    category: "Campus",
+  },
+  {
+    id: "dance",
+    title: "Dance Performance",
+    line: "Rhythm learnt long before the words.",
+    img: lifeDance,
+    srcSet: danceSet,
+    srcSetLarge: danceLargeSet,
+    reveal: "zoom",
+    size: "tall",
+    category: "Annual Day",
+  },
+  {
+    id: "festival",
+    title: "Festival Celebration",
+    line: "Lights, laughter, and one big family.",
+    img: lifeFestival,
+    srcSet: festivalSet,
+    srcSetLarge: festivalLargeSet,
+    reveal: "blur",
+    size: "wide",
+    category: "Events",
+  },
+  {
+    id: "parents",
+    title: "Parents Meeting",
+    line: "The most important classroom is a shared one.",
+    img: lifeParents,
+    srcSet: parentsSet,
+    srcSetLarge: parentsLargeSet,
+    reveal: "lift",
+    size: "square",
+    category: "Campus",
+  },
+  {
+    id: "assembly",
+    title: "Morning Assembly",
+    line: "Every day begins together.",
+    img: lifeAssembly,
+    srcSet: assemblySet,
+    srcSetLarge: assemblyLargeSet,
+    reveal: "perspective",
+    size: "wide",
+    category: "Campus",
+  },
 ];
 
-
 const REVEALS: Story["reveal"][] = ["mask", "zoom", "blur", "layer", "lift", "perspective"];
-const SIZES: Story["size"][] = ["hero", "tall", "wide", "tall", "wide", "hero", "wide", "tall", "wide", "square", "wide"];
+const SIZES: Story["size"][] = [
+  "hero",
+  "tall",
+  "wide",
+  "tall",
+  "wide",
+  "hero",
+  "wide",
+  "tall",
+  "wide",
+  "square",
+  "wide",
+];
 
 /** Photos are CMS-managed (admin → Life / Gallery → Photo stories). */
 function useStories(): Story[] {
@@ -130,7 +250,15 @@ function useStories(): Story[] {
   });
 }
 
-const categories = ["All", "Campus", "Classrooms", "Events", "Annual Day", "Sports", "Labs"] as const;
+const categories = [
+  "All",
+  "Campus",
+  "Classrooms",
+  "Events",
+  "Annual Day",
+  "Sports",
+  "Labs",
+] as const;
 
 /* -------------------- YouTube videos -------------------- */
 // Edited from the admin CMS (Life / Gallery → Video stories).
@@ -147,7 +275,6 @@ function youTubeId(input: string): string {
     v.match(/\/(?:embed|shorts|live)\/([\w-]{11})/);
   return m ? m[1] : "";
 }
-
 
 /* -------------------- Header + progress -------------------- */
 
@@ -219,9 +346,21 @@ function Rail3DCard({
   const flat = reduce || isMobile;
 
   const rotateY = useTransform(progress, [0, 0.5, 1], flat ? [0, 0, 0] : [14, 0, -14]);
-  const scale = useTransform(progress, [0, 0.5, 1], reduce ? [1, 1, 1] : isMobile ? [0.94, 1, 0.94] : [0.92, 1, 0.92]);
-  const opacity = useTransform(progress, [0, 0.5, 1], reduce ? [1, 1, 1] : isMobile ? [0.86, 1, 0.86] : [0.7, 1, 0.7]);
-  const blur = useTransform(progress, [0, 0.5, 1], flat ? ["none", "none", "none"] : ["blur(2.5px)", "blur(0px)", "blur(2.5px)"]);
+  const scale = useTransform(
+    progress,
+    [0, 0.5, 1],
+    reduce ? [1, 1, 1] : isMobile ? [0.94, 1, 0.94] : [0.92, 1, 0.92],
+  );
+  const opacity = useTransform(
+    progress,
+    [0, 0.5, 1],
+    reduce ? [1, 1, 1] : isMobile ? [0.86, 1, 0.86] : [0.7, 1, 0.7],
+  );
+  const blur = useTransform(
+    progress,
+    [0, 0.5, 1],
+    flat ? ["none", "none", "none"] : ["blur(2.5px)", "blur(0px)", "blur(2.5px)"],
+  );
   const imgX = useTransform(progress, [0, 0.5, 1], flat ? ["0%", "0%", "0%"] : ["5%", "0%", "-5%"]);
 
   const spring = isMobile
@@ -230,7 +369,6 @@ function Rail3DCard({
   const smoothRotate = useSpring(rotateY, spring);
   const smoothScale = useSpring(scale, spring);
   const smoothOpacity = useSpring(opacity, spring);
-
 
   return (
     <motion.div
@@ -275,7 +413,9 @@ function Rail3DCard({
               "linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 100%)",
           }}
         />
-        <div className={`${aspect} relative overflow-hidden rounded-[20px] bg-muted ring-1 ring-white/50`}>
+        <div
+          className={`${aspect} relative overflow-hidden rounded-[20px] bg-muted ring-1 ring-white/50`}
+        >
           <motion.img
             src={item.img}
             srcSet={item.srcSet}
@@ -296,7 +436,6 @@ function Rail3DCard({
           </h3>
         </div>
       </motion.button>
-
     </motion.div>
   );
 }
@@ -393,7 +532,10 @@ function MomentCard({
       <span
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 z-10 h-1/3 rounded-t-[24px] opacity-70"
-        style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 100%)" }}
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 100%)",
+        }}
       />
       <div
         className={`relative overflow-hidden rounded-[18px] bg-muted ring-1 ring-white/50 ${
@@ -406,12 +548,14 @@ function MomentCard({
                 : "aspect-square"
         }`}
       >
-
         {!loaded && (
           <div
             aria-hidden
             className="absolute inset-0 animate-pulse"
-            style={{ background: "linear-gradient(110deg, oklch(0.95 0.01 258) 0%, oklch(0.98 0.008 78) 50%, oklch(0.95 0.01 258) 100%)" }}
+            style={{
+              background:
+                "linear-gradient(110deg, oklch(0.95 0.01 258) 0%, oklch(0.98 0.008 78) 50%, oklch(0.95 0.01 258) 100%)",
+            }}
           />
         )}
         <img
@@ -433,7 +577,9 @@ function MomentCard({
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 flex items-end p-3 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100"
-          style={{ background: "linear-gradient(180deg, rgba(8,12,28,0) 40%, rgba(8,12,28,0.72) 100%)" }}
+          style={{
+            background: "linear-gradient(180deg, rgba(8,12,28,0) 40%, rgba(8,12,28,0.72) 100%)",
+          }}
         >
           <span className="flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-foreground">
             <Maximize2 className="h-3 w-3" strokeWidth={2.6} />
@@ -527,7 +673,10 @@ function MomentsGrid({ onOpen }: { onOpen: (i: number) => void }) {
                 }`}
                 style={
                   active
-                    ? { background: "linear-gradient(135deg,oklch(0.52 0.16 258),oklch(0.34 0.12 258))" }
+                    ? {
+                        background:
+                          "linear-gradient(135deg,oklch(0.52 0.16 258),oklch(0.34 0.12 258))",
+                      }
                     : undefined
                 }
               >
@@ -559,7 +708,7 @@ function MomentsGrid({ onOpen }: { onOpen: (i: number) => void }) {
 
 /**
  * useAutoScrollRail — glides a horizontal rail at a slow, premium speed using a
- * sub-pixel accumulator (no jitter). Any manual interaction (touch, drag,
+ * sub-pixel accumulator (no jitter). unknown manual interaction (touch, drag,
  * wheel, hover, keyboard) pauses it; it resumes smoothly after a short idle
  * delay. At either end it eases into a direction reversal instead of snapping
  * back, so there are never sudden jumps.
@@ -648,7 +797,6 @@ function useAutoScrollRail(ref: React.RefObject<HTMLDivElement | null>, speed = 
   }, [ref, speed, reduce]);
 }
 
-
 /* -------------------- Video Rail (YouTube) -------------------- */
 
 const EMBER = "oklch(0.58 0.16 42)";
@@ -697,8 +845,16 @@ function VideoCard({
   const flat = reduce || isMobile;
 
   const rotateY = useTransform(progress, [0, 0.5, 1], flat ? [0, 0, 0] : [12, 0, -12]);
-  const scale = useTransform(progress, [0, 0.5, 1], reduce ? [1, 1, 1] : isMobile ? [0.94, 1, 0.94] : [0.92, 1, 0.92]);
-  const opacity = useTransform(progress, [0, 0.5, 1], reduce ? [1, 1, 1] : isMobile ? [0.86, 1, 0.86] : [0.7, 1, 0.7]);
+  const scale = useTransform(
+    progress,
+    [0, 0.5, 1],
+    reduce ? [1, 1, 1] : isMobile ? [0.94, 1, 0.94] : [0.92, 1, 0.92],
+  );
+  const opacity = useTransform(
+    progress,
+    [0, 0.5, 1],
+    reduce ? [1, 1, 1] : isMobile ? [0.86, 1, 0.86] : [0.7, 1, 0.7],
+  );
   const imgX = useTransform(progress, [0, 0.5, 1], flat ? ["0%", "0%", "0%"] : ["5%", "0%", "-5%"]);
 
   const vSpring = isMobile
@@ -707,7 +863,6 @@ function VideoCard({
   const smoothRotate = useSpring(rotateY, vSpring);
   const smoothScale = useSpring(scale, vSpring);
   const smoothOpacity = useSpring(opacity, vSpring);
-
 
   const href = `https://www.youtube.com/watch?v=${item.id}`;
   const thumb = item.thumb || `https://i.ytimg.com/vi/${item.id}/hqdefault.jpg`;
@@ -727,7 +882,12 @@ function VideoCard({
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`Watch ${item.title} on YouTube`}
-        style={{ rotateY: smoothRotate, scale: smoothScale, opacity: smoothOpacity, transformStyle: "preserve-3d" }}
+        style={{
+          rotateY: smoothRotate,
+          scale: smoothScale,
+          opacity: smoothOpacity,
+          transformStyle: "preserve-3d",
+        }}
         className="group relative block w-[72vw] max-w-[280px] overflow-hidden rounded-[28px] border border-[rgba(198,93,44,0.16)] bg-[oklch(0.995_0.008_84)] p-1.5 text-left shadow-[0_20px_46px_-26px_rgba(56,38,26,0.35)] transition-[box-shadow,transform,border-color] duration-500 will-change-transform hover:scale-[1.03] hover:border-[rgba(198,93,44,0.45)] hover:shadow-[0_34px_66px_-28px_rgba(56,38,26,0.45)] active:scale-[0.99] md:w-[50vw] md:max-w-[400px] md:p-2 lg:w-[38vw] lg:max-w-[460px]"
       >
         <div className="relative aspect-video overflow-hidden rounded-[20px] bg-[oklch(0.93_0.02_78)]">
@@ -743,8 +903,7 @@ function VideoCard({
             aria-hidden
             className="absolute inset-0"
             style={{
-              background:
-                "linear-gradient(180deg, rgba(28,20,14,0) 40%, rgba(28,20,14,0.42) 100%)",
+              background: "linear-gradient(180deg, rgba(28,20,14,0) 40%, rgba(28,20,14,0.42) 100%)",
             }}
           />
           {/* Terracotta play button */}
@@ -753,7 +912,9 @@ function VideoCard({
               animate={reduce ? {} : { scale: [1, 1.05, 1] }}
               transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
               className="relative grid h-[60px] w-[60px] place-items-center rounded-full text-white shadow-[0_16px_34px_-10px_rgba(140,60,26,0.6)] ring-4 ring-white/70 transition-transform duration-500 group-hover:scale-110"
-              style={{ background: `linear-gradient(150deg, ${EMBER} 0%, oklch(0.48 0.15 34) 100%)` }}
+              style={{
+                background: `linear-gradient(150deg, ${EMBER} 0%, oklch(0.48 0.15 34) 100%)`,
+              }}
             >
               <Play className="relative ml-0.5 h-6 w-6 fill-current" strokeWidth={0} />
             </motion.span>
@@ -833,8 +994,8 @@ function VideoStories() {
           Watch us in motion.
         </motion.h2>
         <p className="mt-3 max-w-[34ch] text-[13px] font-medium text-[oklch(0.44_0.03_262)] md:text-[14px]">
-          Real school memories — assemblies, stage nights and celebrations. Tap any card to open the
-          video on YouTube.
+          Real school memories — assemblies, stage nights and celebrations. Tap unknown card to open
+          the video on YouTube.
         </p>
       </div>
 
@@ -850,7 +1011,6 @@ function VideoStories() {
   );
 }
 
-
 /* -------------------- Closing -------------------- */
 
 function Closing() {
@@ -863,11 +1023,7 @@ function Closing() {
         transition={{ duration: 0.9, ease }}
         className="font-editorial mx-auto max-w-md text-[48px] leading-[0.92] text-foreground"
       >
-        Your child will make{" "}
-        <span>
-          beautiful memories
-        </span>{" "}
-        here.
+        Your child will make <span>beautiful memories</span> here.
       </motion.h2>
       <Link
         to="/"
@@ -913,7 +1069,15 @@ function Lightbox({
     startMidY: number;
     startX: number;
     startY: number;
-  }>({ active: false, startDist: 0, startScale: 1, startMidX: 0, startMidY: 0, startX: 0, startY: 0 });
+  }>({
+    active: false,
+    startDist: 0,
+    startScale: 1,
+    startMidX: 0,
+    startMidY: 0,
+    startX: 0,
+    startY: 0,
+  });
   const lastTapRef = useRef<number>(0);
 
   const springy = { type: "spring" as const, stiffness: 320, damping: 32, mass: 0.7 };
@@ -999,7 +1163,7 @@ function Lightbox({
       const dist = Math.hypot(dx, dy) || 1;
       const nextScale = Math.max(
         0.6,
-        Math.min(5, pinchRef.current.startScale * (dist / pinchRef.current.startDist))
+        Math.min(5, pinchRef.current.startScale * (dist / pinchRef.current.startDist)),
       );
       scale.set(nextScale);
       // Pan follows midpoint movement so pinch feels anchored
@@ -1017,7 +1181,7 @@ function Lightbox({
     }
   };
 
-  const handleImageDragEnd = (_: any, info: PanInfo) => {
+  const handleImageDragEnd = (_: unknown, info: PanInfo) => {
     // Zoomed image drag → clamp pan
     clampPan();
     // A quick horizontal flick while zoomed-out advances slides
@@ -1031,7 +1195,7 @@ function Lightbox({
     }
   };
 
-  const handleSheetDragEnd = (_: any, info: PanInfo) => {
+  const handleSheetDragEnd = (_: unknown, info: PanInfo) => {
     if (scale.get() > 1.05) {
       animate(sheetX, 0, springy);
       animate(sheetY, 0, springy);
@@ -1074,7 +1238,10 @@ function Lightbox({
       style={{ WebkitBackdropFilter: "blur(24px)", touchAction: "none" }}
     >
       <button
-        onClick={(e) => { e.stopPropagation(); onClose(); }}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
         className="absolute right-4 top-4 z-10 grid h-11 w-11 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md ring-1 ring-white/20 active:scale-95 transition-transform"
         aria-label="Close"
       >
@@ -1131,14 +1298,20 @@ function Lightbox({
       </AnimatePresence>
 
       <button
-        onClick={(e) => { e.stopPropagation(); onPrev(); }}
+        onClick={(e) => {
+          e.stopPropagation();
+          onPrev();
+        }}
         className="absolute left-3 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md ring-1 ring-white/20 active:scale-95 transition-transform"
         aria-label="Previous"
       >
         <ChevronLeft className="h-5 w-5" strokeWidth={2.5} />
       </button>
       <button
-        onClick={(e) => { e.stopPropagation(); onNext(); }}
+        onClick={(e) => {
+          e.stopPropagation();
+          onNext();
+        }}
         className="absolute right-3 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/15 text-white backdrop-blur-md ring-1 ring-white/20 active:scale-95 transition-transform"
         aria-label="Next"
       >
@@ -1156,7 +1329,9 @@ function LifePage() {
   useEffect(() => {
     const lock = lightbox !== null;
     document.body.style.overflow = lock ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [lightbox]);
 
   const storyCount = useStories().length;

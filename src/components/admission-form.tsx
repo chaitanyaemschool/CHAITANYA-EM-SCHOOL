@@ -9,7 +9,6 @@ import { isValidEmail, isValidMobile, isValidName, normalizeMobile } from "@/lib
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-
 export type AdmissionForm = {
   studentName: string;
   mobile: string;
@@ -26,10 +25,10 @@ const EMPTY: AdmissionForm = {
 
 const FIELD =
   "w-full min-w-0 rounded-xl border border-black/10 bg-white/80 px-3.5 py-2.5 text-[14px] text-foreground outline-none transition-shadow duration-200 placeholder:text-muted-foreground/70 focus:border-transparent focus:ring-2 focus:ring-[oklch(0.55_0.16_258)]";
-const LABEL = "mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground";
+const LABEL =
+  "mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground";
 const ERR_FIELD = "!border-[oklch(0.6_0.19_25)] focus:!ring-[oklch(0.6_0.19_25)]";
 const ERR_TEXT = "mt-1.5 text-[11.5px] font-medium text-[oklch(0.5_0.19_25)]";
-
 
 function buildWhatsAppText(f: AdmissionForm) {
   const stamp = new Date().toLocaleString("en-IN", {
@@ -93,17 +92,20 @@ export function AdmissionDialog({
   const errors = {
     studentName: isValidName(form.studentName) ? null : "Please enter the student's full name.",
     mobile: isValidMobile(form.mobile) ? null : "Please enter a valid contact number.",
-    email: !form.email.trim() || isValidEmail(form.email) ? null : "Please enter a valid email address.",
+    email:
+      !form.email.trim() || isValidEmail(form.email) ? null : "Please enter a valid email address.",
   };
   const invalid = Object.values(errors).some(Boolean);
   const showError = (k: keyof typeof errors) => (touched[k] ? errors[k] : null);
 
-  const set = (k: keyof AdmissionForm) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const raw = e.target.value;
-    // Mobile accepts digits, spaces and a leading + only — letters are rejected as typed.
-    const value = k === "mobile" ? raw.replace(/[^\d+\s-]/g, "").slice(0, 16) : raw;
-    setForm((p) => ({ ...p, [k]: value }));
-  };
+  const set =
+    (k: keyof AdmissionForm) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      const raw = e.target.value;
+      // Mobile accepts digits, spaces and a leading + only — letters are rejected as typed.
+      const value = k === "mobile" ? raw.replace(/[^\d+\s-]/g, "").slice(0, 16) : raw;
+      setForm((p) => ({ ...p, [k]: value }));
+    };
   const blur = (k: string) => () => setTouched((t) => ({ ...t, [k]: true }));
 
   async function submit(e: React.FormEvent) {
@@ -139,7 +141,6 @@ export function AdmissionDialog({
     setBusy(false);
     setDone(true);
   }
-
 
   return (
     <AnimatePresence>
@@ -182,7 +183,9 @@ export function AdmissionDialog({
               <div className="flex items-center gap-3">
                 <span
                   className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl text-white"
-                  style={{ background: "linear-gradient(135deg,oklch(0.55 0.16 258),oklch(0.35 0.13 258))" }}
+                  style={{
+                    background: "linear-gradient(135deg,oklch(0.55 0.16 258),oklch(0.35 0.13 258))",
+                  }}
                 >
                   <GraduationCap className="h-5 w-5" strokeWidth={2.2} />
                 </span>
@@ -199,11 +202,14 @@ export function AdmissionDialog({
 
             {done ? (
               <div className="px-5 pb-8 pt-6 text-center sm:px-8">
-                <CheckCircle2 className="mx-auto h-10 w-10 text-[oklch(0.6_0.15_150)]" strokeWidth={2} />
+                <CheckCircle2
+                  className="mx-auto h-10 w-10 text-[oklch(0.6_0.15_150)]"
+                  strokeWidth={2}
+                />
                 <div className="mt-3 text-[17px] font-semibold">Enquiry received</div>
                 <p className="mx-auto mt-2 max-w-[42ch] text-[13.5px] leading-relaxed text-muted-foreground">
-                  Thank you. Our admissions office will contact you shortly. A WhatsApp
-                  message has also been prepared for you to send.
+                  Thank you. Our admissions office will contact you shortly. A WhatsApp message has
+                  also been prepared for you to send.
                 </p>
                 <button
                   type="button"
@@ -217,7 +223,9 @@ export function AdmissionDialog({
               <form onSubmit={submit} className="px-5 pb-6 pt-5 sm:px-8 sm:pb-8">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="sm:col-span-2">
-                    <label className={LABEL} htmlFor="ad-student">Student name *</label>
+                    <label className={LABEL} htmlFor="ad-student">
+                      Student name *
+                    </label>
                     <input
                       id="ad-student"
                       className={`${FIELD} ${showError("studentName") ? ERR_FIELD : ""}`}
@@ -228,10 +236,14 @@ export function AdmissionDialog({
                       aria-invalid={!!showError("studentName")}
                       placeholder="Full name of the student"
                     />
-                    {showError("studentName") && <p className={ERR_TEXT}>{showError("studentName")}</p>}
+                    {showError("studentName") && (
+                      <p className={ERR_TEXT}>{showError("studentName")}</p>
+                    )}
                   </div>
                   <div>
-                    <label className={LABEL} htmlFor="ad-mobile">Mobile number *</label>
+                    <label className={LABEL} htmlFor="ad-mobile">
+                      Mobile number *
+                    </label>
                     <input
                       id="ad-mobile"
                       type="tel"
@@ -248,7 +260,9 @@ export function AdmissionDialog({
                     {showError("mobile") && <p className={ERR_TEXT}>{showError("mobile")}</p>}
                   </div>
                   <div>
-                    <label className={LABEL} htmlFor="ad-email">Email address</label>
+                    <label className={LABEL} htmlFor="ad-email">
+                      Email address
+                    </label>
                     <input
                       id="ad-email"
                       type="email"
@@ -263,11 +277,20 @@ export function AdmissionDialog({
                     {showError("email") && <p className={ERR_TEXT}>{showError("email")}</p>}
                   </div>
                   <div className="sm:col-span-2">
-                    <label className={LABEL} htmlFor="ad-message">Message</label>
-                    <textarea id="ad-message" rows={4} className={`${FIELD} resize-none`} value={form.message} onChange={set("message")} maxLength={600} placeholder="Anything you'd like us to know (optional)" />
+                    <label className={LABEL} htmlFor="ad-message">
+                      Message
+                    </label>
+                    <textarea
+                      id="ad-message"
+                      rows={4}
+                      className={`${FIELD} resize-none`}
+                      value={form.message}
+                      onChange={set("message")}
+                      maxLength={600}
+                      placeholder="Anything you'd like us to know (optional)"
+                    />
                   </div>
                 </div>
-
 
                 {error && (
                   <p className="mt-4 rounded-xl bg-[oklch(0.96_0.04_30)] px-3.5 py-2.5 text-[12.5px] text-[oklch(0.45_0.16_30)]">
@@ -287,7 +310,10 @@ export function AdmissionDialog({
                     type="submit"
                     disabled={busy}
                     className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-7 text-[13.5px] font-semibold text-white shadow-[0_16px_36px_-16px_rgba(34,64,180,0.6)] transition-transform duration-200 hover:-translate-y-0.5 active:scale-[0.97] disabled:opacity-70"
-                    style={{ background: "linear-gradient(135deg,oklch(0.55 0.16 258),oklch(0.35 0.13 258))" }}
+                    style={{
+                      background:
+                        "linear-gradient(135deg,oklch(0.55 0.16 258),oklch(0.35 0.13 258))",
+                    }}
                   >
                     {busy && <Loader2 className="h-4 w-4 animate-spin" />}
                     Submit

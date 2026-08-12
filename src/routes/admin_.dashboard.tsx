@@ -6,7 +6,10 @@ export const Route = createFileRoute("/admin_/dashboard")({
   head: () => ({
     meta: [
       { title: "Dashboard — Chaitanya EM School Admin" },
-      { name: "description", content: "Manage content, images, gallery and enquiries for Chaitanya EM School." },
+      {
+        name: "description",
+        content: "Manage content, images, gallery and enquiries for Chaitanya EM School.",
+      },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
