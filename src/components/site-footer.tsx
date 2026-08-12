@@ -12,7 +12,6 @@ import {
   PhoneCall,
 } from "lucide-react";
 
-
 import { WhatsAppIcon } from "@/components/contact-actions";
 import { FacebookMark, InstagramMark, WhatsAppMark, YouTubeMark } from "@/components/brand-icons";
 import { DREAM_TEAM_URL, SOCIAL, waHref as buildWaHref } from "@/lib/social-links";

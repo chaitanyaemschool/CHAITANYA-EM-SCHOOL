@@ -1,8 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-
-
 const ease = [0.22, 1, 0.36, 1] as const;
 
 /** Total on-screen time of the reveal (ms). */

@@ -3,8 +3,6 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/
 import { ArrowLeft, ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-
-
 import { navItems } from "@/components/site-footer";
 import { AdmissionDialog } from "@/components/admission-form";
 
