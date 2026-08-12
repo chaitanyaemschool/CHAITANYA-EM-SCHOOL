@@ -11,7 +11,7 @@ import {
 } from "motion/react";
 import { ArrowUpRight, ChevronRight, X, Sparkles, GraduationCap, Award, Users } from "lucide-react";
 
-import logoAsset from "@/assets/chaitanya-logo.asset.json";
+
 import hero1Assembly from "@/assets/hero-assembly-best.png.asset.json";
 import hero2Classroom from "@/assets/hero-2-classroom.png.asset.json";
 import hero3Students from "@/assets/hero-3-students.png.asset.json";

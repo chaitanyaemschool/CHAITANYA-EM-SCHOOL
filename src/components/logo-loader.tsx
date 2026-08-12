@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-import logoAsset from "@/assets/chaitanya-logo.asset.json";
+
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -114,7 +114,7 @@ export function LogoLoader() {
                 />
               )}
               <img
-                src={logoAsset.url}
+                src="/logo-crest.jpeg"
                 alt="Chaitanya English Medium School crest"
                 className="relative h-[6.75rem] w-[6.75rem] rounded-full bg-white object-contain p-2 shadow-[0_28px_70px_-34px_rgba(15,23,42,0.55)] ring-1 ring-black/5 sm:h-[8.25rem] sm:w-[8.25rem] md:h-[9.25rem] md:w-[9.25rem]"
               />

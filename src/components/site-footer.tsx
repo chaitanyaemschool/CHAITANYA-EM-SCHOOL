@@ -12,7 +12,7 @@ import {
   PhoneCall,
 } from "lucide-react";
 
-import logoAsset from "@/assets/chaitanya-logo.asset.json";
+
 import { WhatsAppIcon } from "@/components/contact-actions";
 import { FacebookMark, InstagramMark, WhatsAppMark, YouTubeMark } from "@/components/brand-icons";
 import { DREAM_TEAM_URL, SOCIAL, waHref as buildWaHref } from "@/lib/social-links";
@@ -96,7 +96,7 @@ export function SiteFooter() {
       <div className="relative mx-auto max-w-6xl">
         <div className="flex items-center gap-4">
           <img
-            src={logoAsset.url}
+            src="/logo-crest.jpeg"
             alt="Chaitanya EM School logo"
             className="h-14 w-14 rounded-2xl bg-white/95 object-cover p-1 ring-1 ring-white/15"
           />

@@ -3,8 +3,8 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/
 import { ArrowLeft, ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import logoAsset from "@/assets/chaitanya-logo.asset.json";
-import wordmarkAsset from "@/assets/chaitanya-telugu-wordmark.asset.json";
+
+
 import { navItems } from "@/components/site-footer";
 import { AdmissionDialog } from "@/components/admission-form";
 
@@ -54,7 +54,7 @@ export function SiteHeader() {
             aria-label="Chaitanya EM School — Home"
           >
             <img
-              src={logoAsset.url}
+              src="/logo-crest.jpeg"
               alt=""
               width={44}
               height={44}
@@ -63,9 +63,9 @@ export function SiteHeader() {
               }`}
             />
             <img
-              src={wordmarkAsset.url}
+              src="/logo-wordmark.png"
               alt="Chaitanya (E.M.) High School"
-              className={`max-w-[120px] sm:max-w-[170px] md:max-w-[230px] object-contain object-left transition-all duration-500 ease-out ${
+              className={`max-w-[150px] sm:max-w-[200px] md:max-w-[280px] object-contain object-left transition-all duration-500 ease-out ${
                 scrolled ? "h-9 md:h-10" : "h-11 md:h-12"
               }`}
             />
@@ -152,12 +152,12 @@ function MenuOverlay({
             >
               <div className="flex min-w-0 items-center gap-3">
                 <img
-                  src={logoAsset.url}
+                  src="/logo-crest.jpeg"
                   alt=""
                   className="h-10 w-10 shrink-0 rounded-full bg-white p-1 ring-1 ring-black/5"
                 />
                 <img
-                  src={wordmarkAsset.url}
+                  src="/logo-wordmark.png"
                   alt="Chaitanya (E.M.) High School"
                   className="h-10 max-w-[180px] object-contain object-left"
                 />
