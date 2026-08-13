@@ -182,7 +182,6 @@
   html {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: none;
   }
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -255,7 +254,7 @@
 }
 @utility glass-panel {
   background: color-mix(in oklab, white 78%, transparent);
-  backdrop-filter: blur(24px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
   box-shadow:
     var(--shadow-md),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.7);
@@ -408,7 +407,7 @@
 /* Strong glassmorphism panel — for floating navs, feature cards, badges */
 @utility glass-strong {
   background: color-mix(in oklab, white 55%, transparent);
-  backdrop-filter: blur(28px) saturate(1.5);
+  backdrop-filter: blur(12px) saturate(1.5);
   border: 1px solid color-mix(in oklab, white 40%, transparent);
   box-shadow:
     0 20px 50px -20px rgba(15, 23, 42, 0.28),

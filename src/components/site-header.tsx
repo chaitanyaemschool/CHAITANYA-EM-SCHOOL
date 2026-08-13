@@ -2,6 +2,7 @@ import { Link, useRouter, useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { ArrowLeft, ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useLenis } from "lenis/react";
 
 import { navItems } from "@/components/site-footer";
 import { AdmissionDialog } from "@/components/admission-form";
@@ -128,6 +129,8 @@ function MenuOverlay({
   onClose: () => void;
   onEnroll: () => void;
 }) {
+  const lenis = useLenis();
+  
   return (
     <AnimatePresence>
       {open && (
@@ -198,7 +201,11 @@ function MenuOverlay({
                       onClick={() => {
                         onClose();
                         window.setTimeout(() => {
-                          window.scrollTo({ top: 0, behavior: "smooth" });
+                          if (lenis) {
+                            lenis.scrollTo(0);
+                          } else {
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                          }
                         }, 120);
                       }}
                       activeProps={{ className: "is-active text-[oklch(0.22_0.14_258)]" }}

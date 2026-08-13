@@ -15,6 +15,7 @@ import { Toaster } from "sonner";
 import { MouseSpotlight } from "@/components/mouse-spotlight";
 import { LogoLoader } from "@/components/logo-loader";
 import { FloatingDock } from "@/components/floating-dock";
+import { LenisProvider } from "@/components/lenis-provider";
 
 function NotFoundComponent() {
   return (
@@ -81,6 +82,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { httpEquiv: "Cache-Control", content: "no-cache, no-store, must-revalidate" },
+      { httpEquiv: "Pragma", content: "no-cache" },
+      { httpEquiv: "Expires", content: "0" },
       { title: "Chaitanya EM School — Chekkapalli" },
       {
         name: "description",
@@ -144,13 +148,15 @@ function RootComponent() {
   const isAdmin = pathname.startsWith("/admin");
 
   return (
-    <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
-      {!isAdmin && <FloatingDock />}
-      <MouseSpotlight />
-      <LogoLoader />
-      <Toaster position="top-center" richColors closeButton />
-    </QueryClientProvider>
+    <LenisProvider>
+      <QueryClientProvider client={queryClient}>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+        {!isAdmin && <FloatingDock />}
+        <MouseSpotlight />
+        <LogoLoader />
+        <Toaster position="top-center" richColors closeButton />
+      </QueryClientProvider>
+    </LenisProvider>
   );
 }

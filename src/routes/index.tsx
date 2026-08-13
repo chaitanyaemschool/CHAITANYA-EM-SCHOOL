@@ -156,7 +156,7 @@ function HeroInner() {
   }, [reduce, slideCount]);
 
   return (
-    <section id="top" ref={ref} className="relative h-[100svh] w-full overflow-hidden">
+    <section id="top" ref={ref} className="relative min-h-[100svh] w-full overflow-hidden flex flex-col">
       <motion.div
         style={{ y: imgY, scale: imgScale, perspective: 1400 }}
         className="absolute inset-0"
@@ -218,7 +218,7 @@ function HeroInner() {
         }}
       />
 
-      <div className="relative mx-auto flex h-full max-w-6xl flex-col justify-end px-5 pb-[clamp(9rem,34vh,15rem)] sm:px-10 sm:pb-32 lg:pb-36">
+      <div className="relative mx-auto flex flex-1 w-full max-w-6xl flex-col justify-end pt-32 px-5 pb-[clamp(9rem,34vh,15rem)] sm:px-10 sm:pb-32 lg:pb-36">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}

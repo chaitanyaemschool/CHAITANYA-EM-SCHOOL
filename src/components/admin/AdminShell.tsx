@@ -58,7 +58,7 @@ export function AdminShell({
         </div>
         {!mini && (
           <div className="min-w-0 leading-none">
-            <div className="truncate text-[10px] font-semibold uppercase tracking-[0.24em] text-[#1c2a4d]/45">
+            <div className="truncate text-[10px] font-semibold uppercase tracking-[0.24em] text-[#1c2a4d]/70">
               Chaitanya
             </div>
             <div className="mt-1.5 truncate text-[15px] font-semibold tracking-[-0.02em] text-[#1c2a4d]">
@@ -72,7 +72,7 @@ export function AdminShell({
         {groups.map((g, gi) => (
           <div key={g.label ?? gi} className="mb-4">
             {g.label && !mini && (
-              <div className="px-3 pb-1.5 pt-1 text-[9.5px] font-semibold uppercase tracking-[0.22em] text-[#1c2a4d]/35">
+              <div className="px-3 pb-1.5 pt-1 text-[9.5px] font-semibold uppercase tracking-[0.22em] text-[#1c2a4d]/60">
                 {g.label}
               </div>
             )}
@@ -93,7 +93,7 @@ export function AdminShell({
                     } ${
                       isActive
                         ? "bg-[oklch(0.32_0.11_258)] text-white shadow-[0_14px_28px_-20px_rgba(28,42,77,0.95)]"
-                        : "text-[#1c2a4d]/70 hover:bg-[#1c2a4d]/[0.05] hover:text-[#1c2a4d]"
+                        : "text-[#1c2a4d]/90 hover:bg-[#1c2a4d]/[0.05] hover:text-[#1c2a4d]"
                     }`}
                   >
                     <Icon
@@ -121,7 +121,7 @@ export function AdminShell({
       <div className="border-t border-[#1c2a4d]/10 p-2">
         <Link
           to="/"
-          className={`flex items-center gap-2 rounded-xl px-3 py-2.5 text-[12.5px] font-semibold text-[#1c2a4d]/65 transition-colors hover:bg-[#1c2a4d]/[0.05] hover:text-[#1c2a4d] ${
+          className={`flex items-center gap-2 rounded-xl px-3 py-2.5 text-[12.5px] font-semibold text-[#1c2a4d]/85 transition-colors hover:bg-[#1c2a4d]/[0.05] hover:text-[#1c2a4d] ${
             mini ? "justify-center" : ""
           }`}
           title="View website"
@@ -130,7 +130,7 @@ export function AdminShell({
           {!mini && "View website"}
         </Link>
         {!mini && (
-          <div className="truncate rounded-xl bg-[#1c2a4d]/[0.04] px-3 py-2 text-[11px] text-[#1c2a4d]/55">
+          <div className="truncate rounded-xl bg-[#1c2a4d]/[0.04] px-3 py-2 text-[11px] font-medium text-[#1c2a4d]/75">
             {email}
           </div>
         )}
@@ -149,7 +149,7 @@ export function AdminShell({
         <button
           onClick={() => setCollapsed((v) => !v)}
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          className="absolute -right-3 top-20 grid h-6 w-6 place-items-center rounded-full bg-white text-[#1c2a4d]/60 ring-1 ring-[#1c2a4d]/10 transition-transform hover:text-[#1c2a4d] active:scale-90"
+          className="absolute -right-3 top-20 grid h-6 w-6 place-items-center rounded-full bg-white text-[#1c2a4d]/80 ring-1 ring-[#1c2a4d]/10 transition-transform hover:text-[#1c2a4d] active:scale-90"
         >
           <ChevronLeft
             className={`h-3.5 w-3.5 transition-transform ${collapsed ? "rotate-180" : ""}`}
@@ -208,7 +208,7 @@ export function AdminShell({
                   {title}
                 </h1>
                 {subtitle && (
-                  <p className="mt-0.5 hidden truncate text-[12px] text-[#1c2a4d]/55 sm:block">
+                  <p className="mt-0.5 hidden truncate text-[12px] font-medium text-[#1c2a4d]/75 sm:block">
                     {subtitle}
                   </p>
                 )}

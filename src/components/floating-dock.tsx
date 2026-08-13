@@ -6,6 +6,7 @@ import {
   useScroll,
 } from "motion/react";
 import { ArrowUp, Phone } from "lucide-react";
+import { useLenis } from "lenis/react";
 
 import { useState } from "react";
 
@@ -67,6 +68,8 @@ export function FloatingDock() {
   const reduce = useReducedMotion();
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
+  const lenis = useLenis();
+  
   useMotionValueEvent(scrollY, "change", (y) => {
     const next = y > 320;
     setScrolled((prev) => (prev === next ? prev : next));
@@ -85,7 +88,7 @@ export function FloatingDock() {
             key="top"
             type="button"
             aria-label="Scroll to top"
-            onClick={() => window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" })}
+            onClick={() => (reduce ? window.scrollTo({ top: 0, behavior: "auto" }) : lenis?.scrollTo(0))}
             initial={reduce ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}

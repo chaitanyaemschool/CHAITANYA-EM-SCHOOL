@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Monitor, Tablet, Smartphone } from "lucide-react";
+import { Monitor, Tablet, Smartphone, Pencil } from "lucide-react";
 
 import type { SectionDef, FieldDef } from "@/lib/content-schema";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -83,7 +83,10 @@ export function SectionPreview({
         </div>
       </div>
 
-      <div className="max-h-[70vh] touch-pan-y overflow-auto overscroll-contain bg-[#faf8f4] p-4 [-webkit-overflow-scrolling:touch] [scrollbar-width:thin] lg:[scrollbar-width:auto]">
+      <div 
+        className="max-h-[70vh] touch-pan-y overflow-auto overscroll-contain bg-[#faf8f4] p-4 [-webkit-overflow-scrolling:touch] [scrollbar-width:thin] lg:[scrollbar-width:auto]"
+        data-lenis-prevent
+      >
         <div
           className="mx-auto overflow-hidden rounded-[18px] bg-background ring-1 ring-black/5"
           style={{
@@ -123,7 +126,7 @@ export function SectionPreview({
               <div
                 className={`mt-6 ${
                   device === "mobile"
-                    ? "flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scrollbar-hide -mx-10 px-10"
+                    ? "flex flex-col gap-4"
                     : "grid grid-cols-2 gap-4"
                 }`}
               >
@@ -132,9 +135,7 @@ export function SectionPreview({
                   return (
                     <div
                       key={f.key}
-                      className={`aspect-[4/3] overflow-hidden rounded-[18px] bg-secondary/60 ring-1 ring-black/5 ${
-                        device === "mobile" ? "w-[260px] shrink-0 snap-center" : ""
-                      }`}
+                      className="aspect-[4/3] overflow-hidden rounded-[18px] bg-secondary/60 ring-1 ring-black/5"
                     >
                       {v ? (
                         <img src={v} alt={f.label} className="h-full w-full object-contain md:object-cover" />
@@ -162,7 +163,7 @@ export function SectionPreview({
                   <div
                     className={`mt-4 ${
                       device === "mobile"
-                        ? "flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scrollbar-hide -mx-10 px-10"
+                        ? "flex flex-col gap-4"
                         : `grid gap-4 ${device === "tablet" ? "grid-cols-2" : "grid-cols-3"}`
                     }`}
                   >
@@ -174,17 +175,17 @@ export function SectionPreview({
                         <div
                           key={i}
                           className={`overflow-hidden rounded-[18px] bg-white ring-1 ring-black/5 shadow-[0_18px_40px_-30px_rgba(15,23,42,0.4)] ${
-                            device === "mobile" ? "w-[280px] shrink-0 snap-center" : ""
+                            device === "mobile" ? "flex flex-row items-center p-3 gap-4" : ""
                           }`}
                         >
                           {imageField && (
-                            <div className="aspect-[4/3] bg-secondary/60">
+                            <div className={`${device === "mobile" ? "h-[86px] w-[86px] shrink-0 rounded-[12px] overflow-hidden" : "aspect-[4/3]"} bg-secondary/60`}>
                               {img && (
-                                <img src={img} alt="" className="h-full w-full object-contain md:object-cover" />
+                                <img src={img} alt="" className="h-full w-full object-cover" />
                               )}
                             </div>
                           )}
-                          <div className="p-4">
+                          <div className={`${device === "mobile" ? "flex flex-1 flex-col min-w-0" : "p-4"}`}>
                             {textFields.map((f, k) => {
                               const v = str(item[f.key]);
                               if (!v) return null;
@@ -193,14 +194,15 @@ export function SectionPreview({
                                   key={f.key}
                                   className={
                                     k === 0
-                                      ? "text-[15px] font-semibold tracking-[-0.01em]"
-                                      : "mt-1.5 text-[13px] leading-relaxed text-muted-foreground"
+                                      ? `font-semibold tracking-[-0.01em] ${device === "mobile" ? "text-[14px] truncate" : "text-[15px]"}`
+                                      : `leading-relaxed text-muted-foreground ${device === "mobile" ? "mt-1 text-[12px] line-clamp-2" : "mt-1.5 text-[13px]"}`
                                   }
                                 >
                                   {v}
                                 </div>
                               );
                             })}
+                            
                           </div>
                         </div>
                       );
