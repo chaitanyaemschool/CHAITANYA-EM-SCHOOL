@@ -189,19 +189,12 @@ function HeroInner() {
               onLoad={i === 0 ? () => setHeroLoaded(true) : undefined}
 
               className="absolute inset-0 h-full w-full object-cover object-center will-change-[transform,opacity] [backface-visibility:hidden]"
-              initial={false}
-              animate={
-                reduce
-                  ? { opacity: active ? 1 : 0, scale: 1 }
-                  : active
-                    ? { opacity: 1, scale: 1.04 }
-                    : { opacity: 0, scale: 1 }
-              }
-              transition={
-                active
-                  ? { opacity: { duration: 1.1, ease }, scale: { duration: 8, ease: "easeOut" } }
-                  : { opacity: { duration: 1.1, ease }, scale: { duration: 0 } }
-              }
+              initial={{ opacity: 0, scale: 1 }}
+              animate={{ 
+                opacity: active ? 1 : 0, 
+                scale: reduce ? 1 : (active ? 1.05 : 1) 
+              }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
               style={{ transformOrigin: i % 2 ? "65% 45%" : "35% 55%" }}
             />
           );

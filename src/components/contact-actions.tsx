@@ -115,8 +115,8 @@ export function ContactActions({
           key={key}
           href={href}
           aria-label={aria}
-          target={href.startsWith("http") ? "_blank" : undefined}
-          rel={href.startsWith("http") ? "noreferrer" : undefined}
+          target={href.startsWith("http") && !href.includes("wa.me") ? "_blank" : undefined}
+          rel={href.startsWith("http") && !href.includes("wa.me") ? "noreferrer" : undefined}
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
