@@ -30,7 +30,7 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "https://www.chaitanyaemschool.com/" }
     ],
     links: [
-      { rel: "preload", as: "image", href: hero1Assembly.url } as unknown,
+      { rel: "preload", as: "image", href: hero1Assembly.url } as any,
       { rel: "canonical", href: "https://www.chaitanyaemschool.com/" }
     ],
   }),
@@ -79,7 +79,7 @@ function Hero() {
   return <HeroInner />;
 }
 
-function ScrollIndicator({ style }: { style?: unknown }) {
+function ScrollIndicator({ style }: { style?: any }) {
   const reduce = useReducedMotion();
   return (
     <motion.a

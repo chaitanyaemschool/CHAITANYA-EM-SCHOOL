@@ -13,13 +13,13 @@ export const Route = createFileRoute("/academics_/$stage")({
     if (!stage) throw notFound();
     return { slug: stage.slug };
   },
-  head: ({ params, location }) => {
+  head: ({ params }) => {
     const stage = getStage(params.stage);
     const title = stage
       ? `${stage.tag} Programme | Chaitanya EM High School`
       : "Academics | Chaitanya EM High School";
     const description = stage?.detail.intro ?? "Academic programmes at Chaitanya EM High School. Dare to dream, care to achieve with our comprehensive curriculum.";
-    const canonical = `https://www.chaitanyaemschool.com${location.pathname}`;
+    const canonical = `https://www.chaitanyaemschool.com/academics/${params.stage}`;
     return {
       meta: [
         { title },

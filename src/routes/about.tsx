@@ -88,12 +88,12 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
     <span
       className="inline-flex items-center gap-2 text-[10.5px] font-bold uppercase tracking-[0.32em] text-[color:var(--ember)] md:text-[11px]"
-      style={{ ["--ember" as unknown]: EMBER }}
+      style={{ ["--ember" as any]: EMBER }}
     >
       <span
         aria-hidden
         className="h-[1.5px] w-8 bg-[color:var(--ember)]"
-        style={{ ["--ember" as unknown]: EMBER }}
+        style={{ ["--ember" as any]: EMBER }}
       />
       {children}
     </span>
@@ -464,7 +464,7 @@ function TimelineItem({ m, i }: { m: Milestone; i: number }) {
         initial: { opacity: 0, y: 24 },
         whileInView: { opacity: 1, y: 0 },
         viewport: { once: true, margin: "-12% 0px -10% 0px" },
-        transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as any },
       };
 
   return (
@@ -483,7 +483,7 @@ function TimelineItem({ m, i }: { m: Milestone; i: number }) {
         <motion.div
           style={{
             background: active ? EMBER : "#cbd2df",
-            ["--cream" as unknown]: CREAM,
+            ["--cream" as any]: CREAM,
             transition: "background 500ms ease",
           }}
           className="relative h-3.5 w-3.5 rounded-full ring-4 ring-[color:var(--cream)]"
@@ -518,7 +518,7 @@ function Timeline() {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const isMobile = useIsMobile();
-  const c = useContent<Record<string, unknown>>("about_timeline");
+  const c = useContent<Record<string, any>>("about_timeline");
   const milestones: Milestone[] =
     Array.isArray(c.milestones) && c.milestones.length ? (c.milestones as Milestone[]) : MILESTONES;
 
@@ -649,7 +649,7 @@ function PeopleCard({ person, index }: { person: Leader; index: number }) {
       style={{ willChange: "transform" }}
     >
       <motion.article
-        ref={cardRef as unknown}
+        ref={cardRef as any}
         initial={{ opacity: 0, y: 34 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-12% 0px" }}
@@ -866,9 +866,9 @@ const MOTO_STAGES = [
 ];
 
 function OurMoto() {
-  const c = useContent<Record<string, unknown>>("about_moto");
+  const c = useContent<Record<string, any>>("about_moto");
   const stages = (Array.isArray(c.stages) && c.stages.length ? c.stages : MOTO_STAGES).map(
-    (s: unknown, i: number) => ({ ...MOTO_STAGES[i % MOTO_STAGES.length], ...s }),
+    (s: any, i: number) => ({ ...MOTO_STAGES[i % MOTO_STAGES.length], ...s }),
   );
   const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
