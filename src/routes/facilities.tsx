@@ -21,11 +21,11 @@ export const Route = createFileRoute("/facilities")({
         content:
           "Dare to dream, care to achieve. Smart classrooms, science lab, library, playground and safe transport at Chaitanya EM High School, Chekkapalli.",
       },
-      { property: "og:url", content: "https://www.chaitanyaemhighschool.com/facilities" },
-      { property: "og:type", content: "article" },
+      { property: "og:url", content: "https://www.chaitanyaemschool.com/facilities" },
+      { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://www.chaitanyaemhighschool.com/facilities" }],
+    links: [{ rel: "canonical", href: "https://www.chaitanyaemschool.com/facilities" }],
   }),
   component: FacilitiesPage,
 });

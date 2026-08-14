@@ -26,12 +26,12 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Chaitanya EM High School | Best School in Chekkapalli" },
-      { property: "og:url", content: "https://www.chaitanyaemhighschool.com/" }
+      { title: "Chaitanya EM High School | Dare to Dream, Care to Achieve" },
+      { property: "og:url", content: "https://www.chaitanyaemschool.com/" }
     ],
     links: [
       { rel: "preload", as: "image", href: hero1Assembly.url } as unknown,
-      { rel: "canonical", href: "https://www.chaitanyaemhighschool.com/" }
+      { rel: "canonical", href: "https://www.chaitanyaemschool.com/" }
     ],
   }),
 });

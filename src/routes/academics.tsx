@@ -30,12 +30,12 @@ export const Route = createFileRoute("/academics")({
         content:
           "Dare to dream, care to achieve. Discover the comprehensive academic programmes at Chaitanya EM High School, from Nursery to Grade 10, featuring the LEAD curriculum and IIT Foundation.",
       },
-      { property: "og:url", content: "https://www.chaitanyaemhighschool.com/academics" },
+      { property: "og:url", content: "https://www.chaitanyaemschool.com/academics" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: "canonical", href: "https://www.chaitanyaemhighschool.com/academics" }
+      { rel: "canonical", href: "https://www.chaitanyaemschool.com/academics" }
     ],
   }),
   component: AcademicsPage,

@@ -68,12 +68,12 @@ export const Route = createFileRoute("/gallery")({
           content:
             "Dare to dream, care to achieve. Every smile, every memory, every achievement. A visual diary of life at Chaitanya EM High School, Chekkapalli.",
         },
-        { property: "og:url", content: "https://www.chaitanyaemhighschool.com/gallery" },
+        { property: "og:url", content: "https://www.chaitanyaemschool.com/gallery" },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
       links: [
-        { rel: "canonical", href: "https://www.chaitanyaemhighschool.com/gallery" }
+        { rel: "canonical", href: "https://www.chaitanyaemschool.com/gallery" }
       ]
   }),
   component: LifePage,

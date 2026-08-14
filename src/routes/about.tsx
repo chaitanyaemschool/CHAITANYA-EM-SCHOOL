@@ -40,11 +40,11 @@ export const Route = createFileRoute("/about")({
         content:
           "Dare to dream, care to achieve. The story, belief and journey behind Chaitanya EM High School — how a small neighbourhood school in Chekkapalli grew into a home for curious minds from Nursery to Grade 10.",
       },
-      { property: "og:url", content: "https://www.chaitanyaemhighschool.com/about" },
-      { property: "og:type", content: "article" },
+      { property: "og:url", content: "https://www.chaitanyaemschool.com/about" },
+      { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://www.chaitanyaemhighschool.com/about" }],
+    links: [{ rel: "canonical", href: "https://www.chaitanyaemschool.com/about" }],
   }),
   component: AboutSchool,
 });

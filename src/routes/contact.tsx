@@ -23,12 +23,12 @@ export const Route = createFileRoute("/contact")({
         content:
           "Dare to dream, care to achieve. Get in touch with Chaitanya EM High School, Chekkapalli. Call, WhatsApp or send a note for admissions or enquiries.",
       },
-      { property: "og:url", content: "https://www.chaitanyaemhighschool.com/contact" },
+      { property: "og:url", content: "https://www.chaitanyaemschool.com/contact" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: "canonical", href: "https://www.chaitanyaemhighschool.com/contact" }
+      { rel: "canonical", href: "https://www.chaitanyaemschool.com/contact" }
     ]
   }),
   component: ContactPage,

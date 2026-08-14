@@ -19,14 +19,14 @@ export const Route = createFileRoute("/academics_/$stage")({
       ? `${stage.tag} Programme | Chaitanya EM High School`
       : "Academics | Chaitanya EM High School";
     const description = stage?.detail.intro ?? "Academic programmes at Chaitanya EM High School. Dare to dream, care to achieve with our comprehensive curriculum.";
-    const canonical = `https://www.chaitanyaemhighschool.com${location.pathname}`;
+    const canonical = `https://www.chaitanyaemschool.com${location.pathname}`;
     return {
       meta: [
         { title },
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
-        { property: "og:type", content: "article" },
+        { property: "og:type", content: "website" },
         { property: "og:url", content: canonical },
         { name: "twitter:card", content: "summary_large_image" },
       ],
