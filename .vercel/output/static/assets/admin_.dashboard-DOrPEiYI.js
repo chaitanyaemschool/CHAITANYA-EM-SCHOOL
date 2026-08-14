@@ -1,1 +1,0 @@
-import{t as e}from"./index-BJ-DhX9a.js";var t=e;export{t as component};
