@@ -69,7 +69,7 @@ export function FloatingDock() {
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
   const lenis = useLenis();
-  
+
   useMotionValueEvent(scrollY, "change", (y) => {
     const next = y > 320;
     setScrolled((prev) => (prev === next ? prev : next));
@@ -88,7 +88,16 @@ export function FloatingDock() {
             key="top"
             type="button"
             aria-label="Scroll to top"
-            onClick={() => (reduce ? window.scrollTo({ top: 0, behavior: "auto" }) : lenis?.scrollTo(0))}
+            onClick={() => {
+              if (reduce) {
+                window.scrollTo({ top: 0, behavior: "auto" });
+              } else if (lenis) {
+                lenis.scrollTo(0);
+                window.scrollTo({ top: 0, behavior: "smooth" }); // Fallback
+              } else {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
             initial={reduce ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
