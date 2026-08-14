@@ -28,21 +28,23 @@ import { useContent } from "@/lib/use-content";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "Our Story — Chaitanya EM School" },
+      { title: "About Chaitanya EM High School | Chekkapalli" },
       {
         name: "description",
         content:
-          "Chapter two of Chaitanya EM School — how a small neighbourhood school in Chekkapalli grew into a home for curious minds from Nursery to Grade 10.",
+          "Dare to dream, care to achieve. The story, belief and journey behind Chaitanya EM High School — how a small neighbourhood school in Chekkapalli grew into a home for curious minds from Nursery to Grade 10.",
       },
-      { property: "og:title", content: "Our Story — Chaitanya EM School" },
+      { property: "og:title", content: "About Chaitanya EM High School | Chekkapalli" },
       {
         property: "og:description",
         content:
-          "More than a school. A place to grow. The story, belief and journey behind Chaitanya EM School.",
+          "Dare to dream, care to achieve. The story, belief and journey behind Chaitanya EM High School — how a small neighbourhood school in Chekkapalli grew into a home for curious minds from Nursery to Grade 10.",
       },
+      { property: "og:url", content: "https://www.chaitanyaemhighschool.com/about" },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://www.chaitanyaemhighschool.com/about" }],
   }),
   component: AboutSchool,
 });
@@ -113,6 +115,7 @@ function Editorial({ children, className }: { children: React.ReactNode; classNa
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y1 = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "12%"]);
   const y2 = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "-8%"]);
@@ -122,7 +125,7 @@ function Hero() {
     <section
       ref={ref}
       id="about-hero"
-      className="relative overflow-hidden px-6 pb-20 pt-28 md:px-10 md:pb-24 md:pt-32 lg:px-16 lg:pt-36"
+      className="relative overflow-hidden px-6 pb-20 pt-[calc(110px_+_env(safe-area-inset-top))] md:px-10 md:pb-24 md:pt-[calc(140px_+_env(safe-area-inset-top))] lg:px-16"
       style={{
         background: `radial-gradient(120% 80% at 8% 8%, #fef3e2 0%, transparent 55%), radial-gradient(110% 80% at 100% 100%, #eef2ff 0%, transparent 55%), linear-gradient(160deg, ${CREAM} 0%, #f5efe4 100%)`,
       }}
@@ -204,18 +207,18 @@ function Hero() {
         </div>
 
         {/* Layered images */}
-        <div className="relative h-[68vw] max-h-[560px] min-h-[380px] md:h-[560px]">
+        <div className="relative flex flex-col gap-6 mt-10 md:mt-0 md:block md:h-[560px]">
           <motion.div
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40, scale: 0.98 }}
             animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1.1, ease, delay: 0.35 }}
-            style={{ y: y1 }}
-            className="absolute right-0 top-0 h-[86%] w-[88%] overflow-hidden rounded-[28px] ring-1 ring-slate-200"
+            style={{ y: isMobile ? 0 : y1 }}
+            className="relative h-[300px] w-full overflow-hidden rounded-[28px] ring-1 ring-slate-200 md:absolute md:right-0 md:top-0 md:h-[86%] md:w-[88%]"
           >
             <img
               src={c.imageMain || heroAssembly.url}
-              alt="Chaitanya EM School students in assembly"
-              className="h-full w-full object-contain md:object-cover"
+              alt="Chaitanya EM High School students in assembly"
+              className="h-full w-full object-cover"
               loading="eager"
               style={{ boxShadow: "0 40px 80px -30px rgba(15,23,48,0.35)" }}
             />
@@ -225,13 +228,13 @@ function Hero() {
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 30, scale: 0.94 }}
               animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 1.1, ease, delay: 0.7 }}
-              style={{ y: y2 }}
-              className="absolute -left-2 bottom-0 w-[52%] overflow-hidden rounded-[22px] ring-1 ring-slate-200 md:-left-6"
+              style={{ y: isMobile ? 0 : y2 }}
+              className="relative h-[280px] w-[85%] self-end overflow-hidden rounded-[22px] ring-1 ring-slate-200 md:absolute md:-left-6 md:bottom-0 md:h-auto md:w-[52%] md:aspect-[4/5]"
             >
               <img
                 src={c.imageSmall || studentReading}
                 alt="Student reading"
-                className="aspect-[4/5] h-full w-full object-contain md:object-cover"
+                className="h-full w-full object-cover"
                 loading="lazy"
                 style={{ boxShadow: "0 30px 60px -25px rgba(15,23,48,0.4)" }}
               />
@@ -243,7 +246,7 @@ function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1, duration: 0.9, ease }}
-            className="absolute -bottom-4 right-2 flex items-center gap-3 rounded-full bg-white/95 px-5 py-2.5 backdrop-blur md:right-6"
+            className="absolute bottom-4 left-4 md:-bottom-4 md:left-auto md:right-6 flex items-center gap-3 rounded-full bg-white/95 px-5 py-2.5 backdrop-blur z-10"
             style={{
               boxShadow: "0 20px 40px -18px rgba(15,23,48,0.35)",
               border: "1px solid rgba(203,210,223,0.9)",
@@ -317,7 +320,7 @@ function Beginning() {
                 src={c.image}
                 alt="An early classroom at Chaitanya"
                 loading="lazy"
-                className="aspect-[4/5] w-full object-contain md:object-cover"
+                className="aspect-[4/5] w-full object-cover"
               />
             </div>
 
@@ -451,45 +454,24 @@ function MeshGrid() {
 function TimelineItem({ m, i }: { m: Milestone; i: number }) {
   const right = i % 2 === 1;
   const itemRef = useRef<HTMLLIElement>(null);
-  const active = useInView(itemRef, { margin: "-45% 0px -35% 0px" });
+  const active = useInView(itemRef, { margin: "-20% 0px -20% 0px" });
   const reduce = useReducedMotion();
   const isMobile = useIsMobile();
 
-  /* Desktop: scroll-linked reveal. Mobile: a single cheap one-shot transition
-     (scroll-linked springs per card cause jank on phones). */
-  const { scrollYProgress } = useScroll({
-    target: itemRef,
-    offset: ["start 92%", "start 52%"],
-  });
-  const p = useSpring(scrollYProgress, { stiffness: 90, damping: 26, mass: 0.4 });
-
-  const opacity = useTransform(p, [0, 1], [0, 1]);
-  const x = useTransform(p, [0, 1], [right ? 56 : -56, 0]);
-  const y = useTransform(p, [0, 1], [40, 0]);
-  const scale = useTransform(p, [0, 1], [0.965, 1]);
-  const dotScale = useTransform(p, [0.15, 1], [0.35, 1]);
-
-  const scrollLinked = !reduce && !isMobile;
-
-  const motionStyle = scrollLinked
-    ? { opacity, x, y, scale, willChange: "transform, opacity" as const }
-    : { opacity: 1 };
-
-  const revealProps =
-    !reduce && isMobile
-      ? {
-          initial: { opacity: 0, y: 24 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, margin: "-12% 0px -10% 0px" },
-          transition: { duration: 0.55, ease },
-        }
-      : {};
+  const revealProps = reduce
+    ? {}
+    : {
+        initial: { opacity: 0, y: 24 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-12% 0px -10% 0px" },
+        transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+      };
 
   return (
     <li ref={itemRef} className="relative md:grid md:grid-cols-2 md:gap-12">
       {/* point */}
-      <div className="absolute left-6 top-3 z-[2] -translate-x-1/2 md:left-1/2">
-        {!isMobile && (
+      <div className="absolute left-6 top-1/2 z-[2] -translate-x-1/2 -translate-y-1/2 md:left-1/2">
+        {!reduce && (
           <motion.span
             aria-hidden
             className="absolute left-1/2 top-1/2 block h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
@@ -500,7 +482,6 @@ function TimelineItem({ m, i }: { m: Milestone; i: number }) {
         )}
         <motion.div
           style={{
-            scale: scrollLinked ? dotScale : 1,
             background: active ? EMBER : "#cbd2df",
             ["--cream" as unknown]: CREAM,
             transition: "background 500ms ease",
@@ -511,17 +492,8 @@ function TimelineItem({ m, i }: { m: Milestone; i: number }) {
 
       <motion.div
         {...revealProps}
-        style={{
-          ...motionStyle,
-          background: active ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0.9)",
-          boxShadow: active
-            ? "0 40px 80px -40px rgba(15,23,48,0.42), 0 6px 18px -12px rgba(15,23,48,0.18)"
-            : "0 22px 48px -34px rgba(15,23,48,0.24)",
-          border: `1px solid ${active ? "rgba(198,93,44,0.32)" : "rgba(203,210,223,0.7)"}`,
-          transition: "background 600ms ease, box-shadow 600ms ease, border-color 600ms ease",
-        }}
-        className={`ml-14 rounded-[22px] p-6 md:ml-0 md:p-8 md:backdrop-blur ${
-          right ? "md:col-start-2" : "md:col-start-1 md:text-right"
+        className={`col-start-1 col-end-2 row-start-1 ml-14 rounded-[28px] bg-white p-6 ring-1 ring-slate-200 shadow-sm md:ml-0 md:mt-0 md:p-8 transition-shadow duration-300 hover:shadow-md ${
+          right ? "md:col-start-2 md:col-end-3" : "md:col-start-1 md:col-end-2 md:text-right"
         }`}
       >
         <div
@@ -536,7 +508,7 @@ function TimelineItem({ m, i }: { m: Milestone; i: number }) {
         >
           {m.title}
         </div>
-        <p className="mt-3 text-[14.5px] leading-[1.7] text-slate-700 md:text-[15.5px]">{m.body}</p>
+        <p className="mt-3 text-[14.5px] leading-[1.6] text-slate-700 md:leading-[1.7] md:text-[15.5px]">{m.body}</p>
       </motion.div>
     </li>
   );
@@ -593,7 +565,7 @@ function Timeline() {
         </motion.div>
 
         {/* travelling indicator — follows scroll progress along the rail */}
-        {!reduce && !isMobile && (
+        {!reduce && (
           <motion.div
             aria-hidden
             style={{ top: headTop, opacity: headOpacity }}
@@ -711,7 +683,7 @@ function PeopleCard({ person, index }: { person: Leader; index: number }) {
                 src={person.photo}
                 alt={`${person.name} — ${person.role}`}
                 loading="lazy"
-                className="aspect-[4/5] w-full object-contain md:object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+                className="aspect-[4/5] w-full object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
               />
             ) : (
               <div
@@ -1202,7 +1174,7 @@ function FinalCTA() {
                 alt="Students learning together in a Chaitanya classroom"
                 loading="lazy"
                 decoding="async"
-                className="aspect-[4/5] w-full object-contain md:object-cover transition-transform duration-[1200ms] ease-out will-change-transform group-hover:scale-[1.04]"
+                className="aspect-[4/5] w-full object-cover transition-transform duration-[1200ms] ease-out will-change-transform group-hover:scale-[1.04]"
               />
             </div>
           </div>

@@ -9,15 +9,23 @@ import { useContent } from "@/lib/use-content";
 export const Route = createFileRoute("/facilities")({
   head: () => ({
     meta: [
-      { title: "Facilities — Chaitanya EM School" },
+      { title: "School Facilities | Chaitanya EM High School" },
       {
         name: "description",
         content:
-          "Smart classrooms, science lab, library, playground and safe transport at Chaitanya EM School, Chekkapalli.",
+          "Dare to dream, care to achieve. Smart classrooms, science lab, library, playground and safe transport at Chaitanya EM High School, Chekkapalli.",
       },
-      { property: "og:title", content: "Facilities — Chaitanya EM School" },
-      { property: "og:description", content: "Every space, built for a child." },
+      { property: "og:title", content: "School Facilities | Chaitanya EM High School" },
+      {
+        property: "og:description",
+        content:
+          "Dare to dream, care to achieve. Smart classrooms, science lab, library, playground and safe transport at Chaitanya EM High School, Chekkapalli.",
+      },
+      { property: "og:url", content: "https://www.chaitanyaemhighschool.com/facilities" },
+      { property: "og:type", content: "article" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://www.chaitanyaemhighschool.com/facilities" }],
   }),
   component: FacilitiesPage,
 });
@@ -35,7 +43,7 @@ function FacilitiesPage() {
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
 
-      <section className="mx-auto max-w-6xl px-5 pt-28 xl:max-w-7xl pb-8 md:px-10 md:pt-36 md:pb-12 lg:px-16">
+      <section className="mx-auto max-w-6xl px-5 pt-[calc(110px_+_env(safe-area-inset-top))] xl:max-w-7xl pb-8 md:px-10 md:pt-[calc(140px_+_env(safe-area-inset-top))] md:pb-12 lg:px-16">
         <div className="text-[10px] font-medium uppercase tracking-[0.32em] text-muted-foreground">
           Campus
         </div>
@@ -109,13 +117,13 @@ function FacilitiesPage() {
                     }}
                   />
 
-                  <div className="relative m-1.5 h-44 overflow-hidden rounded-[20px] bg-muted sm:h-48 lg:h-44">
+                  <div className="relative m-1.5 aspect-[16/9] overflow-hidden rounded-[20px] bg-muted">
                     <img
                       src={f.image}
                       alt={f.title ?? ""}
                       loading="lazy"
                       decoding="async"
-                      className="h-full w-full object-contain md:object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent" />
                     <div className="absolute left-3 top-3 grid h-10 w-10 place-items-center rounded-full border border-white/50 bg-[rgba(15,23,42,0.42)] shadow-[0_8px_20px_-10px_rgba(15,23,42,0.6)] backdrop-blur-md">

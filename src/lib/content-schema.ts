@@ -418,10 +418,10 @@ export const CONTENT_DEFAULTS: Record<string, Record<string, unknown>> = {
     ctaPrimary: "Book a visit",
     ctaSecondary: "Our academics",
     slides: [
-      { image: heroAssembly.url, alt: "Chaitanya EM School — morning assembly with students" },
+      { image: heroAssembly.url, alt: "Chaitanya EM High School — morning assembly with students" },
       { image: heroClassroom.url, alt: "Classroom in session with teacher" },
       { image: heroStudents.url, alt: "Three students collaborating at a desk" },
-      { image: heroCampus.url, alt: "Chaitanya EM School campus aerial view" },
+      { image: heroCampus.url, alt: "Chaitanya EM High School campus aerial view" },
     ],
   },
   home_about: {
@@ -589,7 +589,7 @@ export const CONTENT_DEFAULTS: Record<string, Record<string, unknown>> = {
     line2: "a school.",
     line3: "A place to grow.",
     paragraph:
-      "Since 2015, Chaitanya EM School has grown from a small neighbourhood school into a place where children learn, discover and grow with confidence — from Nursery to Grade 10.",
+      "Since 2015, Chaitanya EM High School has grown from a small neighbourhood school into a place where children learn, discover and grow with confidence — from Nursery to Grade 10.",
     imageMain: heroAssembly.url,
     imageSmall: studentReading,
     badgeLabel: "Est.",

@@ -1,5 +1,6 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 import {
   Mail,
   MapPin,
@@ -77,6 +78,13 @@ export function SiteFooter() {
     facebook: string;
     youtube: string;
   }>("footer");
+  const [clickedPath, setClickedPath] = useState<string | null>(null);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  useEffect(() => {
+    setClickedPath(null);
+  }, [pathname]);
+
   const telHref = `tel:${(contact.phone || SOCIAL.phone).replace(/[^+\d]/g, "")}`;
   const waHref = buildWaHref(contact.whatsapp);
   const mailHref = `mailto:${contact.email || SOCIAL.email}`;
@@ -96,7 +104,7 @@ export function SiteFooter() {
         <div className="flex items-center gap-4">
           <img
             src="/logo-crest.jpeg"
-            alt="Chaitanya EM School logo"
+            alt="Chaitanya EM High School logo"
             className="h-14 w-14 rounded-2xl bg-white/95 object-cover p-1 ring-1 ring-white/15"
           />
           <div className="min-w-0 leading-none">
@@ -156,13 +164,23 @@ export function SiteFooter() {
                 Explore
               </div>
               <ul className="mt-3 grid grid-cols-2 gap-x-6 gap-y-2 text-[14px] text-background/85">
-                {navItems.map((n) => (
+                {navItems.map((n) => {
+                  const isClicked = clickedPath === n.to;
+                  return (
                   <li key={n.label}>
-                    <Link to={n.to} className="transition-colors hover:text-background">
+                    <Link
+                      to={n.to}
+                      onClick={(e) => {
+                        if (clickedPath) e.preventDefault();
+                        else setClickedPath(n.to);
+                      }}
+                      className={`block py-2 -my-2 transition-all duration-200 ${isClicked ? "scale-95 opacity-50 pointer-events-none" : "hover:text-background active:scale-95"}`}
+                    >
                       {n.label}
                     </Link>
                   </li>
-                ))}
+                  );
+                })}
               </ul>
             </div>
           </div>
@@ -202,7 +220,7 @@ export function SiteFooter() {
 
         <div className="relative mt-6 flex flex-col gap-3 text-[11px] leading-relaxed text-background/50 md:flex-row md:items-center md:justify-between">
           <div>
-            © {new Date().getFullYear()} Chaitanya EM School, Chekkapalli. All rights reserved.
+            © {new Date().getFullYear()} Chaitanya EM High School, Chekkapalli. All rights reserved.
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
             <span>Designed &amp; developed by</span>

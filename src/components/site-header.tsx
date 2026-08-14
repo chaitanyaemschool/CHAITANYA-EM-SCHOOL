@@ -13,6 +13,7 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [menu, setMenu] = useState(false);
   const [enroll, setEnroll] = useState(false);
+  const [clickedPath, setClickedPath] = useState<string | null>(null);
 
   const { scrollY } = useScroll();
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 24));
@@ -20,6 +21,10 @@ export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isInner = pathname !== "/" && pathname !== "/admin";
   // Always permanent/sticky navigation per user requirement - no back arrow button needed.
+
+  useEffect(() => {
+    setClickedPath(null);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = menu ? "hidden" : "";
@@ -44,74 +49,94 @@ export function SiteHeader() {
           transition:
             "background-color 500ms cubic-bezier(0.22,1,0.36,1), box-shadow 500ms cubic-bezier(0.22,1,0.36,1)",
         }}
-        className="fixed inset-x-3 top-3 z-50 mx-auto max-w-6xl rounded-[28px] ring-1 ring-black/5 md:inset-x-6 md:top-4 lg:inset-x-8"
+        className="fixed inset-x-3 top-[max(0.75rem,env(safe-area-inset-top))] z-50 mx-auto max-w-6xl rounded-[28px] ring-1 ring-black/5 md:inset-x-6 md:top-[max(1rem,env(safe-area-inset-top))] lg:inset-x-8"
       >
-        <div className="relative flex h-full items-center justify-between gap-2 px-3 md:gap-3 md:px-6">
+        <div
+          className={`relative h-full w-full items-center px-2 md:flex md:justify-between md:px-6 ${
+            isInner ? "grid grid-cols-[3.5rem_1fr_3.5rem]" : "flex justify-between"
+          }`}
+        >
+          {/* LEFT: Back Button (Only rendered on inner pages on mobile) */}
           {isInner && (
-            <button
-              onClick={() => router.history.back()}
-              aria-label="Go back"
-              className={`focus-luxe grid shrink-0 place-items-center rounded-full bg-white text-foreground ring-1 ring-black/5 shadow-[0_4px_14px_-6px_rgba(15,23,42,0.12)] transition-all duration-300 ease-out hover:scale-105 active:scale-95 md:hidden ${
-                scrolled ? "h-10 w-10" : "h-11 w-11"
-              }`}
-            >
-              <ArrowLeft className="h-4 w-4" strokeWidth={2.5} />
-            </button>
+            <div className="flex items-center justify-start md:hidden">
+              <button
+                onClick={() => router.history.back()}
+                aria-label="Go back"
+                className={`focus-luxe grid shrink-0 place-items-center rounded-full bg-white text-foreground ring-1 ring-black/5 shadow-[0_4px_14px_-6px_rgba(15,23,42,0.12)] transition-all duration-300 ease-out hover:scale-105 active:scale-95 ${
+                  scrolled ? "h-10 w-10" : "h-11 w-11"
+                }`}
+              >
+                <ArrowLeft className="h-4 w-4" strokeWidth={2.5} />
+              </button>
+            </div>
           )}
+
+          {/* CENTER/LEFT: Logo & Branding */}
           <Link
             to="/"
-            className={`flex min-w-0 items-center gap-2.5 md:gap-3 ${
-              isInner ? "absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0" : ""
+            className={`flex min-w-0 items-center gap-1.5 sm:gap-2.5 md:gap-3 ${
+              isInner ? "justify-center md:justify-start" : "justify-start pl-1 md:pl-0"
             }`}
-            aria-label="Chaitanya EM School — Home"
+            aria-label="Chaitanya EM High School — Home"
           >
             <img
               src="/logo-crest.jpeg"
               alt=""
               className={`shrink-0 rounded-full object-cover ring-1 ring-black/5 transition-all duration-500 ease-out ${
-                scrolled ? "h-10 w-10 md:h-12 md:w-12" : "h-12 w-12 md:h-14 md:w-14"
+                scrolled ? "h-8 w-8 sm:h-10 sm:w-10 md:h-11 md:w-11" : "h-9 w-9 sm:h-11 sm:w-11 md:h-13 md:w-13"
               }`}
             />
             <img
               src="/logo-wordmark.png"
               alt="Chaitanya (E.M.) High School"
-              className={`object-contain object-left transition-all duration-500 ease-out ${
-                scrolled ? "h-10 md:h-12" : "h-12 md:h-14"
+              className={`min-w-0 flex-shrink object-contain object-left max-w-[120px] sm:max-w-none transition-all duration-500 ease-out ${
+                scrolled ? "h-8 sm:h-10 md:h-11" : "h-9 sm:h-11 md:h-13"
               }`}
             />
           </Link>
-          <nav className="hidden items-center gap-1 md:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                to={item.to}
-                activeProps={{ className: "bg-black/5 text-primary" }}
-                activeOptions={{ exact: item.to === "/" }}
-                className="rounded-full px-4 py-2 font-nav text-[14px] font-semibold tracking-tight text-foreground/70 transition-colors hover:bg-black/5 hover:text-foreground"
+
+          {/* RIGHT: Menu & Desktop Nav */}
+          <div className="flex items-center justify-end">
+            <nav className="hidden items-center gap-1 md:flex">
+              {navItems.map((item) => {
+                const isClicked = clickedPath === item.to;
+                return (
+                  <Link
+                    key={item.label}
+                    to={item.to}
+                    onClick={(e) => {
+                      if (clickedPath) e.preventDefault();
+                      else setClickedPath(item.to);
+                    }}
+                    activeProps={{ className: "bg-black/5 text-primary" }}
+                    activeOptions={{ exact: item.to === "/" }}
+                    className={`rounded-full px-4 py-2 font-nav text-[14px] font-semibold tracking-tight transition-all duration-200 ${isClicked ? "scale-95 opacity-60 bg-black/10 pointer-events-none" : "hover:bg-black/5 hover:text-foreground text-foreground/70 active:scale-95"}`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+              <button
+                onClick={() => setEnroll(true)}
+                className="ml-2 focus-luxe rounded-full bg-primary px-5 py-2.5 font-nav text-[14px] font-bold text-white shadow-[0_10px_28px_-10px_rgba(34,64,180,0.55)] transition-all hover:scale-[1.03] active:scale-95"
               >
-                {item.label}
-              </Link>
-            ))}
+                Enroll
+              </button>
+            </nav>
             <button
-              onClick={() => setEnroll(true)}
-              className="ml-2 focus-luxe rounded-full bg-primary px-5 py-2.5 font-nav text-[14px] font-bold text-white shadow-[0_10px_28px_-10px_rgba(34,64,180,0.55)] transition-all hover:scale-[1.03] active:scale-95"
+              onClick={() => setMenu(true)}
+              aria-label="Open menu"
+              aria-expanded={menu}
+              className={`focus-luxe grid shrink-0 place-items-center rounded-full text-white shadow-[0_10px_28px_-10px_rgba(34,64,180,0.55)] transition-all duration-500 ease-out hover:scale-105 active:scale-95 md:hidden ${
+                scrolled ? "h-10 w-10" : "h-11 w-11"
+              }`}
+              style={{
+                background: "linear-gradient(135deg,oklch(0.52 0.16 258),oklch(0.36 0.13 258))",
+              }}
             >
-              Enroll
+              <Menu className="h-4 w-4" strokeWidth={2.5} />
             </button>
-          </nav>
-          <button
-            onClick={() => setMenu(true)}
-            aria-label="Open menu"
-            aria-expanded={menu}
-            className={`focus-luxe grid shrink-0 place-items-center rounded-full text-white shadow-[0_10px_28px_-10px_rgba(34,64,180,0.55)] transition-all duration-500 ease-out hover:scale-105 active:scale-95 md:hidden ${
-              scrolled ? "h-10 w-10" : "h-11 w-11"
-            }`}
-            style={{
-              background: "linear-gradient(135deg,oklch(0.52 0.16 258),oklch(0.36 0.13 258))",
-            }}
-          >
-            <Menu className="h-4 w-4" strokeWidth={2.5} />
-          </button>
+          </div>
         </div>
       </motion.header>
       <MenuOverlay open={menu} onClose={() => setMenu(false)} onEnroll={() => setEnroll(true)} />
@@ -130,6 +155,11 @@ function MenuOverlay({
   onEnroll: () => void;
 }) {
   const lenis = useLenis();
+  const [clickedPath, setClickedPath] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!open) setClickedPath(null);
+  }, [open]);
   
   return (
     <AnimatePresence>
@@ -198,7 +228,12 @@ function MenuOverlay({
                   >
                     <Link
                       to={item.to}
-                      onClick={() => {
+                      onClick={(e) => {
+                        if (clickedPath) {
+                          e.preventDefault();
+                          return;
+                        }
+                        setClickedPath(item.to);
                         onClose();
                         window.setTimeout(() => {
                           if (lenis) {
@@ -210,7 +245,7 @@ function MenuOverlay({
                       }}
                       activeProps={{ className: "is-active text-[oklch(0.22_0.14_258)]" }}
                       activeOptions={{ exact: item.to === "/" }}
-                      className="font-nav group flex min-h-12 items-center gap-3 rounded-2xl px-2 py-1.5 text-[21px] leading-[1.25] text-[oklch(0.2_0.035_258)] transition-all duration-200 md:text-[22px]"
+                      className={`font-nav group flex min-h-12 items-center gap-3 rounded-2xl px-2 py-1.5 text-[21px] leading-[1.25] text-[oklch(0.2_0.035_258)] transition-all duration-200 md:text-[22px] ${clickedPath === item.to ? "scale-95 opacity-60 pointer-events-none bg-black/5" : "active:scale-95"}`}
                     >
                       <span className="relative">
                         {/* Soft outer halo — fades in on active */}

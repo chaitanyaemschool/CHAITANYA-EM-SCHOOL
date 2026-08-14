@@ -1,6 +1,6 @@
 import { ReactLenis, useLenis } from 'lenis/react';
 import { useReducedMotion } from 'motion/react';
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { useLocation } from '@tanstack/react-router';
 
 export function LenisProvider({ children }: { children: ReactNode }) {
@@ -15,8 +15,14 @@ export function LenisProvider({ children }: { children: ReactNode }) {
     }
   }, [location.pathname, lenis]);
 
-  // If user prefers reduced motion, we disable the smooth scroll interpolation
-  if (reduce) {
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
+
+  // If user prefers reduced motion or is on a touch device, we disable the smooth scroll interpolation
+  if (reduce || isTouch) {
     return <>{children}</>;
   }
 

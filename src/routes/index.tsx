@@ -25,7 +25,14 @@ import { ACADEMIC_STAGES } from "@/lib/academics-data";
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
-    links: [{ rel: "preload", as: "image", href: hero1Assembly.url } as unknown],
+    meta: [
+      { title: "Chaitanya EM High School | Best School in Chekkapalli" },
+      { property: "og:url", content: "https://www.chaitanyaemhighschool.com/" }
+    ],
+    links: [
+      { rel: "preload", as: "image", href: hero1Assembly.url } as unknown,
+      { rel: "canonical", href: "https://www.chaitanyaemhighschool.com/" }
+    ],
   }),
 });
 
@@ -133,14 +140,14 @@ function HeroInner() {
     slides: { image?: string; alt?: string }[];
   }>("home_hero");
   const defaultHeroImages = [
-    { src: hero1Assembly.url, alt: "Chaitanya EM School — morning assembly with students" },
+    { src: hero1Assembly.url, alt: "Chaitanya EM High School — morning assembly with students" },
     { src: hero2Classroom.url, alt: "Classroom in session with teacher" },
     { src: hero3Students.url, alt: "Three students collaborating at a desk" },
-    { src: hero4Campus.url, alt: "Chaitanya EM School campus aerial view" },
+    { src: hero4Campus.url, alt: "Chaitanya EM High School campus aerial view" },
   ];
   const cmsSlides = (cms.slides ?? []).filter((s) => s && s.image);
   const heroImages = cmsSlides.length
-    ? cmsSlides.map((s) => ({ src: s.image!, alt: s.alt || "Chaitanya EM School" }))
+    ? cmsSlides.map((s) => ({ src: s.image!, alt: s.alt || "Chaitanya EM High School" }))
     : defaultHeroImages;
   const [heroIdx, setHeroIdx] = useState(0);
   const [heroLoaded, setHeroLoaded] = useState(false);
@@ -181,18 +188,18 @@ function HeroInner() {
               loading={i === 0 ? "eager" : "lazy"}
               onLoad={i === 0 ? () => setHeroLoaded(true) : undefined}
 
-              className="absolute inset-0 h-full w-full object-contain md:object-cover will-change-[transform,opacity] [backface-visibility:hidden]"
+              className="absolute inset-0 h-full w-full object-cover object-center will-change-[transform,opacity] [backface-visibility:hidden]"
               initial={false}
               animate={
                 reduce
                   ? { opacity: active ? 1 : 0, scale: 1 }
                   : active
-                    ? { opacity: 1, scale: 1.08 }
+                    ? { opacity: 1, scale: 1.04 }
                     : { opacity: 0, scale: 1 }
               }
               transition={
                 active
-                  ? { opacity: { duration: 1.1, ease }, scale: { duration: 6.5, ease: "easeOut" } }
+                  ? { opacity: { duration: 1.1, ease }, scale: { duration: 8, ease: "easeOut" } }
                   : { opacity: { duration: 1.1, ease }, scale: { duration: 0 } }
               }
               style={{ transformOrigin: i % 2 ? "65% 45%" : "35% 55%" }}
@@ -218,7 +225,7 @@ function HeroInner() {
         }}
       />
 
-      <div className="relative mx-auto flex flex-1 w-full max-w-6xl flex-col justify-end pt-32 px-5 pb-[clamp(9rem,34vh,15rem)] sm:px-10 sm:pb-32 lg:pb-36">
+      <div className="relative mx-auto flex w-full max-w-6xl flex-col pt-[clamp(140px,22svh,240px)] pb-24 px-5 sm:px-10 md:pt-[clamp(180px,28svh,300px)] md:pb-32 lg:pb-36 z-10">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -234,7 +241,7 @@ function HeroInner() {
             initial={{ y: "110%" }}
             animate={{ y: 0 }}
             transition={{ duration: 1, ease, delay: 0.65 }}
-            className="text-[clamp(2.5rem,11.5vw,6rem)] sm:whitespace-nowrap leading-[1.15] tracking-[-0.02em] text-white md:text-[clamp(3.5rem,7vw,6.5rem)]"
+            className="text-[clamp(2.15rem,9vw,6rem)] leading-[1.05] tracking-[-0.02em] text-white md:text-[clamp(3.25rem,7vw,6.5rem)] text-balance"
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 700,
@@ -249,7 +256,7 @@ function HeroInner() {
             initial={{ y: "110%" }}
             animate={{ y: 0 }}
             transition={{ duration: 1, ease, delay: 0.85 }}
-            className="text-[clamp(2.5rem,11.5vw,6rem)] sm:whitespace-nowrap leading-[1.15] tracking-[-0.02em] text-white/95 md:text-[clamp(3.5rem,7vw,6.5rem)]"
+            className="text-[clamp(2.15rem,9vw,6rem)] leading-[1.05] tracking-[-0.02em] text-white/95 md:text-[clamp(3.25rem,7vw,6.5rem)] text-balance"
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 700,
@@ -607,7 +614,7 @@ function AcademicsStageModal({
                 decoding="async"
                 src={stage.image}
                 alt={stage.grades}
-                className="h-full w-full object-contain md:object-cover"
+                className="h-full w-full object-cover"
               />
               <button
                 type="button"
@@ -818,7 +825,7 @@ function PreviewCardInner({ item, index }: { item: SectionPreview; index: number
               whileInView={{ scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 1.6, ease }}
-              className="h-[42vh] w-full object-contain md:object-cover sm:h-[54vh] md:h-[62vh] lg:h-[70vh]"
+              className="h-[42vh] w-full object-cover sm:h-[54vh] md:h-[62vh] lg:h-[70vh]"
               loading="lazy"
               decoding="async"
             />

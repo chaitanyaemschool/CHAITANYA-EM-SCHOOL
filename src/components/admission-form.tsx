@@ -36,7 +36,7 @@ function buildWhatsAppText(f: AdmissionForm) {
     timeStyle: "short",
   });
   return [
-    "*CHAITANYA ENGLISH MEDIUM SCHOOL*",
+    "*CHAITANYA EM HIGH SCHOOL*",
     "_Admission Enquiry_",
     "━━━━━━━━━━━━━━━━━━",
     "",

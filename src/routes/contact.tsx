@@ -11,15 +11,25 @@ import { LocationSection } from "@/components/location-section";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Chaitanya EM School" },
+      { title: "Contact Chaitanya EM High School | Chekkapalli" },
       {
         name: "description",
         content:
-          "Get in touch with Chaitanya EM School, Chekkapalli. Call, WhatsApp or send a note.",
+          "Dare to dream, care to achieve. Get in touch with Chaitanya EM High School, Chekkapalli. Call, WhatsApp or send a note for admissions or enquiries.",
       },
-      { property: "og:title", content: "Contact — Chaitanya EM School" },
-      { property: "og:description", content: "Simple, helpful, one tap away." },
+      { property: "og:title", content: "Contact Chaitanya EM High School | Chekkapalli" },
+      {
+        property: "og:description",
+        content:
+          "Dare to dream, care to achieve. Get in touch with Chaitanya EM High School, Chekkapalli. Call, WhatsApp or send a note for admissions or enquiries.",
+      },
+      { property: "og:url", content: "https://www.chaitanyaemhighschool.com/contact" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [
+      { rel: "canonical", href: "https://www.chaitanyaemhighschool.com/contact" }
+    ]
   }),
   component: ContactPage,
 });
@@ -38,7 +48,7 @@ function ContactPage() {
     <div className="min-h-screen bg-[radial-gradient(circle_at_10%_0%,oklch(0.95_0.05_78/0.4),transparent_50%),radial-gradient(circle_at_90%_100%,oklch(0.93_0.06_258/0.35),transparent_55%)] bg-background text-foreground">
       <PageHeader label="Contact" />
 
-      <section className="mx-auto max-w-6xl px-6 pt-28 pb-8 md:px-10 md:pt-36 lg:px-16">
+      <section className="mx-auto max-w-6xl px-6 pt-[calc(110px_+_env(safe-area-inset-top))] pb-8 md:px-10 md:pt-[calc(140px_+_env(safe-area-inset-top))] lg:px-16">
         <div className="text-[10px] font-medium uppercase tracking-[0.32em] text-muted-foreground">
           Say hello
         </div>

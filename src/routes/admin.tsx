@@ -45,10 +45,10 @@ import {
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Admin Dashboard — Chaitanya EM School" },
+      { title: "Admin Dashboard | Chaitanya EM High School" },
       {
         name: "description",
-        content: "Manage content, images, gallery and pages of Chaitanya EM School.",
+        content: "Manage content, images, gallery and pages of Chaitanya EM High School.",
       },
       { name: "robots", content: "noindex, nofollow" },
     ],

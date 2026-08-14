@@ -37,7 +37,10 @@ export function LogoLoader() {
       // ease-out so the line decelerates into completion rather than snapping
       setProgress(1 - Math.pow(1 - p, 2));
       if (p < 1) raf = requestAnimationFrame(tick);
-      else setVisible(false);
+      else {
+        setVisible(false);
+        document.body.classList.add("loader-finished");
+      }
     };
     raf = requestAnimationFrame(tick);
 
@@ -58,11 +61,12 @@ export function LogoLoader() {
       {visible && (
         <motion.div
           key="intro"
-          className="fixed inset-0 z-[100] grid place-items-center overflow-hidden bg-[radial-gradient(circle_at_50%_35%,oklch(0.99_0.01_78)_0%,oklch(0.965_0.025_78)_60%,oklch(0.94_0.03_78)_100%)]"
+          className="fixed inset-0 z-[99999] grid place-items-center overflow-hidden bg-[radial-gradient(circle_at_50%_35%,oklch(0.99_0.01_78)_0%,oklch(0.965_0.025_78)_60%,oklch(0.94_0.03_78)_100%)]"
+          style={{ position: "fixed", inset: 0, zIndex: 99999, backgroundColor: "#fdfdfd" }}
           initial={{ opacity: 1 }}
           exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.04, filter: "blur(6px)" }}
           transition={{ duration: reduce ? 0.3 : 0.7, ease }}
-          aria-label="Loading Chaitanya English Medium School"
+          aria-label="Loading Chaitanya EM High School"
           role="status"
         >
           {/* very soft ambient light behind the crest */}
@@ -113,7 +117,7 @@ export function LogoLoader() {
               )}
               <img
                 src="/logo-crest.jpeg"
-                alt="Chaitanya English Medium School crest"
+                alt="Chaitanya EM High School crest"
                 className="relative h-[6.75rem] w-[6.75rem] rounded-full bg-white object-contain p-2 shadow-[0_28px_70px_-34px_rgba(15,23,42,0.55)] ring-1 ring-black/5 sm:h-[8.25rem] sm:w-[8.25rem] md:h-[9.25rem] md:w-[9.25rem]"
               />
             </motion.div>
@@ -124,7 +128,7 @@ export function LogoLoader() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: reduce ? 0.3 : 0.9, delay: reduce ? 0 : 1.5, ease }}
             >
-              Chaitanya English Medium School
+              Chaitanya EM High School
             </motion.h1>
 
             <motion.p

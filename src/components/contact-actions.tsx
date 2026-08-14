@@ -6,7 +6,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 /* Ready-to-send templates so a parent never faces an empty message box. */
 const WHATSAPP_TEMPLATE = [
-  "Hello Chaitanya English Medium School,",
+  "Hello Chaitanya EM High School,",
   "",
   "I would like to know more about admissions.",
   "",
@@ -18,11 +18,11 @@ const WHATSAPP_TEMPLATE = [
   "Please share the details. Thank you.",
 ].join("\n");
 
-const EMAIL_SUBJECT = "Admission enquiry - Chaitanya English Medium School";
+const EMAIL_SUBJECT = "Admission enquiry - Chaitanya EM High School";
 const EMAIL_BODY = [
   "Dear Admissions Team,",
   "",
-  "I would like to enquire about admissions at Chaitanya English Medium School.",
+  "I would like to enquire about admissions at Chaitanya EM High School.",
   "",
   "Student name: ",
   "Class seeking admission: ",
@@ -81,7 +81,7 @@ export function ContactActions({
       bg: "linear-gradient(135deg,#3b82f6,#1e3a8a)",
       shadow: "0 14px 28px -14px rgba(29,78,216,0.6)",
       ring: "#1e40af",
-      aria: "Call Chaitanya EM School",
+      aria: "Call Chaitanya EM High School",
       Icon: ({ className }) => <Phone className={className} strokeWidth={2.2} aria-hidden="true" />,
     },
     {
@@ -92,7 +92,7 @@ export function ContactActions({
       bg: "linear-gradient(135deg,#25D366,#128C7E)",
       shadow: "0 14px 28px -14px rgba(18,140,126,0.65)",
       ring: "#128C7E",
-      aria: "Message Chaitanya EM School on WhatsApp",
+      aria: "Message Chaitanya EM High School on WhatsApp",
       Icon: ({ className }) => <WhatsAppIcon className={className} />,
     },
     {
@@ -103,14 +103,14 @@ export function ContactActions({
       bg: "linear-gradient(135deg,#f59e0b,#b45309)",
       shadow: "0 14px 28px -14px rgba(180,83,9,0.6)",
       ring: "#b45309",
-      aria: "Email Chaitanya EM School",
+      aria: "Email Chaitanya EM High School",
       Icon: ({ className }) => <Mail className={className} strokeWidth={2.2} aria-hidden="true" />,
     },
   ];
 
   return (
-    <div className={`grid gap-3 ${className || "grid-cols-1 sm:grid-cols-3"}`}>
-      {actions.map(({ key, label, sub, href, bg, shadow, ring, aria, Icon }, i) => (
+    <div className={`flex flex-wrap justify-center gap-3 md:gap-4 ${className || ""}`}>
+      {actions.map(({ key, label, sub, href, ring, aria, Icon }, i) => (
         <motion.a
           key={key}
           href={href}
@@ -121,22 +121,22 @@ export function ContactActions({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5, ease, delay: i * 0.07 }}
-          whileHover={reduce ? undefined : { y: -3 }}
+          whileHover={reduce ? undefined : { y: -2 }}
           whileTap={{ scale: 0.98 }}
           style={{ ["--focus-ring" as string]: ring }}
-          className="group flex min-h-[64px] items-center gap-3.5 rounded-2xl bg-white px-4 py-3.5 ring-1 ring-black/5 shadow-[0_12px_28px_-18px_rgba(15,23,42,0.3)] transition-shadow duration-500 hover:shadow-[0_22px_44px_-22px_rgba(15,23,42,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="group flex flex-1 sm:flex-initial min-w-[145px] max-w-[280px] items-center gap-3 rounded-2xl bg-white p-3 ring-1 ring-black/5 shadow-[0_2px_8px_-4px_rgba(15,23,42,0.06)] transition-all duration-300 hover:shadow-[0_12px_24px_-8px_rgba(15,23,42,0.12)] hover:ring-black/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
         >
           <span
-            className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-white transition-transform duration-500 group-hover:scale-105"
-            style={{ background: bg, boxShadow: shadow }}
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-full transition-transform duration-300 group-hover:scale-105"
+            style={{ backgroundColor: `${ring}15`, color: ring }}
           >
-            <Icon className="h-[19px] w-[19px]" />
+            <Icon className="h-5 w-5" />
           </span>
-          <span className="min-w-0">
-            <span className="block truncate text-[14px] font-semibold tracking-tight text-foreground">
+          <span className="flex min-w-0 flex-col">
+            <span className="truncate text-[14px] font-bold tracking-tight text-slate-800 transition-colors group-hover:text-[var(--focus-ring)]">
               {label}
             </span>
-            <span className="block truncate text-[11.5px] text-muted-foreground">{sub}</span>
+            <span className="truncate text-[12px] font-medium text-slate-500">{sub}</span>
           </span>
         </motion.a>
       ))}

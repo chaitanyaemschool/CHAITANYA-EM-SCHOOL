@@ -85,23 +85,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { httpEquiv: "Cache-Control", content: "no-cache, no-store, must-revalidate" },
       { httpEquiv: "Pragma", content: "no-cache" },
       { httpEquiv: "Expires", content: "0" },
-      { title: "Chaitanya EM School — Chekkapalli" },
+      { title: "Chaitanya EM High School | Chekkapalli" },
       {
         name: "description",
-        content: "A school for complete knowledge. English medium education in Chekkapalli.",
+        content: "Dare to dream, care to achieve — Chaitanya EM High School, Chekkapalli. Nurturing young minds from Nursery to Grade 10 with quality education, the LEAD curriculum and IIT Foundation.",
       },
-      { name: "author", content: "Chaitanya EM School" },
-      { property: "og:title", content: "Chaitanya EM School — Chekkapalli" },
+      { name: "author", content: "Chaitanya EM High School" },
+      { property: "og:title", content: "Chaitanya EM High School | Chekkapalli" },
       {
         property: "og:description",
-        content: "A school for complete knowledge. English medium education in Chekkapalli.",
+        content: "Dare to dream, care to achieve — Chaitanya EM High School, Chekkapalli. Nurturing young minds from Nursery to Grade 10 with quality education, the LEAD curriculum and IIT Foundation.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.chaitanyaemhighschool.com/" },
+      { property: "og:site_name", content: "Chaitanya EM High School" },
+      { property: "og:image", content: "https://www.chaitanyaemhighschool.com/logo-crest.jpeg" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Chaitanya EM School — Chekkapalli" },
+      { name: "twitter:title", content: "Chaitanya EM High School | Chekkapalli" },
       {
         name: "twitter:description",
-        content: "A school for complete knowledge. English medium education in Chekkapalli.",
+        content: "Dare to dream, care to achieve — nurturing young minds from Nursery to Grade 10.",
       },
     ],
     links: [
@@ -109,7 +112,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/logo-crest.jpeg", type: "image/jpeg" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {
         rel: "preconnect",
@@ -119,6 +122,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "EducationalOrganization",
+          name: "Chaitanya EM High School",
+          url: "https://www.chaitanyaemhighschool.com/",
+          logo: "https://www.chaitanyaemhighschool.com/logo-crest.jpeg",
+          slogan: "Dare to dream, care to achieve",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Chekkapalli",
+            addressRegion: "Andhra Pradesh",
+            addressCountry: "IN",
+          },
+        }),
       },
     ],
   }),
@@ -133,6 +155,17 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <style dangerouslySetInnerHTML={{ __html: `
+          body:not(.loader-finished) #app-content {
+            opacity: 0;
+            visibility: hidden;
+          }
+          body.loader-finished #app-content {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.8s ease-in-out;
+          }
+        `}} />
       </head>
       <body>
         {children}
@@ -150,11 +183,12 @@ function RootComponent() {
   return (
     <LenisProvider>
       <QueryClientProvider client={queryClient}>
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
-        {!isAdmin && <FloatingDock />}
-        <MouseSpotlight />
         <LogoLoader />
+        <div id="app-content">
+          <Outlet />
+          {!isAdmin && <FloatingDock />}
+          <MouseSpotlight />
+        </div>
         <Toaster position="top-center" richColors closeButton />
       </QueryClientProvider>
     </LenisProvider>

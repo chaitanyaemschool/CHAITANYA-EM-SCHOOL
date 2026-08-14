@@ -13,12 +13,13 @@ export const Route = createFileRoute("/academics_/$stage")({
     if (!stage) throw notFound();
     return { slug: stage.slug };
   },
-  head: ({ params }) => {
+  head: ({ params, location }) => {
     const stage = getStage(params.stage);
     const title = stage
-      ? `${stage.tag} Programme — Chaitanya EM School`
-      : "Academics — Chaitanya EM School";
-    const description = stage?.detail.intro ?? "Academic programmes at Chaitanya EM School.";
+      ? `${stage.tag} Programme | Chaitanya EM High School`
+      : "Academics | Chaitanya EM High School";
+    const description = stage?.detail.intro ?? "Academic programmes at Chaitanya EM High School. Dare to dream, care to achieve with our comprehensive curriculum.";
+    const canonical = `https://www.chaitanyaemhighschool.com${location.pathname}`;
     return {
       meta: [
         { title },
@@ -26,8 +27,12 @@ export const Route = createFileRoute("/academics_/$stage")({
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:type", content: "article" },
+        { property: "og:url", content: canonical },
         { name: "twitter:card", content: "summary_large_image" },
       ],
+      links: [
+        { rel: "canonical", href: canonical }
+      ]
     };
   },
   component: StagePage,
@@ -50,7 +55,7 @@ function StagePage() {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="mx-auto max-w-6xl px-6 pb-10 pt-28 md:px-10 md:pt-36 lg:px-16">
+      <section className="mx-auto max-w-6xl px-6 pb-10 pt-[calc(110px_+_env(safe-area-inset-top))] md:px-10 md:pt-[calc(140px_+_env(safe-area-inset-top))] lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,8 +97,8 @@ function StagePage() {
             loading="lazy"
             decoding="async"
             src={stage.detail.heroImage}
-            alt={`${stage.tag} students at Chaitanya EM School`}
-            className="aspect-[16/10] w-full object-contain md:object-cover md:aspect-[21/9]"
+            alt={`${stage.tag} students at Chaitanya EM High School`}
+            className="aspect-[16/10] w-full object-cover md:aspect-[21/9]"
           />
         </motion.div>
 
@@ -182,7 +187,7 @@ function StagePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.6, delay: i * 0.1, ease }}
-                className={`w-full rounded-[20px] object-contain md:object-cover ring-1 ring-black/5 ${
+                className={`w-full rounded-[20px] object-cover ring-1 ring-black/5 ${
                   i % 2 === 0 ? "aspect-[3/4]" : "aspect-[3/4] mt-8"
                 }`}
               />

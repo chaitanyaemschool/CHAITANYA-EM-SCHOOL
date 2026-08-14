@@ -12,7 +12,7 @@ export const SOCIAL = {
 export const DREAM_TEAM_URL = "https://www.thedreamteamservices.com/";
 
 /** Professional pre-filled WhatsApp enquiry message. */
-export const WA_ENQUIRY_MESSAGE = `Hello Chaitanya EM School,
+export const WA_ENQUIRY_MESSAGE = `Hello Chaitanya EM High School,
 
 I visited your website and would like to know more about admissions.
 
@@ -21,7 +21,7 @@ Please assist me.
 Thank you.`;
 
 export const MAIL_SUBJECT = "Admission Enquiry";
-export const MAIL_BODY = `Hello Chaitanya EM School,
+export const MAIL_BODY = `Hello Chaitanya EM High School,
 
 I would like to know more about admissions.
 

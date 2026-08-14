@@ -56,20 +56,25 @@ import { useContent } from "@/lib/use-content";
 export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
-      { title: "Life at Chaitanya EM School — Memories, Events & Moments" },
-      {
-        name: "description",
-        content:
-          "Every smile, every memory, every achievement. A visual diary of life at Chaitanya EM School, Chekkapalli.",
-      },
-      { property: "og:title", content: "Life at Chaitanya EM School" },
-      {
-        property: "og:description",
-        content: "Every smile, every memory, every achievement.",
-      },
-      { property: "og:type", content: "article" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+      { title: "School Gallery | Chaitanya EM High School" },
+        {
+          name: "description",
+          content:
+            "Dare to dream, care to achieve. Every smile, every memory, every achievement. A visual diary of life at Chaitanya EM High School, Chekkapalli.",
+        },
+        { property: "og:title", content: "School Gallery | Chaitanya EM High School" },
+        {
+          property: "og:description",
+          content:
+            "Dare to dream, care to achieve. Every smile, every memory, every achievement. A visual diary of life at Chaitanya EM High School, Chekkapalli.",
+        },
+        { property: "og:url", content: "https://www.chaitanyaemhighschool.com/gallery" },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+      links: [
+        { rel: "canonical", href: "https://www.chaitanyaemhighschool.com/gallery" }
+      ]
   }),
   component: LifePage,
 });
@@ -424,7 +429,7 @@ function Rail3DCard({
             loading={index < 2 ? "eager" : "lazy"}
             decoding="async"
             style={{ x: imgX }}
-            className="h-full w-full scale-[1.04] object-contain md:object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.09] [image-rendering:auto] [transform:translateZ(0)]"
+            className="h-full w-full scale-[1.04] object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.09] [image-rendering:auto] [transform:translateZ(0)]"
           />
         </div>
         <div className="relative z-10 px-1.5 pb-2 pt-3">
@@ -569,7 +574,7 @@ function MomentCard({
             if (el?.complete) setLoaded(true);
           }}
           onLoad={() => setLoaded(true)}
-          className={`h-full w-full object-contain md:object-cover transition-[opacity,transform] duration-[800ms] ease-out group-hover:scale-[1.06] ${
+          className={`h-full w-full object-cover transition-[opacity,transform] duration-[800ms] ease-out group-hover:scale-[1.06] ${
             loaded ? "opacity-100" : "opacity-0"
           }`}
         />
@@ -897,7 +902,7 @@ function VideoCard({
             loading={index < 2 ? "eager" : "lazy"}
             decoding="async"
             style={{ x: imgX }}
-            className="h-full w-full scale-[1.04] object-contain md:object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.09] [transform:translateZ(0)]"
+            className="h-full w-full scale-[1.04] object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.09] [transform:translateZ(0)]"
           />
           <div
             aria-hidden
@@ -1339,7 +1344,7 @@ function LifePage() {
     <div className="min-h-screen bg-white text-foreground">
       <ScrollProgress />
       <SiteHeader />
-      <div className="pt-24 md:pt-28" />
+      <div className="pt-[calc(110px_+_env(safe-area-inset-top))] md:pt-[calc(140px_+_env(safe-area-inset-top))]" />
       <PhotoStories onOpen={(i) => setLightbox(i)} />
       <MomentsGrid onOpen={(i) => setLightbox(i)} />
       <VideoStories />

@@ -18,16 +18,24 @@ import { useAcademicStages } from "@/lib/use-academic-stages";
 export const Route = createFileRoute("/academics")({
   head: () => ({
     meta: [
-      { title: "Academics — Chaitanya EM School" },
+      { title: "Academics | Chaitanya EM High School" },
       {
         name: "description",
         content:
-          "Foundation, Development and Excellence — a journey from Nursery to Grade 10 with the LEAD curriculum and IIT Foundation.",
+          "Dare to dream, care to achieve. Discover the comprehensive academic programmes at Chaitanya EM High School, from Nursery to Grade 10, featuring the LEAD curriculum and IIT Foundation.",
       },
-      { property: "og:title", content: "Academics — Chaitanya EM School" },
-      { property: "og:description", content: "From first words to first ranks." },
+      { property: "og:title", content: "Academics | Chaitanya EM High School" },
+      {
+        property: "og:description",
+        content:
+          "Dare to dream, care to achieve. Discover the comprehensive academic programmes at Chaitanya EM High School, from Nursery to Grade 10, featuring the LEAD curriculum and IIT Foundation.",
+      },
+      { property: "og:url", content: "https://www.chaitanyaemhighschool.com/academics" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://www.chaitanyaemhighschool.com/academics" }
     ],
   }),
   component: AcademicsPage,
@@ -43,7 +51,7 @@ function AcademicsPage() {
     <div className="min-h-screen overflow-x-clip bg-background text-foreground">
       <SiteHeader />
 
-      <section className="mx-auto max-w-6xl px-6 pb-8 pt-28 md:px-10 md:pt-36 lg:px-16">
+      <section className="mx-auto max-w-6xl px-6 pb-8 pt-[calc(110px_+_env(safe-area-inset-top))] md:px-10 md:pt-[calc(140px_+_env(safe-area-inset-top))] lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
@@ -219,9 +227,9 @@ function StageCard({
                   >
                     <img
                       src={stage.preview.image}
-                      alt={`${stage.tag} learning at Chaitanya EM School`}
+                      alt={`${stage.tag} learning at Chaitanya EM High School`}
                       loading="lazy"
-                      className="aspect-[4/3] w-full object-contain md:object-cover"
+                      className="aspect-[4/3] w-full object-cover"
                     />
                   </motion.div>
 

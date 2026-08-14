@@ -17,7 +17,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 /** Shared shell: glossy 3D sphere with rim light, inner highlight and depth shadow. */
 const BTN =
-  "group pointer-events-auto relative grid h-[44px] w-[44px] place-items-center overflow-hidden rounded-full text-white transition-[transform,box-shadow] duration-300 ease-out will-change-transform [transform:translateZ(0)] hover:-translate-y-0.5 hover:scale-[1.06] active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background md:h-[48px] md:w-[48px]";
+  "group pointer-events-auto relative grid h-[40px] w-[40px] place-items-center overflow-hidden rounded-full text-white transition-[transform,box-shadow] duration-300 ease-out will-change-transform [transform:translateZ(0)] hover:-translate-y-0.5 hover:scale-[1.06] active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background md:h-[44px] md:w-[44px]";
 
 const sphere = (from: string, to: string, glow: string) => ({
   background: `radial-gradient(120% 120% at 30% 18%, ${from} 0%, ${to} 62%, ${to} 100%)`,
@@ -131,7 +131,7 @@ export function FloatingDock() {
         style={sphere("#5ffc7b", "#25d366", "rgba(37,211,102,0.8)")}
       >
         <Gloss />
-        <WhatsAppGlyph className="relative h-[26px] w-[26px] text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]" />
+        <WhatsAppGlyph className="relative h-[22px] w-[22px] text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]" />
       </a>
     </div>
   );
