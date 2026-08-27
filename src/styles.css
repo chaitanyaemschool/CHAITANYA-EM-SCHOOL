@@ -1,0 +1,601 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  /* Curated palette — White · Trust Blue · Education Green · Warm Golden · Soft Gray */
+  --radius: 1.75rem;
+  --background: oklch(0.992 0.003 95); /* warm white */
+  --foreground: oklch(0.19 0.045 258); /* deep ink */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.19 0.045 258);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.19 0.045 258);
+  --primary: oklch(0.32 0.11 258); /* trust blue */
+  --primary-foreground: oklch(0.99 0.004 95);
+  --secondary: oklch(0.965 0.006 250); /* soft gray */
+  --secondary-foreground: oklch(0.22 0.05 258);
+  --muted: oklch(0.96 0.005 250);
+  --muted-foreground: oklch(0.52 0.018 258);
+  --accent: oklch(0.78 0.13 78); /* warm golden */
+  --accent-foreground: oklch(0.19 0.045 258);
+  --growth: oklch(0.6 0.13 148); /* education green */
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(0.92 0.008 250);
+  --input: oklch(0.92 0.008 250);
+  --ring: oklch(0.32 0.11 258);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.984 0.003 247.858);
+  --sidebar-foreground: oklch(0.129 0.042 264.695);
+  --sidebar-primary: oklch(0.208 0.042 265.755);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.968 0.007 247.896);
+  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
+  --sidebar-border: oklch(0.929 0.013 255.508);
+  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --font-display: "Manrope", "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-editorial: "Manrope", "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  --font-nav: "Manrope", "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-serif: "Manrope", "Inter", "Segoe UI", system-ui, sans-serif;
+
+  /* Luxury shadow scale */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 4px 12px -6px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 12px 28px -12px rgba(15, 23, 42, 0.14);
+  --shadow-lg: 0 24px 48px -20px rgba(15, 23, 42, 0.22);
+  --shadow-xl: 0 40px 80px -28px rgba(15, 23, 42, 0.28);
+  --shadow-glow: 0 20px 60px -20px color-mix(in oklab, var(--primary) 45%, transparent);
+
+  /* Motion system */
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 240ms;
+  --dur-base: 480ms;
+  --dur-slow: 720ms;
+}
+
+.dark {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  @media (min-width: 768px) {
+    body {
+      font-size: 18px;
+    }
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  html {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Lenis smooth scroll base CSS */
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.018em;
+  }
+  h1 {
+    font-weight: 800;
+  }
+  h2,
+  h3 {
+    font-weight: 700;
+  }
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+  }
+  button,
+  input,
+  textarea,
+  select,
+  label {
+    font-family: var(--font-body);
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 22%, transparent);
+    color: var(--foreground);
+  }
+  img {
+    -webkit-user-drag: none;
+  }
+}
+
+@theme inline {
+  --color-growth: var(--growth);
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+/* -------- Premium primitives -------- */
+@utility shadow-luxe {
+  box-shadow: var(--shadow-lg);
+}
+@utility shadow-luxe-lg {
+  box-shadow: var(--shadow-xl);
+}
+@utility ring-hairline {
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--foreground) 8%, transparent);
+}
+@utility card-luxe {
+  background: var(--card);
+  border-radius: 28px;
+  box-shadow: var(--shadow-md);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6),
+    inset 0 0 0 1px color-mix(in oklab, var(--foreground) 6%, transparent);
+}
+@utility glass-panel {
+  background: color-mix(in oklab, white 78%, transparent);
+  backdrop-filter: blur(12px) saturate(1.4);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.7);
+  border: 1px solid color-mix(in oklab, var(--foreground) 6%, transparent);
+}
+@utility btn-luxe {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  height: 56px;
+  padding: 0 1.5rem 0 1.75rem;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  transition:
+    transform var(--dur-fast) var(--ease-out-quart),
+    box-shadow var(--dur-base) var(--ease-out-quart),
+    background-color var(--dur-base) var(--ease-out-quart);
+  will-change: transform;
+  &:active {
+    transform: scale(0.97);
+  }
+}
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--muted-foreground);
+}
+@utility h-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.022em;
+  line-height: 1.05;
+}
+@utility font-editorial {
+  font-family: var(--font-editorial);
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: -0.02em;
+}
+/* Menu / navigation typography — modern professional sans */
+@utility font-nav {
+  font-family: var(--font-nav);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 1.3;
+}
+@utility grain {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.6) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+}
+
+/* Skip paint/layout for offscreen heavy sections — big win on low-end Android */
+@utility cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes heroShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ---------- Premium interaction primitives (site-wide) ---------- */
+
+/* Cards lift + rotate + glow on hover; tap-friendly on mobile too */
+@utility hover-lift {
+  transition:
+    transform 500ms var(--ease-out-quart),
+    box-shadow 500ms var(--ease-out-quart),
+    border-color 500ms var(--ease-out-quart);
+  will-change: transform;
+  &:hover {
+    transform: translateY(-6px) rotate(-0.6deg);
+    box-shadow: var(--shadow-xl);
+  }
+  &:active {
+    transform: translateY(-2px) scale(0.995);
+  }
+}
+
+/* Buttons glow on hover */
+@utility btn-glow {
+  position: relative;
+  isolation: isolate;
+  transition:
+    box-shadow 480ms var(--ease-out-quart),
+    transform 240ms var(--ease-out-quart);
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: radial-gradient(
+      60% 100% at 50% 0%,
+      color-mix(in oklab, var(--primary) 35%, transparent),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 500ms var(--ease-out-quart);
+    z-index: -1;
+    filter: blur(14px);
+  }
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+/* Cursor-tracked spotlight — kept as a no-op wrapper (the white hover wash was
+   removed because it washed out photography on hover). */
+@utility card-spotlight {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Strong glassmorphism panel — for floating navs, feature cards, badges */
+@utility glass-strong {
+  background: color-mix(in oklab, white 55%, transparent);
+  backdrop-filter: blur(12px) saturate(1.5);
+  border: 1px solid color-mix(in oklab, white 40%, transparent);
+  box-shadow:
+    0 20px 50px -20px rgba(15, 23, 42, 0.28),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Floating badges */
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@utility float-slow {
+  animation: floatY 6s ease-in-out infinite;
+}
+@utility float-slower {
+  animation: floatY 8.5s ease-in-out infinite;
+}
+
+/* Scroll indicator dot */
+@keyframes scrollDot {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+}
+@utility scroll-hint-dot {
+  animation: scrollDot 1.8s var(--ease-out-quart) infinite;
+}
+
+/* Underline sweep on links */
+@utility link-sweep {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background: currentColor;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 500ms var(--ease-out-quart);
+  }
+  &:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+  }
+}
+
+/* Site-wide cursor spotlight — a fixed overlay driven by CSS vars from <MouseSpotlight /> */
+.cursor-spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  background: radial-gradient(
+    420px circle at var(--cursor-x, -100px) var(--cursor-y, -100px),
+    color-mix(in oklab, var(--primary) 22%, transparent) 0%,
+    transparent 65%
+  );
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+  transition: opacity 400ms var(--ease-out-quart);
+}
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .cursor-spotlight {
+    display: none;
+  }
+}
+
+/* ---------- Utility: hide scrollbars on horizontal rails ---------- */
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ---------- Restrained lift (no rotation) for editorial cards ---------- */
+@utility hover-raise {
+  transition:
+    transform 480ms var(--ease-out-quart),
+    box-shadow 480ms var(--ease-out-quart);
+  will-change: transform;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  &:active {
+    transform: translateY(-1px) scale(0.995);
+  }
+}
+
+/* ---------- Accessible focus ring on brand surfaces ---------- */
+@utility focus-luxe {
+  &:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--background),
+      0 0 0 4px color-mix(in oklab, var(--primary) 65%, transparent);
+  }
+}
+
+/* ---------- Form field + floating label ---------- */
+@utility field-luxe {
+  width: 100%;
+  height: 56px;
+  border-radius: 20px;
+  background: color-mix(in oklab, var(--secondary) 55%, white);
+  border: 1px solid color-mix(in oklab, var(--foreground) 10%, transparent);
+  padding: 22px 16px 8px;
+  font-size: 15px;
+  color: var(--foreground);
+  transition:
+    border-color 280ms var(--ease-out-quart),
+    background-color 280ms var(--ease-out-quart),
+    box-shadow 280ms var(--ease-out-quart);
+  &::placeholder {
+    color: transparent;
+  }
+  &:focus {
+    outline: none;
+    background: white;
+    border-color: color-mix(in oklab, var(--primary) 45%, transparent);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--primary) 12%, transparent);
+  }
+  &[aria-invalid="true"] {
+    border-color: color-mix(in oklab, var(--destructive) 60%, transparent);
+  }
+}
+@utility field-label {
+  position: absolute;
+  left: 17px;
+  top: 18px;
+  font-size: 15px;
+  color: var(--muted-foreground);
+  pointer-events: none;
+  transform-origin: left top;
+  transition:
+    transform 260ms var(--ease-out-quart),
+    color 260ms var(--ease-out-quart);
+}
+
+/* Loader: golden sweep line */
+@keyframes goldSweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@utility gold-sweep {
+  animation: goldSweep 1.2s var(--ease-out-quart) infinite;
+}
+
+/* Cache buster to force Vercel to generate a new CSS file hash */
+.cache-buster-trigger {
+  opacity: 0.99;
+}
